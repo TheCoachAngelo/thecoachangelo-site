@@ -21,7 +21,7 @@
         header { padding: 20px 40px; position: absolute; width: 100%; z-index: 100; box-sizing: border-box; display: flex; justify-content: flex-start; }
         .logo img { height: 90px; filter: drop-shadow(0 0 10px rgba(0,0,0,0.8)); }
 
-        /* HERO - TEXT AT BOTTOM LEFT */
+        /* HERO - DESKTOP */
         .hero { 
             height: 100vh; 
             display: flex; 
@@ -35,15 +35,36 @@
             padding-left: 5%;
         }
         .hero h1 { font-size: clamp(2.5rem, 8vw, 5rem); line-height: 1.1; margin-bottom: 30px; text-align: left; text-shadow: 2px 2px 20px rgba(0,0,0,0.9); }
-        .btn-main { background: var(--red); color: #fff; padding: 18px 45px; text-decoration: none; font-family: 'Oswald', sans-serif; font-weight: bold; border: 2px solid var(--red); transition: 0.3s; cursor: pointer; }
+        .btn-main { background: var(--red); color: #fff; padding: 18px 45px; text-decoration: none; font-family: 'Oswald', sans-serif; font-weight: bold; border: 2px solid var(--red); transition: 0.3s; cursor: pointer; display: inline-block; }
 
-        /* REDUCED SPACING */
+        /* --- MOBILE FIXES: TAGLIO LINEA ROSA + TESTO A SINISTRA NEL CERCHIO --- */
+        @media (max-width: 768px) {
+            header { padding: 15px; }
+            .logo img { height: 50px; } 
+            .hero { 
+                height: 55vh; /* TAGLIO ALLA LINEA ROSA */
+                align-items: flex-start; 
+                padding-left: 20px; 
+                text-align: left; 
+                justify-content: center;
+                background-position: center top; 
+                background-size: cover;
+            }
+            .hero-content { margin-top: 130px; } /* TESTO NEL CERCHIO SUI PETTORALI */
+            .hero h1 { text-align: left; font-size: 2.3rem; margin-bottom: 20px; }
+            .btn-main { width: auto; padding: 12px 25px; font-size: 0.9rem; }
+            .about-flex { flex-direction: column; text-align: center; } 
+            .about-img { flex: 0 0 100%; }
+            .price-card.featured { transform: scale(1); }
+        }
+
+        /* SCIENCE SECTION */
         .science-section { padding: 80px 0 40px 0; background: #050505; }
         .science-content { max-width: 850px; border-left: 2px dashed #444; padding-left: 40px; margin-left: 20px; }
         .science-content h2 { font-size: 3.5rem; color: var(--red); margin-bottom: 20px; }
         .science-content p { font-size: 1.2rem; color: #ccc; margin-bottom: 50px; }
 
-        /* ABOUT - TEXT ON RIGHT */
+        /* ABOUT SECTION */
         .about { padding: 40px 0; background: #000; }
         .about-flex { display: flex; flex-wrap: nowrap; gap: 60px; align-items: center; }
         .about-img { flex: 0 0 45%; }
@@ -53,7 +74,7 @@
         .about-list li { margin: 15px 0; display: flex; align-items: center; }
         .about-list li::before { content: '>'; color: var(--red); margin-right: 15px; font-size: 1.8rem; }
 
-        /* PRICING COMPLETE */
+        /* PRICING */
         .pricing { padding: 80px 0; text-align: center; }
         .price-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
         .price-card { background: var(--gray); padding: 50px 30px; border: 1px solid #222; position: relative; display: flex; flex-direction: column; }
@@ -64,13 +85,13 @@
         .price-card li { margin: 10px 0; }
         .btn-wa { display: block; padding: 15px; text-decoration: none; font-weight: bold; text-transform: uppercase; font-family: 'Oswald', sans-serif; transition: 0.3s; }
 
-        /* ALL 4 REVIEWS */
+        /* TESTIMONIALS */
         .testimonials { padding: 80px 0; background: #050505; }
         .quote-block { max-width: 900px; margin: 0 auto 60px; padding-bottom: 40px; border-bottom: 1px solid #222; text-align: left; }
         .quote-text { font-style: italic; color: #ccc; font-size: 1.1rem; line-height: 1.8; margin-bottom: 25px; }
         .quote-author { font-family: 'Oswald', sans-serif; font-size: 1.5rem; color: #fff; }
 
-        /* COMPLETE CONTACT FORM */
+        /* CONTACT FORM */
         .contact { padding: 80px 0; background: #000; }
         .form-container { max-width: 700px; margin: auto; }
         .form-group { margin-bottom: 25px; text-align: left; }
@@ -81,42 +102,24 @@
         .btn-send { background: #b02a37; color: #fff; width: 100%; padding: 20px; font-family: 'Oswald', sans-serif; border: none; font-size: 1.4rem; cursor: pointer; transition: 0.3s; margin-top: 30px; }
 
         .footer { padding: 80px 20px; text-align: center; border-top: 1px solid #111; background: #050505; }
-
-        /* Social Share Buttons */
         .social-share { margin-bottom: 40px; }
         .share-btn { display: inline-block; padding: 10px 20px; margin: 5px; color: #fff; text-decoration: none; font-family: 'Oswald', sans-serif; border-radius: 4px; transition: 0.3s; font-size: 0.9rem; }
         .share-wa { background: #25d366; }
         .share-fb { background: #1877f2; }
         .share-tw { background: #1da1f2; }
         .share-ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
-        .share-btn:hover { opacity: 0.8; transform: translateY(-3px); }
-
         .insta-follow { display: block; margin: 20px auto; color: var(--red); font-weight: bold; text-decoration: none; font-size: 1.2rem; transition: 0.3s; }
-        .insta-follow:hover { color: #fff; }
         .copyright { margin-top: 30px; color: #444; font-size: 0.85rem; border-top: 1px solid #111; padding-top: 20px; }
-
-        @media (max-width: 768px) { 
-            .about-flex { flex-direction: column; text-align: center; } 
-            .about-img { flex: 0 0 100%; }
-            .hero { align-items: center; padding-left: 0; text-align: center; }
-            .hero h1 { text-align: center; }
-            header { justify-content: center; }
-            .price-card.featured { transform: scale(1); }
-        }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo">
-            <img src="https://static.wixstatic.com/media/4338d0_1b54ec807b4046d2b77ed9c57a71295d~mv2.png" alt="Coach Angelo Logo">
-        </div>
-    </header>
+    <header><div class="logo"><img src="https://static.wixstatic.com/media/4338d0_1b54ec807b4046d2b77ed9c57a71295d~mv2.png" alt="Coach Angelo Logo"></div></header>
 
     <section class="hero">
-        <div class="reveal active">
+        <div class="hero-content reveal active">
             <h1>UNLEASH YOUR<br>TRUE <span class="red-text">POTENTIAL</span></h1>
-            <a href="#contact" class="btn-main">START THE CHALLENGE</a>
+            <a href="#plans" class="btn-main">START THE CHALLENGE</a>
         </div>
     </section>
 
@@ -125,7 +128,6 @@
             <div class="science-content">
                 <h2>THE GRIND & THE SCIENCE</h2>
                 <p>"Becaming a Competitive Athlete wasn't luck or genetics. It was years of calculation, suffering, and absolute discipline applied to nutrition and training. I learned that you cannot cheat the process if you want elite results."</p>
-                
                 <h2>FROM MY STAGE TO YOUR REALITY</h2>
                 <p>"I realized my true passion wasn't just building my own physique, but engineering the bodies of others. I don't provide 'cookie-cutter' PDF plans. I use the exact protocols that got me to the stage, aggressively adapted to your lifestyle and goals. No guesswork. Just execution."</p>
             </div>
@@ -135,9 +137,7 @@
     <section id="about" class="about reveal">
         <div class="container">
             <div class="about-flex">
-                <div class="about-img">
-                    <img src="https://static.wixstatic.com/media/4338d0_eee8be588aa143a1bae80af1b3a4fba2~mv2.jpg" alt="Coach Angelo">
-                </div>
+                <div class="about-img"><img src="https://static.wixstatic.com/media/4338d0_eee8be588aa143a1bae80af1b3a4fba2~mv2.jpg" alt="Coach Angelo"></div>
                 <div class="about-content">
                     <h2 style="font-size: 3.5rem; margin-bottom: 25px;">THE MAN BEHIND THE METHOD</h2>
                     <ul class="about-list">
@@ -159,39 +159,23 @@
                     <h3>TRAINING PROTOCOL</h3>
                     <div class="price-val">€80</div>
                     <p style="margin-top:-10px; font-weight:bold;">/ 6 WEEKS</p>
-                    <ul>
-                        <li>Custom Workout Program</li>
-                        <li>Monthly Check-ins</li>
-                        <li>Supplementation Plan</li>
-                    </ul>
-                    <a href="https://wa.me/359889021289?text=Hello%20Angelo,%20interested%20in%20Training%20Protocol%2080€" class="btn-wa" style="background:#fff; color:#000;">CHOOSE PLAN</a>
+                    <ul><li>Custom Workout Program</li><li>Monthly Check-ins</li><li>Supplementation Plan</li></ul>
+                    <a href="https://wa.me/359889021289?text=Interested in Training" class="btn-wa" style="background:#fff; color:#000;">CHOOSE PLAN</a>
                 </div>
-
                 <div class="price-card featured">
                     <div class="best-value">BEST VALUE</div>
                     <h3>FULL COACHING</h3>
                     <div class="price-val">€100</div>
                     <p style="margin-top:-10px; font-weight:bold;">/ 6 WEEKS</p>
-                    <ul>
-                        <li>Custom Diet & Training</li>
-                        <li>Weekly Check-ins</li>
-                        <li>24/7 WhatsApp Support</li>
-                        <li>Support Cardio Protocol</li>
-                    </ul>
-                    <a href="https://wa.me/359889021289?text=Hello%20Angelo,%20interested%20in%20Full%20Coaching%20100€" class="btn-wa" style="background:var(--red); color:#fff;">START NOW</a>
+                    <ul><li>Custom Diet & Training</li><li>Weekly Check-ins</li><li>24/7 WhatsApp Support</li><li>Support Cardio Protocol</li></ul>
+                    <a href="https://wa.me/359889021289?text=Interested in Coaching" class="btn-wa" style="background:var(--red); color:#fff;">START NOW</a>
                 </div>
-
                 <div class="price-card">
                     <h3>CONTEST PREP</h3>
                     <div class="price-val">€150</div>
                     <p style="margin-top:-10px; font-weight:bold;">/ 6 WEEKS</p>
-                    <ul>
-                        <li>Custom Diet & Training Plan</li>
-                        <li>Daily Adjustments</li>
-                        <li>Peak Week Control</li>
-                        <li>Post Show Reverse Diet</li>
-                    </ul>
-                    <a href="https://wa.me/359889021289?text=Hello%20Angelo,%20interested%20in%20Contest%20Prep%20150€" class="btn-wa" style="background:#fff; color:#000;">CHOOSE PLAN</a>
+                    <ul><li>Custom Diet & Training Plan</li><li>Daily Adjustments</li><li>Peak Week Control</li><li>Post Show Reverse Diet</li></ul>
+                    <a href="https://wa.me/359889021289?text=Interested in Prep" class="btn-wa" style="background:#fff; color:#000;">CHOOSE PLAN</a>
                 </div>
             </div>
         </div>
@@ -200,22 +184,18 @@
     <section class="testimonials reveal">
         <div class="container">
             <h2 style="font-size: 4rem; text-align: center; margin-bottom: 70px;">REAL RESULTS</h2>
-            
             <div class="quote-block">
                 <p class="quote-text">"I'm so grateful to have Angelo as my coach. Not only has he helped me improve my physique, but he's also taught me life lessons that go far beyond the gym. His approach is all about discipline, consistency, and becoming the best version of yourself."</p>
                 <div class="quote-author">✱ ANTONIS KATSIAMIS - CYPRUS</div>
             </div>
-
             <div class="quote-block">
                 <p class="quote-text">"Angelo changed my mindset... nutrition and life... I've known him for many years and he's been following me for a short time but my changes have been beyond expectations... thank you Coach"</p>
                 <div class="quote-author">✱ GIGIO MOSCA - ITALY</div>
             </div>
-
             <div class="quote-block">
                 <p class="quote-text">"Working with Angelo has changed my life. He gave me hope and completely transformed my fitness journey. With him, I've found not only an amazing coach and role model, but also a lifelong friend."</p>
                 <div class="quote-author">✱ ANDREAS MATHEOU - CYPRUS</div>
             </div>
-
             <div class="quote-block">
                 <p class="quote-text">"I have been training with Angelo for two years. His knowledge changed my life and I became completely unrecognizable. I highly recommend him — a true professional."</p>
                 <div class="quote-author">✱ VILIAN GORANOV - BULGARIA</div>
@@ -227,31 +207,19 @@
         <div class="container">
             <div class="form-container">
                 <h2 class="red-text" style="font-size: 4rem; margin-bottom: 20px;">CONNECT WITH ANGELO</h2>
-                <form>
-                    <div class="form-group">
-                        <label>Full Name *</label>
-                        <input type="text" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Email *</label>
-                        <input type="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label>WhatsApp Number</label>
-                        <input type="text">
-                    </div>
+                <form action="mailto:angelo@example.com" method="post" enctype="text/plain">
+                    <div class="form-group"><label>Full Name *</label><input type="text" name="name" required></div>
+                    <div class="form-group"><label>Email *</label><input type="email" name="email" required></div>
+                    <div class="form-group"><label>WhatsApp Number</label><input type="text" name="whatsapp"></div>
                     <div class="form-group">
                         <label>Main Goal *</label>
                         <div class="checkbox-group">
-                            <label class="checkbox-item"><input type="checkbox"> Fat Loss</label>
-                            <label class="checkbox-item"><input type="checkbox"> Muscle Gain</label>
-                            <label class="checkbox-item"><input type="checkbox"> Contest Prep</label>
+                            <label class="checkbox-item"><input type="checkbox" name="goal" value="Fat Loss"> Fat Loss</label>
+                            <label class="checkbox-item"><input type="checkbox" name="goal" value="Muscle Gain"> Muscle Gain</label>
+                            <label class="checkbox-item"><input type="checkbox" name="goal" value="Contest Prep"> Contest Prep</label>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label>Current Stats & Goals *</label>
-                        <textarea rows="5" required></textarea>
-                    </div>
+                    <div class="form-group"><label>Current Stats & Goals *</label><textarea name="stats" rows="5" required></textarea></div>
                     <button type="submit" class="btn-send">SEND APPLICATION</button>
                 </form>
             </div>
@@ -261,17 +229,13 @@
     <footer class="footer">
         <div class="social-share">
             <p style="margin-bottom: 15px; font-weight: bold; color: #888;">SHARE MY PROTOCOLS:</p>
-            <a href="https://wa.me/?text=Check out The Coach Angelo - Elite Physiques: https://coachangelo.com" class="share-btn share-wa" target="_blank">WhatsApp</a>
-            <a href="https://www.facebook.com/sharer/sharer.php?u=https://coachangelo.com" class="share-btn share-fb" target="_blank">Facebook</a>
-            <a href="https://twitter.com/intent/tweet?url=https://coachangelo.com&text=Check out The Coach Angelo - Elite Physiques" class="share-btn share-tw" target="_blank">Twitter / X</a>
+            <a href="https://wa.me/?text=Check out The Coach Angelo: https://thecoachangelo.com" class="share-btn share-wa" target="_blank">WhatsApp</a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://thecoachangelo.com" class="share-btn share-fb" target="_blank">Facebook</a>
+            <a href="https://twitter.com/intent/tweet?url=https://thecoachangelo.com" class="share-btn share-tw" target="_blank">Twitter / X</a>
             <a href="https://www.instagram.com/thecoachangelo" class="share-btn share-ig" target="_blank">Instagram</a>
         </div>
-        
         <a href="https://www.instagram.com/thecoachangelo" target="_blank" class="insta-follow">FOLLOW ON INSTAGRAM</a>
-        
-        <div class="copyright">
-            © 2026 THE COACH ANGELO. ALL RIGHTS RESERVED.
-        </div>
+        <div class="copyright">© 2026 THE COACH ANGELO. ALL RIGHTS RESERVED.</div>
     </footer>
 
     <script>
@@ -280,15 +244,11 @@
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 120;
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add("active");
-                }
+                if (elementTop < windowHeight - 120) { reveals[i].classList.add("active"); }
             }
         }
         window.addEventListener("scroll", reveal);
         window.addEventListener("load", reveal);
     </script>
-
 </body>
 </html>
