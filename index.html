@@ -157,20 +157,23 @@
         }
 
         /* ===== STICKY CTA BAR ===== */
-        #stickyCTA {
-            position: fixed;
-            bottom: -100px;
-            left: 0;
-            width: 100%;
-            background: linear-gradient(135deg, var(--red), #c91520);
-            padding: 20px;
-            z-index: 9000;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 -5px 30px rgba(0,0,0,0.5);
-            transition: bottom 0.4s;
-        }
+       #stickyCTA {
+    position: fixed;
+    bottom: -100px;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(135deg, var(--red), #c91520);
+    padding: 20px;
+    z-index: 9000;
+    display: none; /* COMPLETELY HIDE IT */
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 -5px 30px rgba(0,0,0,0.5);
+    transition: bottom 0.4s;
+}
+#stickyCTA.show {
+    bottom: 0;
+}
         #stickyCTA.show {
             bottom: 0;
         }
@@ -205,22 +208,25 @@
         }
 
         /* ===== SOCIAL PROOF NOTIFICATIONS ===== */
-        #socialProof {
-            position: fixed;
-            bottom: 100px;
-            left: 20px;
-            background: rgba(10,10,10,0.95);
-            border: 2px solid var(--red);
-            border-radius: 12px;
-            padding: 20px 25px;
-            max-width: 350px;
-            z-index: 9500;
-            transform: translateX(-500px);
-            transition: transform 0.5s;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
-        }
-        #socialProof.show {
-            transform: translateX(0);
+  #socialProof {
+    position: fixed;
+    bottom: 100px;
+    left: 20px;
+    background: rgba(10,10,10,0.95);
+    border: 2px solid var(--red);
+    border-radius: 12px;
+    padding: 20px 25px;
+    max-width: 350px;
+    z-index: 9500;
+    transform: translateX(-500px);
+    transition: transform 0.5s;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    display: none; /* HIDDEN BY DEFAULT */
+}
+#socialProof.show {
+    transform: translateX(0);
+    display: block; /* SHOW WHEN ACTIVE */
+}
         }
         .proof-content {
             display: flex;
@@ -578,22 +584,22 @@
             justify-content: space-around; 
             padding: 15px 0;
         }
-        .mobile-nav a { 
-            color: #fff; 
-            text-decoration: none; 
-            font-size: 0.75rem; 
-            font-family: 'Oswald', sans-serif; 
-            text-align: center; 
-            display: flex; 
-            flex-direction: column; 
-            gap: 5px;
-            min-width: 48px;
-            min-height: 48px;
-            align-items: center;
-            justify-content: center;
-            padding: 8px;
-            border-radius: 8px;
-        }
+     .mobile-nav a { 
+    color: #fff; 
+    text-decoration: none; 
+    font-size: 0.75rem; 
+    font-family: 'Oswald', sans-serif; 
+    text-align: center; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 5px;
+    min-width: 60px;
+    min-height: 56px;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 8px;
+}
         .mobile-nav a:focus-visible {
             background: rgba(230, 30, 42, 0.2);
         }
@@ -664,32 +670,223 @@
         }
 
         @media (max-width: 768px) { 
-            header { opacity: 0; pointer-events: none; } 
-            header.scrolled { 
-                opacity: 1; 
-                pointer-events: auto; 
-                padding: 12px 20px; 
-            }
-            .nav-links { display: none; } 
-            .mobile-nav { display: flex; } 
-            .hero { 
-                justify-content: center; 
-                padding-bottom: 0; 
-                padding-left: 20px;
-                text-align: center;
-                align-items: center;
-                background-attachment: scroll;
-            }
-            .hero-content { margin-bottom: 150px; }
-            .hero h1 { font-size: 2.8rem; }
-            .about-flex { flex-direction: column; }
-            .stats-bar { flex-direction: column; gap: 30px; }
-            .calc-grid { grid-template-columns: 1fr; }
-            .email-form { flex-direction: column; }
-            .email-form input { min-width: 100%; }
-            #stickyCTA { flex-direction: column; gap: 15px; text-align: center; }
-            #socialProof { left: 10px; right: 10px; max-width: none; }
-            .parallax { background-attachment: scroll; }
+    /* Body padding for sticky elements */
+    body { 
+        padding-bottom: 150px; /* Account for mobile nav + sticky CTA */
+    }
+    
+    /* Header */
+    header { opacity: 0; pointer-events: none; } 
+    header.scrolled { 
+        opacity: 1; 
+        pointer-events: auto; 
+        padding: 12px 20px; 
+    }
+    .nav-links { display: none; } 
+    .mobile-nav { display: flex; } 
+    
+    /* Hero Section - Better text scaling */
+    .hero { 
+        justify-content: center; 
+        padding-bottom: 0; 
+        padding-left: 20px;
+        padding-right: 20px;
+        text-align: center;
+        align-items: center;
+        background-attachment: scroll;
+    }
+    .hero-content { margin-bottom: 150px; }
+    .hero h1 { 
+        font-size: clamp(2rem, 10vw, 3.5rem);
+        line-height: 1.2;
+        margin-bottom: 25px;
+    }
+    .btn-main {
+        padding: 18px 40px;
+        font-size: 1.1rem;
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+        min-height: 56px;
+    }
+    
+    /* WhatsApp Float - Move above sticky elements */
+    .whatsapp-float {
+        bottom: 170px;
+        right: 15px;
+        width: 56px;
+        height: 56px;
+        font-size: 28px;
+    }
+    
+    /* Social Proof - Better mobile positioning */
+    #socialProof { 
+        left: 10px; 
+        right: 10px; 
+        max-width: none;
+        bottom: 180px;
+    }
+    
+    /* Stats Bar */
+    .stats-bar { 
+        flex-direction: column; 
+        gap: 30px;
+        padding: 50px 20px;
+    }
+    .stat-item h2 {
+        font-size: 3rem;
+    }
+    .stat-item p {
+        font-size: 1rem;
+    }
+    
+    /* About Section */
+    .about-flex { flex-direction: column; }
+    .about-img img {
+        max-height: 400px;
+        width: 100%;
+        object-fit: cover;
+    }
+    .about-list {
+        font-size: 1.2rem;
+    }
+    
+    /* Calculators - Better touch targets */
+    .calc-grid { grid-template-columns: 1fr; }
+    .calc-card {
+        padding: 30px 20px;
+    }
+    .input-group input,
+    .input-group select {
+        padding: 18px;
+        font-size: 16px; /* Prevents iOS zoom */
+        min-height: 56px;
+    }
+    .calc-btn {
+        padding: 20px;
+        font-size: 1.1rem;
+        min-height: 56px;
+    }
+    
+    /* Body Fat Estimator - 2 column grid */
+    .bodyfat-visual {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    .bf-option {
+        padding: 20px 10px;
+        min-height: 80px;
+    }
+    .bf-percentage {
+        font-size: 1.5rem;
+    }
+    
+    /* Email Capture */
+    .email-form { 
+        flex-direction: column; 
+    }
+    .email-form input { 
+        min-width: 100%;
+        font-size: 16px;
+        padding: 18px;
+    }
+    .email-form button {
+        min-height: 56px;
+        padding: 18px 30px;
+    }
+    
+    /* Pricing Cards */
+    .price-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    .price-card {
+        padding: 40px 25px;
+        max-width: 100%;
+    }
+    .price-val {
+        font-size: 4rem;
+    }
+    .btn-wa {
+        min-height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Contact Form */
+    .form-container {
+        padding: 40px 20px;
+    }
+    input[type="text"],
+    input[type="email"],
+    textarea {
+        font-size: 16px;
+        padding: 18px;
+        min-height: 56px;
+    }
+    textarea {
+        min-height: 120px;
+    }
+    .btn-send {
+        min-height: 56px;
+        padding: 18px;
+        font-size: 1.3rem;
+    }
+    
+    /* FAQ */
+    .faq-question {
+        font-size: 1.2rem;
+        padding: 15px;
+        min-height: 56px;
+    }
+    
+   /* Sticky CTA Bar - HIDE ON MOBILE */
+#stickyCTA { 
+    display: none !important; /* Hide completely on mobile */
+}
+    .sticky-text {
+        font-size: 1.1rem;
+    }
+    .sticky-btn {
+        min-height: 48px;
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    /* Exit Popup Mobile */
+    .popup-content {
+        padding: 40px 25px;
+        width: 95%;
+        max-width: 400px;
+    }
+    .popup-content h2 {
+        font-size: 2rem;
+    }
+    .popup-content p {
+        font-size: 1rem;
+    }
+    .popup-btn {
+        padding: 18px 30px;
+        font-size: 1.1rem;
+        width: 100%;
+    }
+    
+    /* Footer */
+    .share-btn {
+        width: 56px;
+        height: 56px;
+        font-size: 1.8rem;
+    }
+    .copy-link-btn {
+        min-height: 48px;
+        padding: 15px 20px;
+        font-size: 0.85rem;
+    }
+    
+    /* Parallax fix */
+    .parallax { background-attachment: scroll; }
+}
         }
 
         .science-section { 
@@ -1063,6 +1260,36 @@
             border-top: 1px solid #222;
             margin-top: 40px;
         }
+/* === MOBILE LANDSCAPE OPTIMIZATION === */
+@media (max-width: 768px) and (orientation: landscape) {
+    .hero {
+        height: auto;
+        min-height: 100vh;
+        padding: 120px 20px 80px;
+    }
+    .hero-content {
+        margin-bottom: 60px;
+    }
+}
+
+/* === SMALL PHONES (iPhone SE, etc) === */
+@media (max-width: 375px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+    .popup-content {
+        padding: 30px 20px;
+    }
+    .popup-content h2 {
+        font-size: 1.6rem;
+    }
+    .calc-card {
+        padding: 25px 15px;
+    }
+    .price-val {
+        font-size: 3.5rem;
+    }
+}
     </style>
 </head>
 <body>
@@ -1131,7 +1358,7 @@
         <a href="#about" aria-label="About Method"><i class="fas fa-user-tie" aria-hidden="true"></i>Method</a>
         <a href="#calculators" aria-label="Fitness Calculators"><i class="fas fa-calculator" aria-hidden="true"></i>Tools</a>
         <a href="#plans" aria-label="Training Protocols"><i class="fas fa-dumbbell" aria-hidden="true"></i>Protocols</a>
-        <a href="https://wa.me/359889021289" target="_blank" rel="noopener noreferrer" aria-label="Book consultation on WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i>Book</a>
+     <a href="#contact" aria-label="Contact Form"><i class="fas fa-envelope" aria-hidden="true"></i>Contact</a>
     </nav>
 
     <a href="https://wa.me/359889021289" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Contact on WhatsApp">
@@ -1561,36 +1788,64 @@
             animateCounters();
         });
 
-        // ===== SOCIAL PROOF NOTIFICATIONS (ONLY 2 TIMES - NOT SPAMMY) =====
-        const proofData = [
-            { name: 'Alexander from Bulgaria', action: 'just booked Full Coaching' },
-            { name: 'Karl from Germani', action: 'downloaded the 3-Day Split' }
-        ];
-        let proofShownCount = 0;
+// ===== SOCIAL PROOF NOTIFICATIONS =====
+const proofData = [
+    { name: 'Alexander from Bulgaria', action: 'just booked Full Coaching' },
+    { name: 'Andreas from Argentina', action: 'just booked Contest Prep' },
+    { name: 'Joao from Portugal', action: 'downloaded the 3-Day Split' },
+    { name: 'Massimo from Italy', action: 'just booked Training Protocol' },
+    { name: 'Kostas from Greece', action: 'just booked Full Coaching' },
+    { name: 'Mehmet from Turkey', action: 'downloaded the 3-Day Split' },
+    { name: 'Marcel from France', action: 'just booked Contest Prep' }
+];
+let proofShownCount = 0;
+let usedIndices = []; // Track which ones have been shown
+let proofTimeout = null;
 
-        function showSocialProof() {
-            if (proofShownCount >= 2) return; // Only show 2 times total
-            
-            const proof = document.getElementById('socialProof');
-            const nameEl = document.getElementById('proofName');
-            const actionEl = document.getElementById('proofAction');
-            
-            nameEl.textContent = proofData[proofShownCount].name;
-            actionEl.textContent = proofData[proofShownCount].action;
-            
-            proof.classList.add('show');
-            
-            setTimeout(() => {
-                proof.classList.remove('show');
-            }, 5000);
-            
-            proofShownCount++;
-        }
+function showSocialProof() {
+    if (proofShownCount >= 2) return; // Only show 2 times total
+    
+    const proof = document.getElementById('socialProof');
+    const nameEl = document.getElementById('proofName');
+    const actionEl = document.getElementById('proofAction');
+    
+    // Get a random index that hasn't been used yet
+    let randomIndex;
+    if (usedIndices.length === proofData.length) {
+        usedIndices = []; // Reset if all have been shown
+    }
+    
+    do {
+        randomIndex = Math.floor(Math.random() * proofData.length);
+    } while (usedIndices.includes(randomIndex));
+    
+    usedIndices.push(randomIndex);
+    
+    // Update content with random person
+    nameEl.textContent = proofData[randomIndex].name;
+    actionEl.textContent = proofData[randomIndex].action;
+    
+    // Show notification
+    proof.style.display = 'block';
+    setTimeout(() => {
+        proof.classList.add('show');
+    }, 100);
+    
+    // Hide after 5 seconds
+    setTimeout(() => {
+        proof.classList.remove('show');
+        setTimeout(() => {
+            proof.style.display = 'none';
+        }, 500); // Wait for slide animation to complete
+    }, 5000);
+    
+    proofShownCount++;
+}
 
-        // First notification at 8 seconds
-        setTimeout(showSocialProof, 8000);
-        // Second notification at 50 seconds
-        setTimeout(showSocialProof, 50000);
+// First notification at 8 seconds
+setTimeout(showSocialProof, 8000);
+// Second notification at 50 seconds
+setTimeout(showSocialProof, 50000);
 
         // ===== ANIMATED COUNTER =====
         let countersAnimated = false;
@@ -1660,7 +1915,7 @@
         function selectBodyFat(percentage) {
             selectedBF = percentage;
             document.querySelectorAll('.bf-option').forEach(el => el.classList.remove('selected'));
-            document.querySelector(`[data-bf="${percentage}"]`).classList.add('selected');
+document.querySelector(`[data-bf="${percentage}"]`).classList.add('selected');
             
             const weight = parseFloat(document.getElementById('bf-weight').value);
             if (weight) {
