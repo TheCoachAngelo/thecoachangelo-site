@@ -1103,8 +1103,8 @@
                 <i class="fas fa-check"></i>
             </div>
             <div class="proof-text">
-                <strong id="proofName">John from Cyprus</strong>
-                <p>just booked Full Coaching</p>
+                <strong id="proofName">Andreas from Cyprus</strong>
+                <p id="proofAction">just booked Full Coaching</p>
             </div>
         </div>
     </div>
@@ -1310,7 +1310,7 @@
             </div>
         </section>
 
-       <!-- EMAIL CAPTURE -->
+        <!-- EMAIL CAPTURE - FREE 3-DAY SPLIT -->
         <section class="email-capture reveal">
             <div class="container">
                 <div class="email-box">
@@ -1561,29 +1561,36 @@
             animateCounters();
         });
 
-        // ===== SOCIAL PROOF NOTIFICATIONS =====
-        const proofNames = [
-            'John from Cyprus', 'Maria from Italy', 'Andreas from Greece', 
-            'Luca from Bulgaria', 'George from UK', 'Alex from USA'
+        // ===== SOCIAL PROOF NOTIFICATIONS (ONLY 2 TIMES - NOT SPAMMY) =====
+        const proofData = [
+            { name: 'Andreas from Cyprus', action: 'just booked Full Coaching' },
+            { name: 'Gigio from Italy', action: 'downloaded the 3-Day Split' }
         ];
-        let proofIndex = 0;
+        let proofShownCount = 0;
 
         function showSocialProof() {
+            if (proofShownCount >= 2) return; // Only show 2 times total
+            
             const proof = document.getElementById('socialProof');
             const nameEl = document.getElementById('proofName');
+            const actionEl = document.getElementById('proofAction');
             
-            nameEl.textContent = proofNames[proofIndex];
+            nameEl.textContent = proofData[proofShownCount].name;
+            actionEl.textContent = proofData[proofShownCount].action;
+            
             proof.classList.add('show');
             
             setTimeout(() => {
                 proof.classList.remove('show');
             }, 5000);
             
-            proofIndex = (proofIndex + 1) % proofNames.length;
+            proofShownCount++;
         }
 
-        setInterval(showSocialProof, 15000);
-        setTimeout(showSocialProof, 5000);
+        // First notification at 8 seconds
+        setTimeout(showSocialProof, 8000);
+        // Second notification at 50 seconds
+        setTimeout(showSocialProof, 50000);
 
         // ===== ANIMATED COUNTER =====
         let countersAnimated = false;
@@ -1628,7 +1635,6 @@
                 return;
             }
 
-            // Mifflin-St Jeor formula
             let bmr;
             if (gender === 'male') {
                 bmr = 10 * weight + 6.25 * height - 5 * age + 5;
@@ -1719,21 +1725,62 @@
             document.getElementById('macro-result').classList.add('show');
         }
 
-        // ===== EMAIL CAPTURE =====
+        // ===== EMAIL CAPTURE WITH 3-DAY SPLIT DELIVERY =====
         function captureEmail(e) {
             e.preventDefault();
-            const email = document.getElementById('lead-email').value;
+            const emailInput = document.getElementById('lead-email');
+            const email = emailInput.value.trim();
             
-            // Send to Formspree or your email service
+            if (!email) {
+                alert('Please enter your email');
+                return;
+            }
+
+            const btn = e.target.querySelector('button');
+            const originalText = btn.textContent;
+            btn.textContent = 'SENDING...';
+            btn.disabled = true;
+
+            // YOUR 3-DAY SPLIT DIRECT DOWNLOAD LINK
+            const WORKOUT_PDF_URL = 'https://drive.google.com/uc?export=download&id=1xM5ZUBUunsFSMCrZJD2HV17u9JHO19TM';
+
+            // Send to Formspree
             fetch('https://formspree.io/f/xgovnlpv', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email: email, type: 'Lead Magnet' })
-            }).then(() => {
-                alert('Success! Check your email for the free nutrition guide.');
-                document.getElementById('lead-email').value = '';
-            }).catch(() => {
-                alert('Thank you! The guide will be sent shortly.');
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: email,
+                    type: 'Free 3-Day Split Download',
+                    workout_link: WORKOUT_PDF_URL
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Open PDF in new tab
+                    window.open(WORKOUT_PDF_URL, '_blank');
+                    
+                    // Success message
+                    alert('✅ SUCCESS! Your FREE 3-Day Split is downloading now.\n\nCheck your email for the link + bonus tips from Angelo!');
+                    emailInput.value = '';
+                    
+                    btn.textContent = '✅ SENT! CHECK DOWNLOADS';
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                        btn.disabled = false;
+                    }, 4000);
+                } else {
+                    throw new Error('Submission failed');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Still open the PDF even if email fails
+                window.open(WORKOUT_PDF_URL, '_blank');
+                alert('⚠️ Download started! If you don\'t receive the email, contact us on WhatsApp.');
+                btn.textContent = originalText;
+                btn.disabled = false;
             });
         }
 
@@ -1869,14 +1916,6 @@
 
                 lazyImages.forEach(img => imageObserver.observe(img));
             }
-        });
-
-        // Form field validation
-        document.querySelectorAll('input[required], textarea[required]').forEach(field => {
-            field.addEventListener('invalid', function(e) {
-                e.preventDefault();
-                this.focus();
-            });
         });
     </script>
 </body>
