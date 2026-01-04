@@ -8,8 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,400&family=Oswald:wght@700&display=swap" rel="stylesheet">
     <style>
         :root { --red: #e61e2a; --black: #000; --gray: #0a0a0a; }
-        html { scroll-behavior: smooth; scroll-padding-top: 100px; }
-        body { margin: 0; background: var(--black); color: #fff; font-family: 'Montserrat', sans-serif; line-height: 1.6; overflow-x: hidden; }
+        html { scroll-behavior: smooth; scroll-padding-top: 100px; } /* Pro Offset */
+        body { margin: 0; background: var(--black); color: #fff; font-family: 'Montserrat', sans-serif; line-height: 1.6; overflow-x: hidden; padding-bottom: 70px; }
         h1, h2, h3 { font-family: 'Oswald', sans-serif; text-transform: uppercase; margin: 0; }
         .container { max-width: 1100px; margin: auto; padding: 0 20px; }
         .red-text { color: var(--red); }
@@ -17,29 +17,12 @@
         .reveal { opacity: 0; transform: translateY(80px) scale(0.95); filter: blur(5px); transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
         .reveal.active { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
 
+        /* HEADER DINAMICO */
         header { 
-            padding: 25px 40px; 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            z-index: 1000; 
-            box-sizing: border-box; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center;
-            background: transparent;
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.5s ease;
+            padding: 25px 40px; position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; box-sizing: border-box; display: flex; justify-content: space-between; align-items: center; background: transparent; transition: all 0.5s ease;
         }
         header.scrolled {
-            opacity: 1;
-            pointer-events: auto;
-            background: rgba(0, 0, 0, 0.95);
-            padding: 15px 40px;
-            border-bottom: 1px solid rgba(230, 30, 42, 0.3);
-            backdrop-filter: blur(15px);
+            background: rgba(0, 0, 0, 0.95); padding: 15px 40px; border-bottom: 1px solid var(--red); backdrop-filter: blur(15px);
         }
         .logo img { height: 65px; transition: 0.5s; }
         header.scrolled .logo img { height: 50px; }
@@ -49,20 +32,37 @@
         .nav-links a:hover { color: var(--red); }
         .book-btn { background: var(--red); padding: 8px 18px; border-radius: 2px; font-weight: bold; border: 1px solid var(--red); color: #fff !important; }
 
-        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background: #25d366; color: #fff; width: 60px; height: 60px; border-radius: 50%; z-index: 1000; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: 0.3s; font-size: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        /* NAVIGAZIONE MOBILE */
+        .mobile-nav {
+            display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(10, 10, 10, 0.98); backdrop-filter: blur(15px); border-top: 1px solid var(--red); z-index: 2000; justify-content: space-around; padding: 12px 0;
+        }
+        .mobile-nav a { color: #fff; text-decoration: none; font-size: 0.7rem; font-family: 'Oswald', sans-serif; text-align: center; display: flex; flex-direction: column; gap: 5px; }
+        .mobile-nav i { font-size: 1.2rem; color: var(--red); }
 
-        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-start; background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.9)), url('https://static.wixstatic.com/media/4338d0_9c6fc5304e2144cea2a932ddb0adc172~mv2.jpg'); background-size: cover; background-position: top center; padding-bottom: 120px; padding-left: 5%; }
+        .whatsapp-float { position: fixed; bottom: 100px; right: 20px; background: #25d366; color: #fff; width: 60px; height: 60px; border-radius: 50%; z-index: 1000; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+
+        /* HERO FIX - SFUMATURA DESKTOP MIGLIORATA */
+        .hero { 
+            height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; 
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.95) 85%, #000 100%), url('https://static.wixstatic.com/media/4338d0_9c6fc5304e2144cea2a932ddb0adc172~mv2.jpg'); 
+            background-size: cover; background-position: top center; padding-left: 5%; 
+        }
+        .hero-content { margin-bottom: 100px; }
         .hero h1 { font-size: clamp(2.5rem, 8vw, 5.5rem); line-height: 1.05; margin-bottom: 35px; text-shadow: 2px 2px 30px rgba(0,0,0,0.8); }
         .btn-main { background: var(--red); color: #fff; padding: 20px 50px; text-decoration: none; font-family: 'Oswald', sans-serif; font-weight: bold; border: 2px solid var(--red); transition: 0.3s; display: inline-block; letter-spacing: 1px; }
 
         @media (max-width: 768px) { 
-            header { padding: 15px 20px; } 
+            header { opacity: 0; pointer-events: none; } 
+            header.scrolled { opacity: 1; pointer-events: auto; background: rgba(0,0,0,0.95); padding: 10px 20px; }
             .nav-links { display: none; } 
-            .about-img { height: 400px; width: 100%; overflow: hidden; }
-            .about-img img { object-position: center 15%; width: 100%; height: 100%; object-fit: cover; }
-            .about-flex { flex-direction: column; }
-            .hero { background-position: center top; height: 100vh; }
+            .mobile-nav { display: flex; } 
+            .hero { height: 100vh; justify-content: center; padding-bottom: 0; }
+            .hero-content { margin-bottom: 150px; }
             .hero h1 { font-size: 2.8rem; }
+            .science-section { padding-top: 10px; margin-top: -10px; } /* Accorcia lo spazio mobile */
+            .about-img { height: 450px; width: 100%; overflow: hidden; }
+            .about-img img { object-position: center 10%; width: 100%; height: 100%; object-fit: cover; }
+            .about-flex { flex-direction: column; }
             .stats-bar { flex-direction: column; gap: 30px; }
         }
 
@@ -77,9 +77,7 @@
 
         .about { padding: 120px 0; background: #000; }
         .about-flex { display: flex; gap: 80px; align-items: stretch; }
-        .about-img { flex: 0 0 50%; } 
         .about-img img { width: 100%; height: 100%; object-fit: cover; border: 1px solid #222; }
-        .about-content { flex: 1; display: flex; flex-direction: column; justify-content: center; }
         .about-list { list-style: none; padding: 0; margin: 40px 0; font-weight: bold; font-size: 1.4rem; }
         .about-list li { margin: 20px 0; display: flex; align-items: flex-start; text-align: left; }
         .about-list li::before { content: '>'; color: var(--red); margin-right: 20px; font-size: 1.8rem; flex-shrink: 0; }
@@ -87,45 +85,32 @@
         .pricing { padding: 120px 0; text-align: center; }
         .price-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; margin-top: 60px; }
         .price-card { background: var(--gray); padding: 60px 35px; border: 1px solid #1a1a1a; position: relative; display: flex; flex-direction: column; text-align: left; transition: all 0.4s ease; border-radius: 4px; }
-        .price-card:hover { transform: translateY(-15px); border-color: var(--red); box-shadow: 0 20px 50px rgba(230, 30, 42, 0.15); }
-        .featured { border: 2px solid var(--red); }
-        .price-val { font-size: 5rem; font-family: 'Oswald', sans-serif; margin: 20px 0; text-align: center; color: var(--red); }
-        .price-card h3 { text-align: center; color: #fff; font-size: 1.8rem; }
-        .price-card ul { list-style: none; padding: 0; margin: 30px 0; flex-grow: 1; color: #ccc; }
-        .price-card li { margin: 15px 0; padding-left: 30px; position: relative; }
-        .price-card li::before { content: '✓'; color: var(--red); position: absolute; left: 0; font-weight: bold; }
+        .price-card:hover { transform: translateY(-15px); border-color: var(--red); }
+        .price-val { font-size: 5rem; font-family: 'Oswald', sans-serif; margin: 15px 0; text-align: center; color: var(--red); }
         .btn-wa { display: block; padding: 18px; text-decoration: none; font-weight: bold; text-transform: uppercase; font-family: 'Oswald', sans-serif; transition: 0.3s; text-align: center; }
 
         .testimonials { padding: 120px 0; background: #000; }
         .quote-block { max-width: 950px; margin: 0 auto 70px; padding: 40px; border-left: 4px solid var(--red); background: #050505; }
-        .quote-text { font-style: italic; color: #ccc; font-size: 1.2rem; line-height: 1.9; margin-bottom: 25px; }
-        .quote-author { font-family: 'Oswald', sans-serif; font-size: 1.5rem; color: #fff; }
+        .quote-text { font-style: italic; color: #ccc; font-size: 1.2rem; line-height: 1.8; margin-bottom: 25px; }
 
         .faq-section { padding: 120px 0; background: #050505; }
         .faq-container { max-width: 900px; margin: auto; }
         .faq-item { border-bottom: 1px solid #222; padding: 25px 0; }
         .faq-question { font-family: 'Oswald', sans-serif; font-size: 1.35rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: #fff; text-transform: uppercase; }
-        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-in-out; color: #bbb; line-height: 1.8; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-in-out; color: #bbb; }
         .faq-item.active .faq-answer { max-height: 1000px; padding-top: 25px; }
         .faq-icon { transition: transform 0.3s; color: var(--red); font-size: 1.5rem; }
-        .faq-item.active .faq-icon { transform: rotate(45deg); }
 
         .contact { padding: 120px 0; background: #000; }
         .form-container { max-width: 750px; margin: auto; background: #050505; padding: 50px; border: 1px solid #111; border-radius: 4px; }
-        .form-group { margin-bottom: 30px; }
-        .form-group label { display: block; font-weight: bold; margin-bottom: 12px; color: #999; font-size: 0.9rem; text-transform: uppercase; }
-        /* FORM LEGGERMENTE SCURO CON PLACEHOLDER */
-        input, textarea { width: 100%; padding: 18px; background: #111; border: 1px solid #222; font-size: 1rem; color: #fff; transition: 0.3s; }
+        input, textarea { width: 100%; padding: 18px; background: #111; border: 1px solid #222; font-size: 1rem; color: #fff; margin-bottom: 20px; box-sizing: border-box; }
         input:focus, textarea:focus { border-color: var(--red); outline: none; background: #000; }
         .btn-send { background: var(--red); color: #fff; width: 100%; padding: 22px; font-family: 'Oswald', sans-serif; border: none; font-size: 1.5rem; cursor: pointer; transition: 0.3s; margin-top: 20px; }
 
         .footer { padding: 100px 20px; text-align: center; border-top: 1px solid #111; background: #000; }
-        .footer-logo { height: 180px; margin-bottom: 30px; }
-        .insta-follow { display: block; margin: 10px auto 40px; color: var(--red); font-weight: bold; text-decoration: none; font-size: 1.3rem; }
+        .footer-logo { height: 100px; margin-bottom: 30px; }
         .share-container { display: flex; justify-content: center; gap: 25px; align-items: center; flex-wrap: wrap; margin-bottom: 50px; }
         .share-btn { color: #fff; font-size: 2rem; text-decoration: none; transition: 0.3s; }
-        .share-btn:hover { color: var(--red); transform: scale(1.2); }
-        .copy-link-btn { font-family: 'Oswald'; font-size: 1rem; border: 1px solid #333; padding: 10px 25px; cursor: pointer; }
         .copyright { color: #444; font-size: 0.9rem; padding-top: 40px; border-top: 1px solid #111; }
     </style>
 </head>
@@ -134,14 +119,17 @@
     <header id="mainHeader">
         <div class="logo"><img src="https://static.wixstatic.com/media/4338d0_1b54ec807b4046d2b77ed9c57a71295d~mv2.png" alt="Coach Angelo Logo"></div>
         <nav class="nav-links">
-            <a href="#about">Method</a>
-            <a href="#plans">Protocols</a>
-            <a href="#faq">FAQ</a>
-            <a href="#testimonials">Results</a>
-            <a href="#contact">Contact</a>
+            <a href="#about">Method</a><a href="#plans">Protocols</a><a href="#faq">FAQ</a><a href="#testimonials">Results</a><a href="#contact">Contact</a>
             <a href="https://wa.me/359889021289" class="book-btn" target="_blank">BOOK NOW</a>
         </nav>
     </header>
+
+    <nav class="mobile-nav">
+        <a href="#about"><i class="fas fa-user-tie"></i>Method</a>
+        <a href="#plans"><i class="fas fa-dumbbell"></i>Protocols</a>
+        <a href="#faq"><i class="fas fa-question-circle"></i>FAQ</a>
+        <a href="https://wa.me/359889021289" target="_blank"><i class="fab fa-whatsapp"></i>Book</a>
+    </nav>
 
     <a href="https://wa.me/359889021289" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
@@ -198,12 +186,22 @@
                 <div class="price-card featured">
                     <div class="best-value" style="background:var(--red); padding:5px 20px; position:absolute; top:-15px; left:50%; transform:translateX(-50%); font-weight:bold; font-family:'Oswald'; color:#fff;">BEST VALUE</div>
                     <div class="price-val">€150</div><h3>FULL COACHING</h3>
-                    <ul><li>Custom Diet & Training</li><li>Weekly Check-ins</li><li>24/7 WhatsApp Support</li></ul>
+                    <ul>
+                        <li>Custom Diet & Training</li>
+                        <li>Weekly Check-ins</li>
+                        <li>24/7 WhatsApp Support</li>
+                        <li>Support Cardio Protocol</li>
+                    </ul>
                     <a href="https://wa.me/359889021289" class="btn-wa" style="background:var(--red); color:#fff;" target="_blank">START NOW</a>
                 </div>
                 <div class="price-card">
                     <div class="price-val">€200</div><h3>CONTEST PREP</h3>
-                    <ul><li>Daily Adjustments</li><li>Peak Week Control</li><li>Post Show Reverse Diet</li></ul>
+                    <ul>
+                        <li>Custom Diet & Training Plan</li>
+                        <li>Daily Adjustments</li>
+                        <li>Peak Week Control</li>
+                        <li>Post Show Reverse Diet</li>
+                    </ul>
                     <a href="https://wa.me/359889021289" class="btn-wa" style="background:#fff; color:#000;" target="_blank">CHOOSE PLAN</a>
                 </div>
             </div>
@@ -213,22 +211,10 @@
     <section id="testimonials" class="testimonials reveal">
         <div class="container">
             <h2 style="font-size: 4.5rem; text-align: center; margin-bottom: 80px;">REAL RESULTS</h2>
-            <div class="quote-block">
-                <p class="quote-text">"I'm so grateful to have Angelo as my coach. Not only has he helped me improve my physique, but he's also taught me life lessons that go far beyond the gym. His approach is all about discipline, consistency, and becoming the best version of yourself."</p>
-                <div class="quote-author">✱ ANTONIS KATSIAMIS - CYPRUS</div>
-            </div>
-            <div class="quote-block">
-                <p class="quote-text">"Angelo changed my mindset... nutrition and life... I've known him for many years and he's been following me for a short time but my changes have been beyond expectations... thank you Coach"</p>
-                <div class="quote-author">✱ GIGIO MOSCA - ITALY</div>
-            </div>
-            <div class="quote-block">
-                <p class="quote-text">"Working with Angelo has changed my life. He gave me hope and completely transformed my fitness journey. With him, I've found not only an amazing coach and role model, but also a lifelong friend."</p>
-                <div class="quote-author">✱ ANDREAS MATHEOU - CYPRUS</div>
-            </div>
-            <div class="quote-block">
-                <p class="quote-text">"I have been training with Angelo for two years. His knowledge changed my life and I became completely unrecognizable. I highly recommend him — a true professional."</p>
-                <div class="quote-author">✱ VILIAN GORANOV - BULGARIA</div>
-            </div>
+            <div class="quote-block"><p class="quote-text">"I'm so grateful to have Angelo as my coach. Not only has he helped me improve my physique, but he's also taught me life lessons that go far beyond the gym. His approach is all about discipline, consistency, and becoming the best version of yourself."</p><div class="quote-author">✱ ANTONIS KATSIAMIS - CYPRUS</div></div>
+            <div class="quote-block"><p class="quote-text">"Angelo changed my mindset... nutrition and life... I've known him for many years and he's been following me for a short time but my changes have been beyond expectations... thank you Coach"</p><div class="quote-author">✱ GIGIO MOSCA - ITALY</div></div>
+            <div class="quote-block"><p class="quote-text">"Working with Angelo has changed my life. He gave me hope and completely transformed my fitness journey. With him, I've found not only an amazing coach and role model, but also a lifelong friend."</p><div class="quote-author">✱ ANDREAS MATHEOU - CYPRUS</div></div>
+            <div class="quote-block"><p class="quote-text">"I have been training with Angelo for two years. His knowledge changed my life and I became completely unrecognizable. I highly recommend him — a true professional."</p><div class="quote-author">✱ VILIAN GORANOV - BULGARIA</div></div>
         </div>
     </section>
 
@@ -236,42 +222,15 @@
         <div class="container">
             <h2 class="red-text" style="font-size: 4.5rem; text-align: center; margin-bottom: 60px;">FAQ</h2>
             <div class="faq-container">
-                <div class="faq-item">
-                    <div class="faq-question">How does online coaching work? <span class="faq-icon">+</span></div>
-                    <div class="faq-answer"><ul><li>Initial questionnaire about history, goals, and lifestyle.</li><li>Fully personalized training protocol and sample meal plan.</li><li>Periodic check-ins via chat to track progress.</li></ul></div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">What do I need to get started? <span class="faq-icon">+</span></div>
-                    <div class="faq-answer"><ul><li>Internet access, smartphone/PC, and email.</li><li>Access to a gym, home setup, or basic equipment.</li><li>Recent photos, measurements, and commitment.</li></ul></div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">How personalized is the program? <span class="faq-icon">+</span></div>
-                    <div class="faq-answer">Built around your specific goals, level, and training time. Updates based on check-in feedback and lifestyle changes.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">How often are plans updated? <span class="faq-icon">+</span></div>
-                    <div class="faq-answer">Reviewed typically ogni 6 settimane. Extraordinary updates per infortuni o cambi obiettivo.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">Can beginners do online coaching? <span class="faq-icon">+</span></div>
-                    <div class="faq-answer">Assolutamente sì, i programmi sono adatti a tutti i livelli, dai principianti agli atleti avanzati. Guida tecnica inclusa.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">What support is provided? <span class="faq-icon">+</span></div>
-                    <div class="faq-answer">Supporto via chat per dubbi tecnici e check-in programmati per valutare i progressi tramite foto e feedback.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">Does coaching replace a doctor? <span class="faq-icon">+</span></div>
-                    <div class="faq-answer">No. Il coaching non sostituisce visite mediche o piani nutrizionali terapeutici. Consulta un medico per condizioni mediche.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">How do payments and renewals work? <span class="faq-icon">+</span></div>
-                    <div class="faq-answer">Pagamenti anticipati via Revolut, Paypal o Bonifico. I piani hanno durata fissa e non si rinnovano automaticamente.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">Can I get a refund? <span class="faq-icon">+</span></div>
-                    <div class="faq-answer">Essendo un servizio personalizzato, non sono previsti rimborsi una volta consegnato il materiale, salvo casi eccezionali.</div>
-                </div>
+                <div class="faq-item"><div class="faq-question">How does online coaching work? <span class="faq-icon">+</span></div><div class="faq-answer">Initial questionnaire, personalized protocols, and periodic chat check-ins via WhatsApp.</div></div>
+                <div class="faq-item"><div class="faq-question">What do I need to get started? <span class="faq-icon">+</span></div><div class="faq-answer">Internet access, gym or home equipment, body measurements, and photos.</div></div>
+                <div class="faq-item"><div class="faq-question">How personalized is the program? <span class="faq-icon">+</span></div><div class="faq-answer">Built entirely around your specific goals, level, and training time.</div></div>
+                <div class="faq-item"><div class="faq-question">How often are plans updated? <span class="faq-icon">+</span></div><div class="faq-answer">Typically reviewed ogni 6 settimane basandosi sui progressi.</div></div>
+                <div class="faq-item"><div class="faq-question">Can beginners do coaching? <span class="faq-icon">+</span></div><div class="faq-answer">Yes, intensity adjusts for everyone from zero experience to advanced athletes.</div></div>
+                <div class="faq-item"><div class="faq-question">What support is provided? <span class="faq-icon">+</span></div><div class="faq-answer">Chat support for doubts and scheduled check-ins per package.</div></div>
+                <div class="faq-item"><div class="faq-question">Does coaching replace a doctor? <span class="faq-icon">+</span></div><div class="faq-answer">No. Online coaching does not substitute medical visits or therapeutic plans.</div></div>
+                <div class="faq-item"><div class="faq-question">How do payments work? <span class="faq-icon">+</span></div><div class="faq-answer">Upfront via Revolut, Paypal, or Bank Transfer. No auto-renew.</div></div>
+                <div class="faq-item"><div class="faq-question">Can I get a refund? <span class="faq-icon">+</span></div><div class="faq-answer">As a digital service, refunds are not available once consegnato.</div></div>
             </div>
         </div>
     </section>
@@ -284,7 +243,7 @@
                     <div class="form-group"><label>Full Name *</label><input type="text" name="name" required placeholder="John Doe"></div>
                     <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="john.doe@example.com"></div>
                     <div class="form-group"><label>WhatsApp Number</label><input type="text" name="whatsapp" placeholder="+39 123 456 7890"></div>
-                    <div class="form-group"><label>Current Stats & Goals *</label><textarea name="stats" rows="5" required placeholder="Current weight, injuries, main goal..."></textarea></div>
+                    <div class="form-group"><label>Current Stats & Goals *</label><textarea name="stats" rows="5" required placeholder="Weight, injuries, main goals..."></textarea></div>
                     <button type="button" onclick="sendToWhatsApp()" class="btn-send">SEND APPLICATION</button>
                 </form>
             </div>
@@ -293,47 +252,29 @@
 
     <footer class="footer">
         <img src="https://static.wixstatic.com/media/4338d0_1b54ec807b4046d2b77ed9c57a71295d~mv2.png" alt="Logo" class="footer-logo">
-        <a href="https://www.instagram.com/thecoachangelo" class="insta-follow" target="_blank">FOLLOW ON INSTAGRAM</a>
         <div class="share-container">
-            <button class="share-btn copy-link-btn" onclick="copyLink()"><i class="fas fa-link"></i> COPY LINK</button>
-            <a href="https://wa.me/?text=Check out https://thecoachangelo.com" class="share-btn" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <button class="copy-link-btn" onclick="copyLink()"><i class="fas fa-link"></i> COPY LINK</button>
             <a href="https://twitter.com/intent/tweet?url=https://thecoachangelo.com" class="share-btn" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
-            <a href="https://www.facebook.com/sharer/sharer.php?u=https://thecoachangelo.com" class="share-btn" target="_blank"><i class="fab fa-facebook"></i></a>
-            <a href="https://www.threads.net/intent/post?text=Check out https://thecoachangelo.com" class="share-btn" target="_blank"><i class="fab fa-threads"></i></a>
+            <a href="https://wa.me/?text=Check out https://thecoachangelo.com" class="share-btn" target="_blank"><i class="fab fa-whatsapp"></i></a>
             <a href="https://www.instagram.com/thecoachangelo" class="share-btn" target="_blank"><i class="fab fa-instagram"></i></a>
         </div>
         <div class="copyright">© 2026 THE COACH ANGELO. ALL RIGHTS RESERVED.</div>
     </footer>
 
     <script>
-        document.querySelectorAll('.faq-question').forEach(button => {
-            button.addEventListener('click', () => {
-                const faqItem = button.parentElement;
-                faqItem.classList.toggle('active');
-            });
-        });
-
+        document.querySelectorAll('.faq-question').forEach(button => { button.addEventListener('click', () => { button.parentElement.classList.toggle('active'); }); });
         function sendToWhatsApp() {
             const form = document.getElementById('applicationForm');
-            const name = form.name.value;
-            const stats = form.stats.value;
-            if(name && stats) {
+            if(form.name.value && form.stats.value) {
                 fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
-                const message = `Ciao Angelo! Sono ${name}. Ho inviato la candidatura dal sito. Obiettivi: ${stats}`;
-                window.open(`https://wa.me/359889021289?text=${encodeURIComponent(message)}`, '_blank');
+                window.open(`https://wa.me/359889021289?text=Ciao Angelo! Sono ${form.name.value}. Ho inviato la candidatura. Obiettivi: ${form.stats.value}`, '_blank');
             } else { alert("Please fill in required fields."); }
         }
-
         window.addEventListener("scroll", function() {
             const header = document.getElementById("mainHeader");
-            if (window.scrollY > 150) {
-                header.classList.add("scrolled");
-            } else {
-                header.classList.remove("scrolled");
-            }
+            if (window.scrollY > 150) { header.classList.add("scrolled"); } else { header.classList.remove("scrolled"); }
             reveal();
         });
-
         function reveal() { 
             var reveals = document.querySelectorAll(".reveal"); 
             for (var i = 0; i < reveals.length; i++) { 
