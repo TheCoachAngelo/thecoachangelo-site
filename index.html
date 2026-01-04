@@ -3,9 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#e61e2a">
+    <meta name="description" content="Elite physique coaching by former IFBB athlete Coach Angelo. Custom diet, training, and contest prep protocols.">
     <title>The Coach Angelo | Elite Physique</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="application/json;base64,ewogICJuYW1lIjogIlRoZSBDb2FjaCBBbmdlbG8iLAogICJzaG9ydF9uYW1lIjogIkNvYWNoIEFuZ2VsbyIsCiAgImRlc2NyaXB0aW9uIjogIkVsaXRlIFBoeXNpcXVlIENvYWNoaW5nIiwKICAic3RhcnRfdXJsIjogIi8iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiMwMDAwMDAiLAogICJ0aGVtZV9jb2xvciI6ICIjZTYxZTJhIiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiaHR0cHM6Ly9zdGF0aWMud2l4c3RhdGljLmNvbS9tZWRpYS80MzM4ZDBfMWI1NGVjODA3YjQwNDZkMmI3N2VkOWM1N2E3MTI5NWR+bXYyLnBuZyIsCiAgICAgICJzaXplcyI6ICIxOTJ4MTkyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfQogIF0KfQ==">
+    <link rel="apple-touch-icon" href="https://static.wixstatic.com/media/4338d0_1b54ec807b4046d2b77ed9c57a71295d~mv2.png">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,400&family=Oswald:wght@700&display=swap" rel="stylesheet">
+    
     <style>
         :root { 
             --red: #e61e2a; 
@@ -14,7 +22,11 @@
             --text-high: #eee;
             --text-med: #ccc;
         }
+        
+        * { box-sizing: border-box; }
+        
         html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+        
         body { 
             margin: 0; 
             background: var(--black); 
@@ -24,11 +36,437 @@
             overflow-x: hidden; 
             padding-bottom: 70px; 
         }
+        
         h1, h2, h3 { font-family: 'Oswald', sans-serif; text-transform: uppercase; margin: 0; }
         .container { max-width: 1100px; margin: auto; padding: 0 20px; }
         .red-text { color: var(--red); }
 
-        /* Skip link for keyboard accessibility */
+        /* ===== LOADING SCREEN ===== */
+        #loadingScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+        #loadingScreen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .loader {
+            width: 120px;
+            height: 120px;
+            position: relative;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        .loader img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.7; }
+        }
+
+        /* ===== EXIT INTENT POPUP ===== */
+        #exitPopup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s;
+        }
+        #exitPopup.show {
+            display: flex;
+        }
+        .popup-content {
+            background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+            padding: 60px 50px;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            border: 2px solid var(--red);
+            box-shadow: 0 30px 80px rgba(230,30,42,0.4);
+            text-align: center;
+            animation: slideUp 0.4s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .popup-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .popup-close:hover {
+            transform: rotate(90deg);
+            color: var(--red);
+        }
+        .popup-content h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--red);
+        }
+        .popup-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: var(--text-med);
+        }
+        .popup-btn {
+            background: var(--red);
+            color: #fff;
+            padding: 20px 50px;
+            border: none;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.3rem;
+            cursor: pointer;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(230,30,42,0.4);
+        }
+        .popup-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(230,30,42,0.6);
+        }
+
+        /* ===== STICKY CTA BAR ===== */
+        #stickyCTA {
+            position: fixed;
+            bottom: -100px;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(135deg, var(--red), #c91520);
+            padding: 20px;
+            z-index: 9000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 -5px 30px rgba(0,0,0,0.5);
+            transition: bottom 0.4s;
+        }
+        #stickyCTA.show {
+            bottom: 0;
+        }
+        .sticky-text {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.4rem;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .sticky-text i {
+            font-size: 2rem;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        .sticky-btn {
+            background: #fff;
+            color: var(--red);
+            padding: 15px 40px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        .sticky-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(255,255,255,0.3);
+        }
+
+        /* ===== SOCIAL PROOF NOTIFICATIONS ===== */
+        #socialProof {
+            position: fixed;
+            bottom: 100px;
+            left: 20px;
+            background: rgba(10,10,10,0.95);
+            border: 2px solid var(--red);
+            border-radius: 12px;
+            padding: 20px 25px;
+            max-width: 350px;
+            z-index: 9500;
+            transform: translateX(-500px);
+            transition: transform 0.5s;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+        }
+        #socialProof.show {
+            transform: translateX(0);
+        }
+        .proof-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .proof-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        .proof-text {
+            flex: 1;
+        }
+        .proof-text strong {
+            color: var(--red);
+            font-size: 1.1rem;
+        }
+        .proof-text p {
+            margin: 5px 0 0;
+            font-size: 0.9rem;
+            color: var(--text-med);
+        }
+
+        /* ===== CALCULATORS SECTION ===== */
+        .calculators-section {
+            padding: 120px 0;
+            background: #000;
+        }
+        .calc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+        .calc-card {
+            background: #0a0a0a;
+            padding: 40px;
+            border: 2px solid #222;
+            border-radius: 16px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+            transition: all 0.4s;
+        }
+        .calc-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--red);
+            box-shadow: 0 25px 60px rgba(230,30,42,0.3);
+        }
+        .calc-card h3 {
+            font-size: 2rem;
+            margin-bottom: 25px;
+            color: var(--red);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .calc-card h3 i {
+            font-size: 2.5rem;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-high);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .input-group input,
+        .input-group select {
+            width: 100%;
+            padding: 15px;
+            background: #111;
+            border: 2px solid #333;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        .input-group input:focus,
+        .input-group select:focus {
+            border-color: var(--red);
+            background: #000;
+            outline: none;
+        }
+        .calc-btn {
+            width: 100%;
+            padding: 18px;
+            background: var(--red);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
+        .calc-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(230,30,42,0.5);
+        }
+        .calc-result {
+            margin-top: 25px;
+            padding: 25px;
+            background: rgba(230,30,42,0.1);
+            border: 2px solid var(--red);
+            border-radius: 12px;
+            display: none;
+        }
+        .calc-result.show {
+            display: block;
+            animation: slideUp 0.4s;
+        }
+        .result-value {
+            font-size: 3rem;
+            color: var(--red);
+            font-family: 'Oswald', sans-serif;
+            font-weight: bold;
+        }
+        .result-label {
+            font-size: 1rem;
+            color: var(--text-med);
+            margin-top: 5px;
+        }
+        .result-details {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+        }
+        .result-details p {
+            margin: 10px 0;
+            color: var(--text-high);
+        }
+
+        /* ===== BODY FAT ESTIMATOR ===== */
+        .bodyfat-visual {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+        }
+        .bf-option {
+            cursor: pointer;
+            padding: 15px;
+            border: 2px solid #333;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s;
+            background: #111;
+        }
+        .bf-option:hover {
+            border-color: var(--red);
+            background: rgba(230,30,42,0.1);
+        }
+        .bf-option.selected {
+            border-color: var(--red);
+            background: rgba(230,30,42,0.2);
+        }
+        .bf-percentage {
+            font-size: 1.8rem;
+            font-family: 'Oswald', sans-serif;
+            color: var(--red);
+            font-weight: bold;
+        }
+        .bf-label {
+            font-size: 0.8rem;
+            color: var(--text-med);
+            margin-top: 5px;
+        }
+
+        /* ===== EMAIL CAPTURE ===== */
+        .email-capture {
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            padding: 80px 0;
+            text-align: center;
+        }
+        .email-box {
+            max-width: 650px;
+            margin: 0 auto;
+            padding: 50px;
+            background: rgba(230,30,42,0.05);
+            border: 2px solid var(--red);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(230,30,42,0.2);
+        }
+        .email-box h2 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        .email-box p {
+            font-size: 1.2rem;
+            color: var(--text-med);
+            margin-bottom: 30px;
+        }
+        .email-form {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .email-form input {
+            flex: 1;
+            min-width: 250px;
+            padding: 20px;
+            background: #111;
+            border: 2px solid #333;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1.1rem;
+        }
+        .email-form button {
+            padding: 20px 40px;
+            background: var(--red);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .email-form button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(230,30,42,0.5);
+        }
+
+        /* ===== PARALLAX ===== */
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        /* Skip link */
         .skip-link {
             position: absolute;
             top: -100px;
@@ -45,7 +483,7 @@
             top: 20px;
         }
 
-        /* Focus visible for all interactive elements */
+        /* Focus visible */
         *:focus-visible {
             outline: 3px solid var(--red);
             outline-offset: 3px;
@@ -186,7 +624,7 @@
             transform: scale(1.1);
         }
 
-        /* HERO */
+        /* HERO with parallax */
         .hero { 
             height: 100vh; 
             display: flex; 
@@ -240,11 +678,18 @@
                 padding-left: 20px;
                 text-align: center;
                 align-items: center;
+                background-attachment: scroll;
             }
             .hero-content { margin-bottom: 150px; }
             .hero h1 { font-size: 2.8rem; }
             .about-flex { flex-direction: column; }
             .stats-bar { flex-direction: column; gap: 30px; }
+            .calc-grid { grid-template-columns: 1fr; }
+            .email-form { flex-direction: column; }
+            .email-form input { min-width: 100%; }
+            #stickyCTA { flex-direction: column; gap: 15px; text-align: center; }
+            #socialProof { left: 10px; right: 10px; max-width: none; }
+            .parallax { background-attachment: scroll; }
         }
 
         .science-section { 
@@ -270,6 +715,7 @@
             line-height: 1.8; 
         }
 
+        /* ANIMATED STATS BAR */
         .stats-bar { 
             background: linear-gradient(135deg, var(--red), #c91520); 
             padding: 70px 0; 
@@ -514,7 +960,9 @@
             font-size: 0.9rem;
             letter-spacing: 1px;
         }
-        input, textarea { 
+        input[type="text"],
+        input[type="email"],
+        textarea { 
             width: 100%; 
             padding: 20px; 
             background: #111; 
@@ -526,7 +974,9 @@
             font-family: 'Montserrat', sans-serif;
             transition: all 0.3s;
         }
-        input:focus, textarea:focus { 
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus { 
             border-color: var(--red); 
             background: #000;
             transform: translateY(-2px);
@@ -616,15 +1066,59 @@
     </style>
 </head>
 <body>
-    <!-- Skip navigation link for keyboard users -->
+    <!-- LOADING SCREEN -->
+    <div id="loadingScreen">
+        <div class="loader">
+            <img src="https://static.wixstatic.com/media/4338d0_1b54ec807b4046d2b77ed9c57a71295d~mv2.png" alt="Loading">
+        </div>
+    </div>
+
+    <!-- EXIT INTENT POPUP -->
+    <div id="exitPopup">
+        <div class="popup-content">
+            <button class="popup-close" onclick="closeExitPopup()" aria-label="Close popup">&times;</button>
+            <h2>WAIT! DON'T LEAVE YET</h2>
+            <p>Book a FREE 15-minute consultation and discover how to transform your physique with science-based coaching.</p>
+            <a href="https://wa.me/359889021289?text=Hi%20Angelo!%20I%20want%20to%20book%20my%20FREE%2015-minute%20consultation" class="popup-btn" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-whatsapp"></i> BOOK FREE CALL NOW
+            </a>
+        </div>
+    </div>
+
+    <!-- STICKY CTA BAR -->
+    <div id="stickyCTA">
+        <div class="sticky-text">
+            <i class="fas fa-fire"></i>
+            <span>Ready to Transform? Start Your Journey Today</span>
+        </div>
+        <a href="https://wa.me/359889021289" class="sticky-btn" target="_blank" rel="noopener noreferrer">
+            BOOK NOW
+        </a>
+    </div>
+
+    <!-- SOCIAL PROOF NOTIFICATION -->
+    <div id="socialProof">
+        <div class="proof-content">
+            <div class="proof-icon">
+                <i class="fas fa-check"></i>
+            </div>
+            <div class="proof-text">
+                <strong id="proofName">John from Cyprus</strong>
+                <p>just booked Full Coaching</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Skip navigation link -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <header id="mainHeader">
         <div class="logo">
-            <img src="https://static.wixstatic.com/media/4338d0_1b54ec807b4046d2b77ed9c57a71295d~mv2.png" alt="Coach Angelo - Elite Physique Training">
+            <img src="https://static.wixstatic.com/media/4338d0_1b54ec807b4046d2b77ed9c57a71295d~mv2.png" alt="Coach Angelo - Elite Physique Training" loading="eager">
         </div>
         <nav class="nav-links" role="navigation" aria-label="Main navigation">
             <a href="#about">Method</a>
+            <a href="#calculators">Tools</a>
             <a href="#plans">Protocols</a>
             <a href="#faq">FAQ</a>
             <a href="#testimonials">Results</a>
@@ -635,8 +1129,8 @@
 
     <nav class="mobile-nav" role="navigation" aria-label="Mobile navigation">
         <a href="#about" aria-label="About Method"><i class="fas fa-user-tie" aria-hidden="true"></i>Method</a>
+        <a href="#calculators" aria-label="Fitness Calculators"><i class="fas fa-calculator" aria-hidden="true"></i>Tools</a>
         <a href="#plans" aria-label="Training Protocols"><i class="fas fa-dumbbell" aria-hidden="true"></i>Protocols</a>
-        <a href="#faq" aria-label="Frequently Asked Questions"><i class="fas fa-question-circle" aria-hidden="true"></i>FAQ</a>
         <a href="https://wa.me/359889021289" target="_blank" rel="noopener noreferrer" aria-label="Book consultation on WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i>Book</a>
     </nav>
 
@@ -645,7 +1139,7 @@
     </a>
 
     <main id="main-content">
-        <section class="hero">
+        <section class="hero parallax">
             <div class="hero-content">
                 <h1 class="reveal active">UNLEASH YOUR<br>TRUE <span class="red-text">POTENTIAL</span></h1>
                 <a href="#plans" class="btn-main reveal active">START THE CHALLENGE</a>
@@ -665,7 +1159,7 @@
 
         <section class="stats-bar reveal" role="region" aria-label="Coach credentials">
             <div class="stat-item">
-                <h2>10+</h2>
+                <h2 class="counter" data-target="10">0</h2>
                 <p>Years Experience</p>
             </div>
             <div class="stat-item">
@@ -673,7 +1167,7 @@
                 <p>Former Athlete</p>
             </div>
             <div class="stat-item">
-                <h2>100%</h2>
+                <h2 class="counter" data-target="100">0</h2>
                 <p>Precision Method</p>
             </div>
         </section>
@@ -693,6 +1187,139 @@
                         </ul>
                         <p style="font-size: 1.2rem; color: var(--text-med);">I focus on precision coaching for serious individuals who are ready to push their limits. My mission is to provide you with the exact science-based protocols needed to succeed.</p>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CALCULATORS SECTION -->
+        <section id="calculators" class="calculators-section reveal">
+            <div class="container">
+                <h2 class="red-text" style="font-size: 4.5rem; text-align: center; margin-bottom: 20px;">FREE FITNESS CALCULATORS</h2>
+                <p style="text-align: center; font-size: 1.2rem; color: var(--text-med); margin-bottom: 60px;">Science-based tools to optimize your transformation</p>
+                
+                <div class="calc-grid">
+                    <!-- TDEE CALCULATOR -->
+                    <div class="calc-card">
+                        <h3><i class="fas fa-fire" aria-hidden="true"></i> TDEE CALCULATOR</h3>
+                        <div class="input-group">
+                            <label for="tdee-weight">Weight (kg)</label>
+                            <input type="number" id="tdee-weight" placeholder="80">
+                        </div>
+                        <div class="input-group">
+                            <label for="tdee-height">Height (cm)</label>
+                            <input type="number" id="tdee-height" placeholder="180">
+                        </div>
+                        <div class="input-group">
+                            <label for="tdee-age">Age</label>
+                            <input type="number" id="tdee-age" placeholder="30">
+                        </div>
+                        <div class="input-group">
+                            <label for="tdee-gender">Gender</label>
+                            <select id="tdee-gender">
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="tdee-activity">Activity Level</label>
+                            <select id="tdee-activity">
+                                <option value="1.2">Sedentary (little/no exercise)</option>
+                                <option value="1.375">Light (1-3 days/week)</option>
+                                <option value="1.55" selected>Moderate (3-5 days/week)</option>
+                                <option value="1.725">Very Active (6-7 days/week)</option>
+                                <option value="1.9">Extremely Active (athlete)</option>
+                            </select>
+                        </div>
+                        <button class="calc-btn" onclick="calculateTDEE()">CALCULATE</button>
+                        <div class="calc-result" id="tdee-result">
+                            <div class="result-value" id="tdee-value">0</div>
+                            <div class="result-label">Calories/Day</div>
+                            <div class="result-details" id="tdee-details"></div>
+                        </div>
+                    </div>
+
+                    <!-- BODY FAT ESTIMATOR -->
+                    <div class="calc-card">
+                        <h3><i class="fas fa-percent" aria-hidden="true"></i> BODY FAT ESTIMATOR</h3>
+                        <p style="margin-bottom: 20px; color: var(--text-med); font-size: 0.95rem;">Select your approximate body fat percentage:</p>
+                        <div class="bodyfat-visual">
+                            <div class="bf-option" data-bf="8" onclick="selectBodyFat(8)">
+                                <div class="bf-percentage">8%</div>
+                                <div class="bf-label">Shredded</div>
+                            </div>
+                            <div class="bf-option" data-bf="12" onclick="selectBodyFat(12)">
+                                <div class="bf-percentage">12%</div>
+                                <div class="bf-label">Lean</div>
+                            </div>
+                            <div class="bf-option" data-bf="15" onclick="selectBodyFat(15)">
+                                <div class="bf-percentage">15%</div>
+                                <div class="bf-label">Fit</div>
+                            </div>
+                            <div class="bf-option" data-bf="20" onclick="selectBodyFat(20)">
+                                <div class="bf-percentage">20%</div>
+                                <div class="bf-label">Average</div>
+                            </div>
+                            <div class="bf-option" data-bf="25" onclick="selectBodyFat(25)">
+                                <div class="bf-percentage">25%</div>
+                                <div class="bf-label">Above Avg</div>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="bf-weight">Your Weight (kg)</label>
+                            <input type="number" id="bf-weight" placeholder="80">
+                        </div>
+                        <div class="calc-result show" id="bf-result" style="display: none;">
+                            <div class="result-label">Fat Mass:</div>
+                            <div class="result-value" id="bf-fat" style="font-size: 2rem;">0 kg</div>
+                            <div class="result-label" style="margin-top: 15px;">Lean Mass:</div>
+                            <div class="result-value" id="bf-lean" style="font-size: 2rem;">0 kg</div>
+                            <div class="result-details" id="bf-recommendation"></div>
+                        </div>
+                    </div>
+
+                    <!-- MACRO CALCULATOR -->
+                    <div class="calc-card">
+                        <h3><i class="fas fa-drumstick-bite" aria-hidden="true"></i> MACRO CALCULATOR</h3>
+                        <div class="input-group">
+                            <label for="macro-calories">Daily Calories</label>
+                            <input type="number" id="macro-calories" placeholder="2500">
+                        </div>
+                        <div class="input-group">
+                            <label for="macro-goal">Goal</label>
+                            <select id="macro-goal">
+                                <option value="cut">Cut (Fat Loss)</option>
+                                <option value="maintain">Maintain</option>
+                                <option value="bulk">Bulk (Muscle Gain)</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="macro-weight-kg">Weight (kg)</label>
+                            <input type="number" id="macro-weight-kg" placeholder="80">
+                        </div>
+                        <button class="calc-btn" onclick="calculateMacros()">CALCULATE MACROS</button>
+                        <div class="calc-result" id="macro-result">
+                            <div class="result-details">
+                                <p style="font-size: 1.2rem; margin-bottom: 15px;"><strong>Daily Targets:</strong></p>
+                                <p><i class="fas fa-drumstick-bite" style="color: var(--red);"></i> <strong>Protein:</strong> <span id="macro-protein">0g</span></p>
+                                <p><i class="fas fa-bread-slice" style="color: var(--red);"></i> <strong>Carbs:</strong> <span id="macro-carbs">0g</span></p>
+                                <p><i class="fas fa-bacon" style="color: var(--red);"></i> <strong>Fats:</strong> <span id="macro-fats">0g</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+       <!-- EMAIL CAPTURE -->
+        <section class="email-capture reveal">
+            <div class="container">
+                <div class="email-box">
+                    <h2 class="red-text">GET YOUR FREE 3-DAY SPLIT</h2>
+                    <p>Download Angelo's proven 3-day training split. Perfect for busy professionals who want maximum results with minimal time.</p>
+                    <form class="email-form" onsubmit="captureEmail(event)">
+                        <input type="email" id="lead-email" placeholder="Enter your email" required>
+                        <button type="submit">GET FREE WORKOUT</button>
+                    </form>
                 </div>
             </div>
         </section>
@@ -738,7 +1365,7 @@
             </div>
         </section>
 
-        <section id="testimonials" class="testimonials reveal">
+        <section id="testimonials" class="testimonials reveal parallax" style="background-image: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), url('https://static.wixstatic.com/media/4338d0_9c6fc5304e2144cea2a932ddb0adc172~mv2.jpg');">
             <div class="container">
                 <h2 style="font-size: 4.5rem; text-align: center; margin-bottom: 80px;">REAL RESULTS</h2>
                 <div class="quote-block">
@@ -853,7 +1480,7 @@
     </main>
 
     <footer class="footer" role="contentinfo">
-        <img src="https://static.wixstatic.com/media/4338d0_1b54ec807b4046d2b77ed9c57a71295d~mv2.png" alt="Coach Angelo Logo" class="footer-logo">
+        <img src="https://static.wixstatic.com/media/4338d0_1b54ec807b4046d2b77ed9c57a71295d~mv2.png" alt="Coach Angelo Logo" class="footer-logo" loading="lazy">
         <div class="share-container">
             <button class="copy-link-btn" onclick="copyLink()" aria-label="Copy website link">
                 <i class="fas fa-link" aria-hidden="true"></i> COPY LINK
@@ -872,17 +1499,253 @@
     </footer>
 
     <script>
-        // FAQ Accordion with full ARIA support and keyboard navigation
+        // ===== LOADING SCREEN =====
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loadingScreen').classList.add('hidden');
+            }, 1500);
+        });
+
+        // ===== PWA SERVICE WORKER =====
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                const swCode = `
+                    self.addEventListener('install', (e) => {
+                        e.waitUntil(
+                            caches.open('coach-angelo-v1').then((cache) => cache.addAll(['/']))
+                        );
+                    });
+                    self.addEventListener('fetch', (e) => {
+                        e.respondWith(
+                            caches.match(e.request).then((response) => response || fetch(e.request))
+                        );
+                    });
+                `;
+                const blob = new Blob([swCode], { type: 'application/javascript' });
+                const swUrl = URL.createObjectURL(blob);
+                navigator.serviceWorker.register(swUrl);
+            });
+        }
+
+        // ===== EXIT INTENT POPUP =====
+        let exitShown = false;
+        document.addEventListener('mouseleave', function(e) {
+            if (e.clientY < 10 && !exitShown) {
+                document.getElementById('exitPopup').classList.add('show');
+                exitShown = true;
+            }
+        });
+
+        function closeExitPopup() {
+            document.getElementById('exitPopup').classList.remove('show');
+        }
+
+        // ===== STICKY CTA BAR =====
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('mainHeader');
+            const stickyCTA = document.getElementById('stickyCTA');
+            
+            if (window.scrollY > 150) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+
+            if (window.scrollY > 800) {
+                stickyCTA.classList.add('show');
+            } else {
+                stickyCTA.classList.remove('show');
+            }
+
+            reveal();
+            animateCounters();
+        });
+
+        // ===== SOCIAL PROOF NOTIFICATIONS =====
+        const proofNames = [
+            'John from Cyprus', 'Maria from Italy', 'Andreas from Greece', 
+            'Luca from Bulgaria', 'George from UK', 'Alex from USA'
+        ];
+        let proofIndex = 0;
+
+        function showSocialProof() {
+            const proof = document.getElementById('socialProof');
+            const nameEl = document.getElementById('proofName');
+            
+            nameEl.textContent = proofNames[proofIndex];
+            proof.classList.add('show');
+            
+            setTimeout(() => {
+                proof.classList.remove('show');
+            }, 5000);
+            
+            proofIndex = (proofIndex + 1) % proofNames.length;
+        }
+
+        setInterval(showSocialProof, 15000);
+        setTimeout(showSocialProof, 5000);
+
+        // ===== ANIMATED COUNTER =====
+        let countersAnimated = false;
+        function animateCounters() {
+            if (countersAnimated) return;
+            
+            const counters = document.querySelectorAll('.counter');
+            const statsBar = document.querySelector('.stats-bar');
+            const rect = statsBar.getBoundingClientRect();
+            
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                countersAnimated = true;
+                counters.forEach(counter => {
+                    const target = +counter.getAttribute('data-target');
+                    const duration = 2000;
+                    const step = target / (duration / 16);
+                    let current = 0;
+                    
+                    const timer = setInterval(() => {
+                        current += step;
+                        if (current >= target) {
+                            counter.textContent = target + '+';
+                            clearInterval(timer);
+                        } else {
+                            counter.textContent = Math.floor(current) + '+';
+                        }
+                    }, 16);
+                });
+            }
+        }
+
+        // ===== CALCULATORS =====
+        function calculateTDEE() {
+            const weight = parseFloat(document.getElementById('tdee-weight').value);
+            const height = parseFloat(document.getElementById('tdee-height').value);
+            const age = parseFloat(document.getElementById('tdee-age').value);
+            const gender = document.getElementById('tdee-gender').value;
+            const activity = parseFloat(document.getElementById('tdee-activity').value);
+
+            if (!weight || !height || !age) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            // Mifflin-St Jeor formula
+            let bmr;
+            if (gender === 'male') {
+                bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+            } else {
+                bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+            }
+
+            const tdee = Math.round(bmr * activity);
+            const cutting = Math.round(tdee - 500);
+            const bulking = Math.round(tdee + 300);
+
+            document.getElementById('tdee-value').textContent = tdee;
+            document.getElementById('tdee-details').innerHTML = `
+                <p><strong>Maintenance:</strong> ${tdee} cal/day</p>
+                <p><strong>Fat Loss:</strong> ${cutting} cal/day (-500)</p>
+                <p><strong>Muscle Gain:</strong> ${bulking} cal/day (+300)</p>
+                <p style="margin-top: 15px; color: var(--text-med);">These are starting points. Angelo will fine-tune your calories based on weekly progress.</p>
+            `;
+            document.getElementById('tdee-result').classList.add('show');
+        }
+
+        let selectedBF = null;
+        function selectBodyFat(percentage) {
+            selectedBF = percentage;
+            document.querySelectorAll('.bf-option').forEach(el => el.classList.remove('selected'));
+            document.querySelector(`[data-bf="${percentage}"]`).classList.add('selected');
+            
+            const weight = parseFloat(document.getElementById('bf-weight').value);
+            if (weight) {
+                const fatMass = (weight * percentage / 100).toFixed(1);
+                const leanMass = (weight - fatMass).toFixed(1);
+                
+                document.getElementById('bf-fat').textContent = fatMass + ' kg';
+                document.getElementById('bf-lean').textContent = leanMass + ' kg';
+                
+                let recommendation = '';
+                if (percentage <= 10) {
+                    recommendation = '<p style="color: var(--red); margin-top: 15px;"><strong>Stage-Ready Condition!</strong> Perfect for competition or photoshoots. Maintain with Contest Prep protocol.</p>';
+                } else if (percentage <= 15) {
+                    recommendation = '<p style="margin-top: 15px;">Excellent condition! Consider a lean bulk with Full Coaching to add quality muscle.</p>';
+                } else if (percentage <= 20) {
+                    recommendation = '<p style="margin-top: 15px;">Good starting point. A cutting phase with Full Coaching will reveal your muscle definition.</p>';
+                } else {
+                    recommendation = '<p style="margin-top: 15px;">Great decision to start! Full Coaching protocol will transform your physique in 12-16 weeks.</p>';
+                }
+                
+                document.getElementById('bf-recommendation').innerHTML = recommendation;
+                document.getElementById('bf-result').style.display = 'block';
+            }
+        }
+
+        document.getElementById('bf-weight').addEventListener('input', function() {
+            if (selectedBF) selectBodyFat(selectedBF);
+        });
+
+        function calculateMacros() {
+            const calories = parseFloat(document.getElementById('macro-calories').value);
+            const goal = document.getElementById('macro-goal').value;
+            const weight = parseFloat(document.getElementById('macro-weight-kg').value);
+
+            if (!calories || !weight) {
+                alert('Please fill in calories and weight');
+                return;
+            }
+
+            let protein, carbs, fats;
+
+            if (goal === 'cut') {
+                protein = Math.round(weight * 2.4);
+                fats = Math.round(weight * 0.8);
+                const remainingCals = calories - (protein * 4 + fats * 9);
+                carbs = Math.round(remainingCals / 4);
+            } else if (goal === 'bulk') {
+                protein = Math.round(weight * 2.0);
+                fats = Math.round(weight * 1.0);
+                const remainingCals = calories - (protein * 4 + fats * 9);
+                carbs = Math.round(remainingCals / 4);
+            } else {
+                protein = Math.round(weight * 2.2);
+                fats = Math.round(weight * 0.9);
+                const remainingCals = calories - (protein * 4 + fats * 9);
+                carbs = Math.round(remainingCals / 4);
+            }
+
+            document.getElementById('macro-protein').textContent = protein + 'g';
+            document.getElementById('macro-carbs').textContent = carbs + 'g';
+            document.getElementById('macro-fats').textContent = fats + 'g';
+            document.getElementById('macro-result').classList.add('show');
+        }
+
+        // ===== EMAIL CAPTURE =====
+        function captureEmail(e) {
+            e.preventDefault();
+            const email = document.getElementById('lead-email').value;
+            
+            // Send to Formspree or your email service
+            fetch('https://formspree.io/f/xgovnlpv', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: email, type: 'Lead Magnet' })
+            }).then(() => {
+                alert('Success! Check your email for the free nutrition guide.');
+                document.getElementById('lead-email').value = '';
+            }).catch(() => {
+                alert('Thank you! The guide will be sent shortly.');
+            });
+        }
+
+        // ===== FAQ =====
         document.addEventListener('DOMContentLoaded', function() {
             const faqButtons = document.querySelectorAll('.faq-question');
             
             faqButtons.forEach(button => {
-                // Click event
                 button.addEventListener('click', function() {
                     toggleFAQ(this);
                 });
                 
-                // Keyboard support (Enter and Space)
                 button.addEventListener('keydown', function(e) {
                     if (e.key === 'Enter' || e.key === ' ') {
                         e.preventDefault();
@@ -896,25 +1759,19 @@
                 const isOpen = item.classList.contains('active');
                 const icon = button.querySelector('.faq-icon');
                 
-                // Toggle active state
                 item.classList.toggle('active');
-                
-                // Update ARIA
                 button.setAttribute('aria-expanded', !isOpen);
-                
-                // Update icon
                 icon.textContent = isOpen ? '+' : '−';
             }
         });
 
-        // Enhanced form submission with validation
+        // ===== FORM SUBMISSION =====
         function sendToWhatsApp() {
             const form = document.getElementById('applicationForm');
             const nameField = form.querySelector('#name');
             const emailField = form.querySelector('#email');
             const statsField = form.querySelector('#stats');
             
-            // Validation
             if (!nameField.value.trim()) {
                 alert("Please enter your name.");
                 nameField.focus();
@@ -933,7 +1790,6 @@
                 return;
             }
             
-            // Submit to Formspree
             const formData = new FormData(form);
             fetch(form.action, {
                 method: 'POST',
@@ -942,16 +1798,9 @@
             })
             .then(response => {
                 if (response.ok) {
-                    // Create WhatsApp message
                     const message = `Ciao Angelo! Sono ${nameField.value}. Ho inviato la candidatura via form. Email: ${emailField.value}. Obiettivi: ${statsField.value}`;
-                    
-                    // Open WhatsApp
                     window.open(`https://wa.me/359889021289?text=${encodeURIComponent(message)}`, '_blank');
-                    
-                    // Reset form
                     form.reset();
-                    
-                    // Show success message
                     alert("Application sent successfully! Opening WhatsApp...");
                 } else {
                     throw new Error('Form submission failed');
@@ -963,18 +1812,7 @@
             });
         }
 
-        // Header scroll effect
-        window.addEventListener("scroll", function() {
-            const header = document.getElementById("mainHeader");
-            if (window.scrollY > 150) {
-                header.classList.add("scrolled");
-            } else {
-                header.classList.remove("scrolled");
-            }
-            reveal();
-        });
-
-        // Reveal animations on scroll
+        // ===== REVEAL ANIMATIONS =====
         function reveal() {
             const reveals = document.querySelectorAll(".reveal");
             const windowHeight = window.innerHeight;
@@ -989,10 +1827,9 @@
             });
         }
 
-        // Initial reveal on page load
         window.addEventListener("load", reveal);
 
-        // Copy link function with visual feedback
+        // ===== COPY LINK =====
         function copyLink() {
             const url = "https://thecoachangelo.com";
             
@@ -1000,12 +1837,10 @@
                 const btn = event.target.closest('.copy-link-btn');
                 const originalHTML = btn.innerHTML;
                 
-                // Show success feedback
                 btn.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i> COPIED!';
                 btn.style.background = 'var(--red)';
                 btn.style.borderColor = 'var(--red)';
                 
-                // Reset after 2 seconds
                 setTimeout(function() {
                     btn.innerHTML = originalHTML;
                     btn.style.background = '';
@@ -1017,7 +1852,26 @@
             });
         }
 
-        // Form field validation feedback
+        // ===== LAZY LOADING IMAGES =====
+        document.addEventListener("DOMContentLoaded", function() {
+            const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+            
+            if ('IntersectionObserver' in window) {
+                const imageObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.src = img.src;
+                            observer.unobserve(img);
+                        }
+                    });
+                });
+
+                lazyImages.forEach(img => imageObserver.observe(img));
+            }
+        });
+
+        // Form field validation
         document.querySelectorAll('input[required], textarea[required]').forEach(field => {
             field.addEventListener('invalid', function(e) {
                 e.preventDefault();
