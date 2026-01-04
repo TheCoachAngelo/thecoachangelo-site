@@ -1725,7 +1725,7 @@
             document.getElementById('macro-result').classList.add('show');
         }
 
-        // ===== EMAIL CAPTURE WITH 3-DAY SPLIT DELIVERY =====
+       // ===== EMAIL CAPTURE WITH 3-DAY SPLIT DELIVERY =====
         function captureEmail(e) {
             e.preventDefault();
             const emailInput = document.getElementById('lead-email');
@@ -1738,13 +1738,22 @@
 
             const btn = e.target.querySelector('button');
             const originalText = btn.textContent;
-            btn.textContent = 'SENDING...';
+            btn.textContent = 'DOWNLOADING...';
             btn.disabled = true;
 
             // YOUR 3-DAY SPLIT DIRECT DOWNLOAD LINK
             const WORKOUT_PDF_URL = 'https://drive.google.com/uc?export=download&id=1xM5ZUBUunsFSMCrZJD2HV17u9JHO19TM';
 
-            // Send to Formspree
+            // Immediately start the download
+            const link = document.createElement('a');
+            link.href = WORKOUT_PDF_URL;
+            link.download = 'Coach_Angelo_3Day_Split.pdf';
+            link.target = '_blank';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // Send email to Formspree for your records
             fetch('https://formspree.io/f/xgovnlpv', {
                 method: 'POST',
                 headers: {
@@ -1757,30 +1766,24 @@
                 })
             })
             .then(response => {
-                if (response.ok) {
-                    // Open PDF in new tab
-                    window.open(WORKOUT_PDF_URL, '_blank');
-                    
-                    // Success message
-                    alert('✅ SUCCESS! Your FREE 3-Day Split is downloading now.\n\nCheck your email for the link + bonus tips from Angelo!');
-                    emailInput.value = '';
-                    
-                    btn.textContent = '✅ SENT! CHECK DOWNLOADS';
-                    setTimeout(() => {
-                        btn.textContent = originalText;
-                        btn.disabled = false;
-                    }, 4000);
-                } else {
-                    throw new Error('Submission failed');
-                }
+                emailInput.value = '';
+                btn.textContent = '✅ DOWNLOADED!';
+                alert('✅ SUCCESS! Your FREE 3-Day Split is downloading now.\n\nGet ready to transform your physique!');
+                
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.disabled = false;
+                }, 4000);
             })
             .catch(error => {
                 console.error('Error:', error);
-                // Still open the PDF even if email fails
-                window.open(WORKOUT_PDF_URL, '_blank');
-                alert('⚠️ Download started! If you don\'t receive the email, contact us on WhatsApp.');
-                btn.textContent = originalText;
-                btn.disabled = false;
+                emailInput.value = '';
+                btn.textContent = '✅ DOWNLOADED!';
+                
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.disabled = false;
+                }, 4000);
             });
         }
 
