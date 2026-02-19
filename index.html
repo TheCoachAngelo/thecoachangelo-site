@@ -19,8 +19,12 @@
             --red: #e61e2a; 
             --black: #000; 
             --gray: #0a0a0a; 
+            --border: #2a2a2e;
             --text-high: #eee;
             --text-med: #ccc;
+            --radius-lg: 18px;
+            --shadow-soft: 0 12px 40px rgba(0,0,0,0.45);
+            --shadow-red: 0 20px 50px rgba(230,30,42,0.22);
         }
         
         * { box-sizing: border-box; }
@@ -29,7 +33,7 @@
         
         body { 
             margin: 0; 
-            background: var(--black); 
+            background: radial-gradient(circle at 20% -10%, rgba(230,30,42,0.18), transparent 45%), var(--black); 
             color: var(--text-high); 
             font-family: 'Montserrat', sans-serif; 
             line-height: 1.7; 
@@ -40,6 +44,18 @@
         h1, h2, h3 { font-family: 'Oswald', sans-serif; text-transform: uppercase; margin: 0; }
         .container { max-width: 1100px; margin: auto; padding: 0 20px; }
         .red-text { color: var(--red); }
+        .section-title {
+            font-size: clamp(2.3rem, 7vw, 4.5rem);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--text-med);
+            margin: 0 auto 60px;
+            max-width: 650px;
+        }
 
         /* ===== LOADING SCREEN ===== */
         #loadingScreen {
@@ -74,108 +90,30 @@
             0%, 100% { transform: scale(1); opacity: 1; }
             50% { transform: scale(1.1); opacity: 0.7; }
         }
-
-        /* ===== EXIT INTENT POPUP ===== */
-        #exitPopup {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.95);
-            z-index: 10000;
-            align-items: center;
-            justify-content: center;
-            animation: fadeIn 0.3s;
-        }
-        #exitPopup.show {
-            display: flex;
-        }
-        .popup-content {
-            background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
-            padding: 60px 50px;
-            border-radius: 20px;
-            max-width: 600px;
-            width: 90%;
-            position: relative;
-            border: 2px solid var(--red);
-            box-shadow: 0 30px 80px rgba(230,30,42,0.4);
-            text-align: center;
-            animation: slideUp 0.4s;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
         @keyframes slideUp {
-            from { transform: translateY(50px); opacity: 0; }
+            from { transform: translateY(30px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
-        }
-        .popup-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: transparent;
-            border: none;
-            color: #fff;
-            font-size: 2rem;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        .popup-close:hover {
-            transform: rotate(90deg);
-            color: var(--red);
-        }
-        .popup-content h2 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            color: var(--red);
-        }
-        .popup-content p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            color: var(--text-med);
-        }
-        .popup-btn {
-            background: var(--red);
-            color: #fff;
-            padding: 20px 50px;
-            border: none;
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.3rem;
-            cursor: pointer;
-            border-radius: 8px;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s;
-            box-shadow: 0 10px 30px rgba(230,30,42,0.4);
-        }
-        .popup-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(230,30,42,0.6);
         }
 
         /* ===== STICKY CTA BAR ===== */
-       #stickyCTA {
-    position: fixed;
-    bottom: -100px;
-    left: 0;
-    width: 100%;
-    background: linear-gradient(135deg, var(--red), #c91520);
-    padding: 20px;
-    z-index: 9000;
-    display: none; /* COMPLETELY HIDE IT */
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 -5px 30px rgba(0,0,0,0.5);
-    transition: bottom 0.4s;
-}
-#stickyCTA.show {
-    bottom: 0;
-}
+        #stickyCTA {
+            position: fixed;
+            bottom: -120px;
+            left: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, rgba(230,30,42,0.96), rgba(170,18,30,0.96));
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 14px 18px;
+            z-index: 9000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-radius: 14px;
+            box-shadow: var(--shadow-red);
+            transition: bottom 0.4s ease;
+        }
         #stickyCTA.show {
-            bottom: 0;
+            bottom: 20px;
         }
         .sticky-text {
             font-family: 'Oswald', sans-serif;
@@ -207,60 +145,10 @@
             box-shadow: 0 5px 20px rgba(255,255,255,0.3);
         }
 
-        /* ===== SOCIAL PROOF NOTIFICATIONS ===== */
-  #socialProof {
-    position: fixed;
-    bottom: 100px;
-    left: 20px;
-    background: rgba(10,10,10,0.95);
-    border: 2px solid var(--red);
-    border-radius: 12px;
-    padding: 20px 25px;
-    max-width: 350px;
-    z-index: 9500;
-    transform: translateX(-500px);
-    transition: transform 0.5s;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
-    display: none; /* HIDDEN BY DEFAULT */
-}
-#socialProof.show {
-    transform: translateX(0);
-    display: block; /* SHOW WHEN ACTIVE */
-}
-        }
-        .proof-content {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .proof-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--red);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            flex-shrink: 0;
-        }
-        .proof-text {
-            flex: 1;
-        }
-        .proof-text strong {
-            color: var(--red);
-            font-size: 1.1rem;
-        }
-        .proof-text p {
-            margin: 5px 0 0;
-            font-size: 0.9rem;
-            color: var(--text-med);
-        }
-
         /* ===== CALCULATORS SECTION ===== */
         .calculators-section {
             padding: 120px 0;
-            background: #000;
+            background: linear-gradient(180deg, #080808, #040404);
         }
         .calc-grid {
             display: grid;
@@ -269,17 +157,17 @@
             margin-top: 60px;
         }
         .calc-card {
-            background: #0a0a0a;
+            background: linear-gradient(145deg, #111113, #0a0a0b);
             padding: 40px;
-            border: 2px solid #222;
-            border-radius: 16px;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-soft);
             transition: all 0.4s;
         }
         .calc-card:hover {
             transform: translateY(-10px);
             border-color: var(--red);
-            box-shadow: 0 25px 60px rgba(230,30,42,0.3);
+            box-shadow: var(--shadow-red);
         }
         .calc-card h3 {
             font-size: 2rem;
@@ -411,7 +299,7 @@
 
         /* ===== EMAIL CAPTURE ===== */
         .email-capture {
-            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            background: linear-gradient(145deg, #18181b, #0c0c0f);
             padding: 80px 0;
             text-align: center;
         }
@@ -419,10 +307,10 @@
             max-width: 650px;
             margin: 0 auto;
             padding: 50px;
-            background: rgba(230,30,42,0.05);
-            border: 2px solid var(--red);
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(230,30,42,0.2);
+            background: rgba(10,10,12,0.8);
+            border: 1px solid rgba(230,30,42,0.55);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-red);
         }
         .email-box h2 {
             font-size: 3rem;
@@ -501,9 +389,9 @@
 
         .reveal { 
             opacity: 0; 
-            transform: translateY(80px) scale(0.95); 
-            filter: blur(5px); 
-            transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+            transform: translateY(50px) scale(0.98); 
+            filter: blur(2px); 
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
         }
         .reveal.active { 
             opacity: 1; 
@@ -525,12 +413,12 @@
             align-items: center; 
             background: transparent; 
             transition: all 0.5s ease;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.12);
         }
         header.scrolled {
-            background: rgba(0, 0, 0, 0.98); 
+            background: rgba(8, 8, 10, 0.95); 
             padding: 15px 40px; 
-            border-bottom: 2px solid var(--red); 
+            border-bottom: 1px solid rgba(230,30,42,0.7); 
             backdrop-filter: blur(20px);
         }
         .logo img { height: 65px; transition: 0.5s; }
@@ -637,7 +525,7 @@
             flex-direction: column; 
             justify-content: center; 
             align-items: flex-start; 
-            background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.2) 30%, rgba(0,0,0,0.98) 75%, #000 100%), 
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.45) 45%, rgba(0,0,0,0.98) 85%, #000 100%), 
                         url('https://static.wixstatic.com/media/4338d0_9c6fc5304e2144cea2a932ddb0adc172~mv2.jpg'); 
             background-size: cover; 
             background-position: top center; 
@@ -717,14 +605,6 @@
         width: 56px;
         height: 56px;
         font-size: 28px;
-    }
-    
-    /* Social Proof - Better mobile positioning */
-    #socialProof { 
-        left: 10px; 
-        right: 10px; 
-        max-width: none;
-        bottom: 180px;
     }
     
     /* Stats Bar */
@@ -854,24 +734,6 @@
         max-width: 300px;
     }
     
-    /* Exit Popup Mobile */
-    .popup-content {
-        padding: 40px 25px;
-        width: 95%;
-        max-width: 400px;
-    }
-    .popup-content h2 {
-        font-size: 2rem;
-    }
-    .popup-content p {
-        font-size: 1rem;
-    }
-    .popup-btn {
-        padding: 18px 30px;
-        font-size: 1.1rem;
-        width: 100%;
-    }
-    
     /* Footer */
     .share-btn {
         width: 56px;
@@ -887,11 +749,10 @@
     /* Parallax fix */
     .parallax { background-attachment: scroll; }
 }
-        }
 
         .science-section { 
             padding: 120px 0; 
-            background: #050505; 
+            background: linear-gradient(180deg, #070707, #050506); 
         }
         .science-content { 
             max-width: 850px; 
@@ -937,7 +798,7 @@
 
         .about { 
             padding: 120px 0; 
-            background: #000; 
+            background: linear-gradient(180deg, #09090a, #030304); 
         }
         .about-flex { 
             display: flex; 
@@ -953,6 +814,10 @@
             border-radius: 4px;
         }
         .about-content { flex: 1; }
+        .about-content h2 {
+            font-size: clamp(2.3rem, 5vw, 3.5rem);
+            margin-bottom: 25px;
+        }
         .about-list { 
             list-style: none; 
             padding: 0; 
@@ -977,7 +842,7 @@
         .pricing { 
             padding: 120px 0; 
             text-align: center;
-            background: #050505;
+            background: linear-gradient(180deg, #070708, #050505);
         }
         .price-grid { 
             display: grid; 
@@ -988,14 +853,14 @@
         .price-card { 
             background: var(--gray); 
             padding: 60px 40px; 
-            border: 2px solid #222; 
+            border: 1px solid var(--border); 
             position: relative; 
             display: flex; 
             flex-direction: column; 
             text-align: left; 
             transition: all 0.4s ease; 
-            border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-soft);
         }
         .price-card:hover { 
             transform: translateY(-12px) scale(1.02); 
@@ -1057,16 +922,19 @@
 
         .testimonials { 
             padding: 120px 0; 
-            background: #000; 
+            background: #060607; 
+        }
+        .testimonials .section-title {
+            margin-bottom: 80px;
         }
         .quote-block { 
             max-width: 950px; 
             margin: 0 auto 70px; 
             padding: 50px; 
-            border-left: 5px solid var(--red); 
-            background: #050505;
-            border-radius: 0 12px 12px 0;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+            border-left: 3px solid var(--red); 
+            background: linear-gradient(145deg, #101013, #080809);
+            border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+            box-shadow: var(--shadow-soft);
         }
         .quote-text { 
             font-style: italic; 
@@ -1084,7 +952,7 @@
 
         .faq-section { 
             padding: 120px 0; 
-            background: #050505; 
+            background: linear-gradient(180deg, #060607, #040404); 
         }
         .faq-container { 
             max-width: 900px; 
@@ -1133,16 +1001,16 @@
 
         .contact { 
             padding: 120px 0; 
-            background: #000; 
+            background: linear-gradient(180deg, #050506, #020202); 
         }
         .form-container { 
             max-width: 800px; 
             margin: auto; 
             background: #050505; 
             padding: 60px; 
-            border: 2px solid #222; 
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+            border: 1px solid var(--border); 
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-soft);
         }
         .form-group {
             margin-bottom: 25px;
@@ -1277,12 +1145,6 @@
     .hero h1 {
         font-size: 2rem;
     }
-    .popup-content {
-        padding: 30px 20px;
-    }
-    .popup-content h2 {
-        font-size: 1.6rem;
-    }
     .calc-card {
         padding: 25px 15px;
     }
@@ -1300,18 +1162,6 @@
         </div>
     </div>
 
-    <!-- EXIT INTENT POPUP -->
-    <div id="exitPopup">
-        <div class="popup-content">
-            <button class="popup-close" onclick="closeExitPopup()" aria-label="Close popup">&times;</button>
-            <h2>WAIT! DON'T LEAVE YET</h2>
-            <p>Book a FREE 15-minute consultation and discover how to transform your physique with science-based coaching.</p>
-            <a href="https://wa.me/359889021289?text=Hi%20Angelo!%20I%20want%20to%20book%20my%20FREE%2015-minute%20consultation" class="popup-btn" target="_blank" rel="noopener noreferrer">
-                <i class="fab fa-whatsapp"></i> BOOK FREE CALL NOW
-            </a>
-        </div>
-    </div>
-
     <!-- STICKY CTA BAR -->
     <div id="stickyCTA">
         <div class="sticky-text">
@@ -1321,19 +1171,6 @@
         <a href="https://wa.me/359889021289" class="sticky-btn" target="_blank" rel="noopener noreferrer">
             BOOK NOW
         </a>
-    </div>
-
-    <!-- SOCIAL PROOF NOTIFICATION -->
-    <div id="socialProof">
-        <div class="proof-content">
-            <div class="proof-icon">
-                <i class="fas fa-check"></i>
-            </div>
-            <div class="proof-text">
-                <strong id="proofName">Rocco from Italy</strong>
-                <p id="proofAction">just booked Full Coaching</p>
-            </div>
-        </div>
     </div>
 
     <!-- Skip navigation link -->
@@ -1406,7 +1243,7 @@
                         <img src="https://static.wixstatic.com/media/4338d0_eee8be588aa143a1bae80af1b3a4fba2~mv2.jpg" alt="Coach Angelo, precision nutrition expert and former IFBB athlete" loading="lazy">
                     </div>
                     <div class="about-content">
-                        <h2 style="font-size: 3.5rem; margin-bottom: 25px;">THE MAN BEHIND THE METHOD</h2>
+                        <h2>THE MAN BEHIND THE METHOD</h2>
                         <ul class="about-list">
                             <li>FORMER IFBB ATHLETE</li>
                             <li>PRECISION NUTRITION EXPERT</li>
@@ -1421,8 +1258,8 @@
         <!-- CALCULATORS SECTION -->
         <section id="calculators" class="calculators-section reveal">
             <div class="container">
-                <h2 class="red-text" style="font-size: 4.5rem; text-align: center; margin-bottom: 20px;">FREE FITNESS CALCULATORS</h2>
-                <p style="text-align: center; font-size: 1.2rem; color: var(--text-med); margin-bottom: 60px;">Science-based tools to optimize your transformation</p>
+                <h2 class="red-text section-title">FREE FITNESS CALCULATORS</h2>
+                <p class="section-subtitle">Science-based tools to optimize your transformation</p>
                 
                 <div class="calc-grid">
                     <!-- TDEE CALCULATOR -->
@@ -1553,7 +1390,7 @@
 
         <section id="plans" class="pricing reveal">
             <div class="container">
-                <h2 class="red-text" style="font-size: 4.5rem; margin-bottom: 20px;">PROTOCOLS</h2>
+                <h2 class="red-text section-title">PROTOCOLS</h2>
                 <div class="price-grid">
                     <div class="price-card">
                         <div class="price-val">€80</div>
@@ -1594,7 +1431,7 @@
 
         <section id="testimonials" class="testimonials reveal parallax" style="background-image: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), url('https://static.wixstatic.com/media/4338d0_9c6fc5304e2144cea2a932ddb0adc172~mv2.jpg');">
             <div class="container">
-                <h2 style="font-size: 4.5rem; text-align: center; margin-bottom: 80px;">REAL RESULTS</h2>
+                <h2 class="section-title">REAL RESULTS</h2>
                 <div class="quote-block">
                     <p class="quote-text">"I'm so grateful to have Angelo as my coach. Not only has he helped me improve my physique, but he's also taught me life lessons that go far beyond the gym. His approach is all about discipline, consistency, and becoming the best version of yourself."</p>
                     <div class="quote-author">✱ ANTONIS KATSIAMIS - CYPRUS</div>
@@ -1616,7 +1453,7 @@
 
         <section id="faq" class="faq-section reveal">
             <div class="container">
-                <h2 class="red-text" style="font-size: 4.5rem; text-align: center; margin-bottom: 60px;">FAQ</h2>
+                <h2 class="red-text section-title">FAQ</h2>
                 <div class="faq-container">
                     <div class="faq-item">
                         <div class="faq-question" role="button" tabindex="0" aria-expanded="false" aria-controls="faq-answer-1">
@@ -1681,7 +1518,7 @@
         <section id="contact" class="contact reveal">
             <div class="container">
                 <div class="form-container">
-                    <h2 class="red-text" style="font-size: 3.5rem; margin-bottom: 30px; text-align: center;">CONNECT WITH ANGELO</h2>
+                    <h2 class="red-text section-title">CONNECT WITH ANGELO</h2>
                     <form id="applicationForm" action="https://formspree.io/f/xgovnlpv" method="POST">
                         <div class="form-group">
                             <label for="name">Full Name *</label>
@@ -1754,19 +1591,6 @@
             });
         }
 
-        // ===== EXIT INTENT POPUP =====
-        let exitShown = false;
-        document.addEventListener('mouseleave', function(e) {
-            if (e.clientY < 10 && !exitShown) {
-                document.getElementById('exitPopup').classList.add('show');
-                exitShown = true;
-            }
-        });
-
-        function closeExitPopup() {
-            document.getElementById('exitPopup').classList.remove('show');
-        }
-
         // ===== STICKY CTA BAR =====
         window.addEventListener('scroll', function() {
             const header = document.getElementById('mainHeader');
@@ -1778,7 +1602,7 @@
                 header.classList.remove('scrolled');
             }
 
-            if (window.scrollY > 800) {
+            if (window.scrollY > 900 && window.innerWidth > 768) {
                 stickyCTA.classList.add('show');
             } else {
                 stickyCTA.classList.remove('show');
@@ -1787,65 +1611,6 @@
             reveal();
             animateCounters();
         });
-
-// ===== SOCIAL PROOF NOTIFICATIONS =====
-const proofData = [
-    { name: 'Alexander from Bulgaria', action: 'just booked Full Coaching' },
-    { name: 'Andreas from Argentina', action: 'just booked Contest Prep' },
-    { name: 'Joao from Portugal', action: 'downloaded the 3-Day Split' },
-    { name: 'Massimo from Italy', action: 'just booked Training Protocol' },
-    { name: 'Kostas from Greece', action: 'just booked Full Coaching' },
-    { name: 'Mehmet from Turkey', action: 'downloaded the 3-Day Split' },
-    { name: 'Marcel from France', action: 'just booked Contest Prep' }
-];
-let proofShownCount = 0;
-let usedIndices = []; // Track which ones have been shown
-let proofTimeout = null;
-
-function showSocialProof() {
-    if (proofShownCount >= 2) return; // Only show 2 times total
-    
-    const proof = document.getElementById('socialProof');
-    const nameEl = document.getElementById('proofName');
-    const actionEl = document.getElementById('proofAction');
-    
-    // Get a random index that hasn't been used yet
-    let randomIndex;
-    if (usedIndices.length === proofData.length) {
-        usedIndices = []; // Reset if all have been shown
-    }
-    
-    do {
-        randomIndex = Math.floor(Math.random() * proofData.length);
-    } while (usedIndices.includes(randomIndex));
-    
-    usedIndices.push(randomIndex);
-    
-    // Update content with random person
-    nameEl.textContent = proofData[randomIndex].name;
-    actionEl.textContent = proofData[randomIndex].action;
-    
-    // Show notification
-    proof.style.display = 'block';
-    setTimeout(() => {
-        proof.classList.add('show');
-    }, 100);
-    
-    // Hide after 5 seconds
-    setTimeout(() => {
-        proof.classList.remove('show');
-        setTimeout(() => {
-            proof.style.display = 'none';
-        }, 500); // Wait for slide animation to complete
-    }, 5000);
-    
-    proofShownCount++;
-}
-
-// First notification at 8 seconds
-setTimeout(showSocialProof, 8000);
-// Second notification at 50 seconds
-setTimeout(showSocialProof, 50000);
 
         // ===== ANIMATED COUNTER =====
         let countersAnimated = false;
