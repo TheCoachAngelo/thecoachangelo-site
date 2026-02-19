@@ -1564,21 +1564,6 @@
         padding-bottom: 0;
         background: linear-gradient(180deg, #0b0e14 0%, #080a10 100%);
     }
-    body.page-home header {
-        opacity: 1;
-        pointer-events: auto;
-        transform: translateY(0);
-    }
-    body.page-home .nav-links {
-        display: flex;
-        justify-content: flex-end;
-    }
-    body.page-home .nav-links a:not(.book-btn) {
-        display: none;
-    }
-    body.page-home .mobile-tabs {
-        display: flex;
-    }
     header,
     body.page-home header.scrolled,
     body.page-coaching header,
@@ -1588,6 +1573,40 @@
         background: rgba(10, 14, 22, 0.92);
         border-bottom: 1px solid rgba(255,255,255,0.18);
         backdrop-filter: blur(14px);
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-110%);
+        transition: transform 0.28s ease, opacity 0.28s ease;
+    }
+    body.page-home header.scrolled,
+    body.page-coaching header.scrolled,
+    body.page-calculators header.scrolled,
+    body.page-apply header.scrolled {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+    body.page-home .nav-links,
+    body.page-coaching .nav-links,
+    body.page-calculators .nav-links,
+    body.page-apply .nav-links {
+        display: flex;
+        justify-content: flex-end;
+    }
+    body.page-home .nav-links a:not(.book-btn),
+    body.page-coaching .nav-links a:not(.book-btn),
+    body.page-calculators .nav-links a:not(.book-btn),
+    body.page-apply .nav-links a:not(.book-btn) {
+        display: none;
+    }
+    .mobile-tabs {
+        display: none;
+    }
+    body.page-home header.scrolled .mobile-tabs,
+    body.page-coaching header.scrolled .mobile-tabs,
+    body.page-calculators header.scrolled .mobile-tabs,
+    body.page-apply header.scrolled .mobile-tabs {
+        display: flex;
     }
     header .logo img,
     body.page-home header .logo img,
