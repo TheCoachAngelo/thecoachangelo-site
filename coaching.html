@@ -1562,6 +1562,7 @@
 @media (max-width: 768px) {
     body {
         padding-bottom: 0;
+        background: linear-gradient(180deg, #0b0e14 0%, #080a10 100%);
     }
     body.page-home header {
         opacity: 1;
@@ -1583,7 +1584,10 @@
     body.page-coaching header,
     body.page-calculators header,
     body.page-apply header {
-        padding: 9px 12px;
+        padding: 10px 12px;
+        background: rgba(10, 14, 22, 0.92);
+        border-bottom: 1px solid rgba(255,255,255,0.18);
+        backdrop-filter: blur(14px);
     }
     header .logo img,
     body.page-home header .logo img,
@@ -1594,31 +1598,43 @@
     }
     .mobile-tabs {
         gap: 10px;
-        padding: 8px 0 4px;
+        padding: 10px 0 6px;
         margin-top: 6px;
         scroll-snap-type: x mandatory;
         scrollbar-width: none;
+        border-top: 1px solid rgba(255,255,255,0.14);
     }
     .mobile-tabs::-webkit-scrollbar {
         display: none;
     }
     .mobile-tabs a {
-        font-size: 0.82rem;
-        padding: 10px 12px;
+        font-size: 0.84rem;
+        padding: 11px 14px;
         min-height: 44px;
-        border-radius: 10px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.08);
+        border: 1px solid rgba(255,255,255,0.18);
+        color: #f4f6fb;
         scroll-snap-align: start;
+    }
+    body.page-home .mobile-tabs a[href="index.html"],
+    body.page-coaching .mobile-tabs a[href="coaching.html"],
+    body.page-calculators .mobile-tabs a[href="calculators.html"],
+    body.page-apply .mobile-tabs a[href="apply.html"] {
+        background: linear-gradient(135deg, rgba(239,64,80,0.92), rgba(186,26,36,0.92));
+        border-color: rgba(239,64,80,0.95);
+        color: #fff;
     }
     #main-content > section {
         scroll-margin-top: 108px;
     }
     .hero {
-        min-height: 80svh;
+        min-height: 74svh;
         padding-top: 72px;
         padding-bottom: 30px;
     }
     .hero h1 {
-        font-size: clamp(2.05rem, 9vw, 3rem);
+        font-size: clamp(2.15rem, 9.8vw, 3.2rem);
         margin-bottom: 16px;
     }
     .btn-main {
@@ -1626,14 +1642,7 @@
         max-width: 320px;
         padding: 14px 20px;
     }
-    .whatsapp-float {
-        bottom: 18px;
-        right: 14px;
-        width: 50px;
-        height: 50px;
-        font-size: 24px;
-        z-index: 1800;
-    }
+    .whatsapp-float { display: none; }
     .science-content {
         border-left: 2px solid rgba(239, 64, 80, 0.72);
         padding-left: 14px;
@@ -1647,7 +1656,10 @@
     .quote-block,
     .faq-group,
     .form-container {
-        border-radius: 16px;
+        border-radius: 18px;
+        background: linear-gradient(145deg, #161b25, #0d1118);
+        border: 1px solid rgba(255,255,255,0.14);
+        box-shadow: 0 12px 26px rgba(0,0,0,0.32);
     }
     .price-card {
         padding: 22px 14px;
@@ -1656,12 +1668,14 @@
         padding: 18px 14px;
     }
     .faq-question {
-        font-size: 0.95rem;
+        font-size: 1rem;
         line-height: 1.35;
         text-transform: none;
         letter-spacing: 0.2px;
         align-items: flex-start;
         min-height: 48px;
+        background: rgba(255,255,255,0.04);
+        border-radius: 12px;
     }
     .faq-icon {
         margin-left: 10px;
@@ -1689,11 +1703,11 @@
         padding-bottom: 20px;
     }
     .mobile-tabs a {
-        font-size: 0.78rem;
-        padding: 9px 10px;
+        font-size: 0.8rem;
+        padding: 10px 12px;
     }
     .hero {
-        min-height: 76svh;
+        min-height: 70svh;
         padding-top: 68px;
     }
     .hero h1 {
