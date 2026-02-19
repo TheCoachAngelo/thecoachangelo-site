@@ -1560,6 +1560,22 @@
         }
 /* === MOBILE UX FINAL OVERRIDES === */
 @media (max-width: 768px) {
+    body.page-coaching header:not(.scrolled),
+    body.page-calculators header:not(.scrolled),
+    body.page-apply header:not(.scrolled),
+    body.page-home header:not(.scrolled) {
+        opacity: 0 !important;
+        pointer-events: none !important;
+        transform: translateY(-110%) !important;
+    }
+    body.page-coaching header.scrolled,
+    body.page-calculators header.scrolled,
+    body.page-apply header.scrolled,
+    body.page-home header.scrolled {
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        transform: translateY(0) !important;
+    }
     body {
         padding-bottom: 0;
         background: linear-gradient(180deg, #0b0e14 0%, #080a10 100%);
