@@ -15,6 +15,8 @@
     <style>
         :root { 
             --red: #e61e2a; 
+            --red-deep: #ba1a24;
+            --red-soft: rgba(230,30,42,0.16);
             --black: #000; 
             --gray: #0a0a0a; 
             --border: #2a2a2e;
@@ -22,7 +24,7 @@
             --panel-bg: linear-gradient(145deg, #111113, #0a0a0b);
             --panel-bg-alt: linear-gradient(145deg, #141417, #0b0b0d);
             --text-high: #eee;
-            --text-med: #a8abb4;
+            --text-med: #b7bbc4;
             --radius-lg: 18px;
             --radius-md: 14px;
             --shadow-soft: 0 12px 40px rgba(0,0,0,0.45);
@@ -38,7 +40,7 @@
         
         body { 
             margin: 0; 
-            background: radial-gradient(circle at 20% -10%, rgba(230,30,42,0.18), transparent 45%), radial-gradient(circle at 85% 20%, rgba(255,255,255,0.03), transparent 35%), var(--black); 
+            background: radial-gradient(circle at 20% -10%, rgba(230,30,42,0.14), transparent 45%), radial-gradient(circle at 85% 20%, rgba(255,255,255,0.04), transparent 35%), var(--black); 
             color: var(--text-high); 
             font-family: 'Montserrat', sans-serif; 
             line-height: 1.7; 
@@ -491,7 +493,7 @@
         .nav-links a:hover,
         .nav-links a:focus-visible { 
             color: var(--red);
-            background: rgba(230, 30, 42, 0.08);
+            background: rgba(255,255,255,0.06);
         }
         .cta-primary,
         .book-btn,
@@ -499,11 +501,11 @@
         .sticky-btn,
         .btn-send,
         .price-card.featured .btn-wa {
-            background: linear-gradient(135deg, var(--red), #b41520);
+            background: linear-gradient(135deg, var(--red), var(--red-deep));
             color: #fff;
             border: 2px solid var(--red);
             border-radius: 8px;
-            box-shadow: 0 8px 24px rgba(230, 30, 42, 0.35);
+            box-shadow: 0 8px 24px rgba(230, 30, 42, 0.28);
             font-family: 'Oswald', sans-serif;
             font-weight: 700;
             text-transform: uppercase;
@@ -518,7 +520,7 @@
         .price-card.featured .btn-wa:hover {
             transform: translateY(-2px);
             filter: brightness(1.03);
-            box-shadow: 0 12px 32px rgba(230, 30, 42, 0.5);
+            box-shadow: 0 12px 32px rgba(230, 30, 42, 0.4);
         }
         .book-btn { 
             padding: 12px 24px; 
@@ -533,7 +535,7 @@
             width: 100%; 
             background: rgba(10, 10, 10, 0.96); 
             backdrop-filter: blur(15px); 
-            border-top: 1px solid rgba(230, 30, 42, 0.75); 
+            border-top: 1px solid rgba(255,255,255,0.14); 
             box-shadow: 0 -10px 30px rgba(0,0,0,0.45);
             z-index: 2000; 
             justify-content: space-around; 
@@ -563,7 +565,7 @@
 }
         .mobile-nav a:hover,
         .mobile-nav a:focus-visible {
-            background: rgba(230, 30, 42, 0.2);
+            background: rgba(255,255,255,0.1);
             color: #fff;
         }
         .mobile-nav i { 
@@ -1022,7 +1024,7 @@
 
         .science-section { 
             padding: var(--space-section) 0; 
-            background: linear-gradient(180deg, #070707, #050506); 
+            background: linear-gradient(180deg, #08090b, #050506); 
         }
         .science-content { 
             max-width: 850px; 
@@ -1068,7 +1070,7 @@
 
         .about { 
             padding: var(--space-section) 0; 
-            background: linear-gradient(180deg, #09090a, #030304); 
+            background: linear-gradient(180deg, #0b0c0f, #050507); 
         }
         .about-flex { 
             display: flex; 
@@ -1117,7 +1119,7 @@
         }
         .timeline-section {
             padding: var(--space-section) 0;
-            background: linear-gradient(180deg, #080809, #050506);
+            background: linear-gradient(180deg, #0a0b0d, #060608);
         }
         .timeline-grid {
             margin-top: 52px;
@@ -1135,7 +1137,7 @@
         }
         .timeline-step:hover {
             transform: translateY(-3px);
-            border-color: rgba(230,30,42,0.38);
+            border-color: rgba(255,255,255,0.2);
         }
         .step-index {
             display: inline-flex;
@@ -1164,7 +1166,7 @@
         .pricing { 
             padding: var(--space-section) 0; 
             text-align: center;
-            background: linear-gradient(180deg, #070708, #050505);
+            background: linear-gradient(180deg, #090a0d, #060608);
         }
         .price-grid { 
             display: grid; 
@@ -1186,8 +1188,8 @@
         }
         .price-card:hover { 
             transform: translateY(-12px) scale(1.02); 
-            border-color: var(--red);
-            box-shadow: 0 25px 60px rgba(230, 30, 42, 0.3);
+            border-color: rgba(255,255,255,0.22);
+            box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5);
         }
         .price-val { 
             font-size: 5rem; 
@@ -1231,9 +1233,9 @@
             margin-top: 20px;
         }
         .btn-wa-ghost {
-            background: #fff;
-            color: #000;
-            border: 2px solid #fff;
+            background: #f1f2f5;
+            color: #111;
+            border: 2px solid #f1f2f5;
         }
         .btn-wa:hover {
             transform: translateY(-2px);
@@ -1307,7 +1309,7 @@
 
         .faq-section { 
             padding: var(--space-section) 0; 
-            background: linear-gradient(180deg, #060607, #040404); 
+            background: linear-gradient(180deg, #0a0b0d, #050608); 
         }
         .faq-container { 
             max-width: 900px; 
@@ -1320,6 +1322,16 @@
             background: linear-gradient(145deg, #111114, #09090b);
             box-shadow: var(--shadow-card);
             padding: 6px 18px 12px;
+            position: relative;
+        }
+        .faq-group::before {
+            content: "";
+            position: absolute;
+            left: 14px;
+            right: 14px;
+            top: 0;
+            height: 1px;
+            background: rgba(255,255,255,0.08);
         }
         .faq-group-title {
             text-transform: uppercase;
@@ -1350,7 +1362,7 @@
             transition: background 0.3s;
         }
         .faq-question:hover {
-            background: rgba(230, 30, 42, 0.05);
+            background: rgba(255,255,255,0.05);
         }
         .faq-answer { 
             max-height: 0; 
@@ -1373,7 +1385,7 @@
 
         .contact { 
             padding: var(--space-section) 0; 
-            background: linear-gradient(180deg, #050506, #020202); 
+            background: linear-gradient(180deg, #090a0d, #040507); 
         }
         .form-container { 
             max-width: 800px;
@@ -1649,34 +1661,6 @@
             </div>
         </section>
 
-        <section id="how-it-works" class="timeline-section reveal">
-            <div class="container">
-                <h2 class="red-text section-title">HOW IT WORKS</h2>
-                <p class="section-subtitle">Clear steps from first contact to your full coaching setup.</p>
-                <div class="timeline-grid">
-                    <article class="timeline-step">
-                        <span class="step-index">1</span>
-                        <h3>BOOK</h3>
-                        <p>Start on WhatsApp and confirm the protocol that matches your goal.</p>
-                    </article>
-                    <article class="timeline-step">
-                        <span class="step-index">2</span>
-                        <h3>APPLY</h3>
-                        <p>Complete the short form with your stats, training level, and target outcome.</p>
-                    </article>
-                    <article class="timeline-step">
-                        <span class="step-index">3</span>
-                        <h3>SETUP</h3>
-                        <p>Receive your individualized training, nutrition, and check-in structure.</p>
-                    </article>
-                    <article class="timeline-step">
-                        <span class="step-index">4</span>
-                        <h3>PROGRESS</h3>
-                        <p>Track execution with regular feedback and plan adjustments.</p>
-                    </article>
-                </div>
-            </div>
-        </section>
 
         <!-- CALCULATORS SECTION -->
         <section id="calculators" class="calculators-section reveal">
