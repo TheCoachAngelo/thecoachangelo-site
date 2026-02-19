@@ -868,33 +868,22 @@
         max-width: 100%;
     }
     .timeline-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 12px;
         margin-top: 26px;
-        position: relative;
-        padding-left: 30px;
-    }
-    .timeline-grid::before {
-        content: "";
-        position: absolute;
-        left: 15px;
-        top: 8px;
-        bottom: 8px;
-        width: 1px;
-        background: linear-gradient(180deg, rgba(230,30,42,0.8), rgba(230,30,42,0.15));
+        padding-left: 0;
     }
     .timeline-step {
         position: relative;
-        padding: 18px 14px 18px 20px;
+        padding: 16px 12px;
         border-radius: 14px;
+        min-height: 175px;
     }
     .step-index {
-        position: absolute;
-        left: -31px;
-        top: 18px;
+        position: static;
         width: 24px;
         height: 24px;
-        margin-bottom: 0;
+        margin-bottom: 8px;
         font-size: 0.85rem;
     }
     .timeline-step h3 {
