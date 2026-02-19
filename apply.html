@@ -173,21 +173,12 @@
             animation: pulse 1.5s ease-in-out infinite;
         }
         .sticky-btn {
-            background: #fff;
-            color: var(--red);
-            padding: 15px 40px;
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.2rem;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
             text-decoration: none;
-        }
-        .sticky-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 20px rgba(255,255,255,0.3);
+            padding: 15px 32px;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         /* ===== CALCULATORS SECTION ===== */
@@ -490,17 +481,35 @@
             color: var(--red);
             background: rgba(230, 30, 42, 0.08);
         }
-        .book-btn { 
-            background: linear-gradient(135deg, var(--red), #b41520); 
-            padding: 12px 24px; 
-            border-radius: 4px; 
-            font-weight: bold; 
+        .cta-primary,
+        .book-btn,
+        .btn-main,
+        .sticky-btn,
+        .btn-send,
+        .price-card.featured .btn-wa {
+            background: linear-gradient(135deg, var(--red), #b41520);
+            color: #fff;
             border: 2px solid var(--red);
-            box-shadow: 0 4px 15px rgba(230, 30, 42, 0.3);
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(230, 30, 42, 0.35);
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
         }
-        .book-btn:hover {
+        .cta-primary:hover,
+        .book-btn:hover,
+        .btn-main:hover,
+        .sticky-btn:hover,
+        .btn-send:hover,
+        .price-card.featured .btn-wa:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(230, 30, 42, 0.5);
+            filter: brightness(1.03);
+            box-shadow: 0 12px 32px rgba(230, 30, 42, 0.5);
+        }
+        .book-btn { 
+            padding: 12px 24px; 
         }
 
         /* MOBILE NAV */
@@ -597,22 +606,9 @@
             text-shadow: 2px 2px 30px rgba(0,0,0,0.9); 
         }
         .btn-main { 
-            background: var(--red); 
-            color: #fff; 
             padding: 20px 50px; 
             text-decoration: none; 
-            font-family: 'Oswald', sans-serif; 
-            font-weight: bold; 
-            border: 2px solid var(--red); 
-            transition: all 0.4s; 
             display: inline-block; 
-            letter-spacing: 1px;
-            box-shadow: 0 8px 25px rgba(230, 30, 42, 0.3);
-            border-radius: 8px;
-        }
-        .btn-main:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(230, 30, 42, 0.5);
         }
 
 @media (max-width: 768px) { 
@@ -871,6 +867,10 @@
         padding: 30px 18px;
         max-width: 100%;
     }
+    .timeline-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
     .price-val {
         font-size: 3.3rem;
     }
@@ -880,8 +880,18 @@
         align-items: center;
         justify-content: center;
     }
+    .purchase-flow {
+        padding: 22px 18px;
+    }
     
     /* Contact Form */
+    .apply-layout {
+        grid-template-columns: 1fr;
+    }
+    .apply-info {
+        position: static;
+        padding: 22px 16px;
+    }
     .form-container {
         padding: 26px 14px;
     }
@@ -931,6 +941,9 @@
         min-height: 48px;
         padding: 15px 20px;
         font-size: 0.85rem;
+    }
+    .trust-strip {
+        grid-template-columns: 1fr;
     }
     
     /* Parallax fix */
@@ -1045,6 +1058,46 @@
             font-size: 1.8rem; 
             flex-shrink: 0; 
         }
+        .timeline-section {
+            padding: 110px 0;
+            background: linear-gradient(180deg, #080809, #050506);
+        }
+        .timeline-grid {
+            margin-top: 52px;
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 18px;
+        }
+        .timeline-step {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-soft);
+            border-radius: var(--radius-lg);
+            padding: 26px 22px;
+            box-shadow: var(--shadow-soft);
+        }
+        .step-index {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(230, 30, 42, 0.18);
+            border: 1px solid rgba(230, 30, 42, 0.6);
+            color: var(--red);
+            font-family: 'Oswald', sans-serif;
+            margin-bottom: 14px;
+        }
+        .timeline-step h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        .timeline-step p {
+            margin: 0;
+            color: var(--text-med);
+            font-size: 0.95rem;
+            line-height: 1.65;
+        }
 
         .pricing { 
             padding: 120px 0; 
@@ -1086,6 +1139,12 @@
             margin: 20px 0;
             font-size: 1.5rem;
         }
+        .best-for {
+            text-align: center;
+            color: var(--text-med);
+            font-size: 0.9rem;
+            margin-top: -6px;
+        }
         .price-card ul {
             list-style: none;
             padding: 0;
@@ -1109,6 +1168,11 @@
             border-radius: 6px;
             margin-top: 20px;
         }
+        .btn-wa-ghost {
+            background: #fff;
+            color: #000;
+            border: 2px solid #fff;
+        }
         .btn-wa:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(0,0,0,0.3);
@@ -1125,6 +1189,28 @@
             color: #fff;
             border-radius: 4px;
             box-shadow: 0 4px 15px rgba(230, 30, 42, 0.4);
+        }
+        .purchase-flow {
+            margin-top: 38px;
+            background: linear-gradient(145deg, #0d0d0f, #08080a);
+            border: 1px solid var(--border-soft);
+            border-radius: var(--radius-lg);
+            text-align: left;
+            padding: 30px;
+            box-shadow: var(--shadow-soft);
+        }
+        .purchase-flow h3 {
+            font-size: 1.35rem;
+            margin-bottom: 14px;
+        }
+        .purchase-flow ol {
+            margin: 0;
+            padding-left: 20px;
+            color: var(--text-med);
+        }
+        .purchase-flow li {
+            margin-bottom: 8px;
+            line-height: 1.65;
         }
 
         .testimonials { 
@@ -1165,13 +1251,32 @@
             max-width: 900px; 
             margin: auto; 
         }
+        .faq-group {
+            margin-bottom: 26px;
+            border: 1px solid var(--border-soft);
+            border-radius: var(--radius-lg);
+            background: linear-gradient(145deg, #0e0e10, #09090b);
+            box-shadow: var(--shadow-soft);
+            padding: 6px 18px 12px;
+        }
+        .faq-group-title {
+            text-transform: uppercase;
+            color: var(--red);
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin: 16px 0 6px;
+        }
         .faq-item { 
             border-bottom: 1px solid rgba(255,255,255,0.08); 
-            padding: 30px 0; 
+            padding: 18px 0; 
+        }
+        .faq-item:last-child {
+            border-bottom: none;
         }
         .faq-question { 
             font-family: 'Oswald', sans-serif; 
-            font-size: 1.4rem; 
+            font-size: 1.15rem; 
             cursor: pointer; 
             display: flex; 
             justify-content: space-between; 
@@ -1194,25 +1299,71 @@
         }
         .faq-item.active .faq-answer { 
             max-height: 1000px; 
-            padding: 25px 10px 10px 10px; 
+            padding: 18px 10px 6px 10px; 
         }
         .faq-icon { 
-            transition: transform 0.3s; 
+            transition: all 0.2s; 
             color: var(--red); 
             font-size: 1.6rem;
             font-weight: bold;
         }
-        .faq-item.active .faq-icon {
-            transform: rotate(45deg);
-        }
+        .faq-item.active .faq-icon { transform: none; }
 
         .contact { 
             padding: 120px 0; 
             background: linear-gradient(180deg, #050506, #020202); 
         }
+        .apply-layout {
+            display: grid;
+            grid-template-columns: minmax(250px, 0.9fr) minmax(320px, 1.3fr);
+            gap: 26px;
+            align-items: start;
+        }
+        .apply-info {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-soft);
+            border-radius: var(--radius-lg);
+            padding: 28px 24px;
+            box-shadow: var(--shadow-soft);
+            position: sticky;
+            top: 110px;
+        }
+        .apply-time {
+            display: inline-block;
+            background: rgba(230, 30, 42, 0.14);
+            color: var(--red);
+            border: 1px solid rgba(230, 30, 42, 0.4);
+            border-radius: 999px;
+            padding: 6px 12px;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 14px;
+        }
+        .apply-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+        }
+        .apply-info p {
+            margin: 0 0 14px;
+            color: var(--text-med);
+        }
+        .apply-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .apply-list li {
+            margin-bottom: 10px;
+            color: var(--text-med);
+            font-size: 0.95rem;
+        }
+        .apply-list li::before {
+            content: "•";
+            color: var(--red);
+            margin-right: 10px;
+        }
         .form-container { 
-            max-width: 800px; 
-            margin: auto; 
             background: #050505; 
             padding: 60px; 
             border: 1px solid var(--border-soft); 
@@ -1255,23 +1406,13 @@
             box-shadow: 0 5px 20px rgba(230, 30, 42, 0.2);
         }
         .btn-send { 
-            background: linear-gradient(135deg, var(--red), #c91520); 
-            color: #fff; 
             width: 100%; 
             padding: 25px; 
-            font-family: 'Oswald', sans-serif; 
-            border: none; 
+            border: 2px solid var(--red); 
             font-size: 1.6rem; 
             cursor: pointer; 
-            transition: all 0.4s; 
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(230, 30, 42, 0.4);
             text-transform: uppercase;
             letter-spacing: 2px;
-        }
-        .btn-send:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(230, 30, 42, 0.6);
         }
 
         .footer { 
@@ -1328,6 +1469,33 @@
             border-color: var(--red);
             transform: translateY(-2px);
         }
+        .trust-strip {
+            max-width: 840px;
+            margin: 0 auto 36px;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            text-align: left;
+        }
+        .trust-item {
+            border: 1px solid var(--border-soft);
+            border-radius: 12px;
+            padding: 14px 12px;
+            background: linear-gradient(145deg, #0c0c0e, #070708);
+        }
+        .trust-item strong {
+            color: var(--text-high);
+            display: block;
+            font-size: 0.85rem;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+        .trust-item span {
+            color: var(--text-med);
+            font-size: 0.86rem;
+            line-height: 1.45;
+        }
         .copyright { 
             color: #666; 
             font-size: 0.9rem; 
@@ -1375,7 +1543,7 @@
             <i class="fas fa-fire"></i>
             <span>Ready to Transform? Start Your Journey Today</span>
         </div>
-        <a href="https://wa.me/359889021289" class="sticky-btn" target="_blank" rel="noopener noreferrer">
+        <a href="https://wa.me/359889021289" class="sticky-btn cta-primary" target="_blank" rel="noopener noreferrer">
             BOOK NOW
         </a>
     </div>
@@ -1392,7 +1560,7 @@
             <a href="coaching.html">Coaching</a>
             <a href="calculators.html">Calculators</a>
             <a href="apply.html">Apply</a>
-            <a href="https://wa.me/359889021289" class="book-btn" target="_blank" rel="noopener noreferrer">BOOK NOW</a>
+            <a href="https://wa.me/359889021289" class="book-btn cta-primary" target="_blank" rel="noopener noreferrer">BOOK NOW</a>
         </nav>
         <nav class="mobile-tabs" aria-label="Mobile top navigation">
             <a href="index.html">Home</a>
@@ -1417,7 +1585,7 @@
         <section class="hero parallax">
             <div class="hero-content">
                 <h1 class="reveal active">UNLEASH YOUR<br>TRUE <span class="red-text">POTENTIAL</span></h1>
-                <a href="apply.html" class="btn-main reveal active">START THE CHALLENGE</a>
+                <a href="apply.html" class="btn-main cta-primary reveal active">START THE CHALLENGE</a>
             </div>
         </section>
 
@@ -1462,6 +1630,35 @@
                         </ul>
                         <p style="font-size: 1.2rem; color: var(--text-med);">I focus on precision coaching for serious individuals who are ready to push their limits. My mission is to provide you with the exact science-based protocols needed to succeed.</p>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="timeline-section reveal">
+            <div class="container">
+                <h2 class="red-text section-title">HOW IT WORKS</h2>
+                <p class="section-subtitle">Clear steps from first contact to your full coaching setup.</p>
+                <div class="timeline-grid">
+                    <article class="timeline-step">
+                        <span class="step-index">1</span>
+                        <h3>BOOK</h3>
+                        <p>Start on WhatsApp and confirm the protocol that matches your goal.</p>
+                    </article>
+                    <article class="timeline-step">
+                        <span class="step-index">2</span>
+                        <h3>APPLY</h3>
+                        <p>Complete the short form with your stats, training level, and target outcome.</p>
+                    </article>
+                    <article class="timeline-step">
+                        <span class="step-index">3</span>
+                        <h3>SETUP</h3>
+                        <p>Receive your individualized training, nutrition, and check-in structure.</p>
+                    </article>
+                    <article class="timeline-step">
+                        <span class="step-index">4</span>
+                        <h3>PROGRESS</h3>
+                        <p>Track execution with regular feedback and plan adjustments.</p>
+                    </article>
                 </div>
             </div>
         </section>
@@ -1606,36 +1803,48 @@
                     <div class="price-card">
                         <div class="price-val">€80</div>
                         <h3>TRAINING PROTOCOL</h3>
+                        <p class="best-for">Best for: independent lifters needing a precise plan.</p>
                         <ul>
                             <li>Custom Workout Program</li>
                             <li>Monthly Check-ins</li>
                             <li>Supplementation Plan</li>
                         </ul>
-                        <a href="https://wa.me/359889021289" class="btn-wa" style="background:#fff; color:#000;" target="_blank" rel="noopener noreferrer">CHOOSE PLAN</a>
+                        <a href="https://wa.me/359889021289" class="btn-wa btn-wa-ghost" target="_blank" rel="noopener noreferrer">CHOOSE PLAN</a>
                     </div>
                     <div class="price-card featured">
                         <div class="best-value">BEST VALUE</div>
                         <div class="price-val">€150</div>
                         <h3>FULL COACHING</h3>
+                        <p class="best-for">Best for: full body recomposition with weekly guidance.</p>
                         <ul>
                             <li>Custom Diet & Training</li>
                             <li>Weekly Check-ins</li>
                             <li>24/7 WhatsApp Support</li>
                             <li>Support Cardio Protocol</li>
                         </ul>
-                        <a href="https://wa.me/359889021289" class="btn-wa" style="background:var(--red); color:#fff;" target="_blank" rel="noopener noreferrer">START NOW</a>
+                        <a href="https://wa.me/359889021289" class="btn-wa" target="_blank" rel="noopener noreferrer">START NOW</a>
                     </div>
                     <div class="price-card">
                         <div class="price-val">€200</div>
                         <h3>CONTEST PREP</h3>
+                        <p class="best-for">Best for: athletes targeting stage-level condition.</p>
                         <ul>
                             <li>Custom Diet & Training Plan</li>
                             <li>Daily Adjustments</li>
                             <li>Peak Week Control</li>
                             <li>Post Show Reverse Diet</li>
                         </ul>
-                        <a href="https://wa.me/359889021289" class="btn-wa" style="background:#fff; color:#000;" target="_blank" rel="noopener noreferrer">CHOOSE PLAN</a>
+                        <a href="https://wa.me/359889021289" class="btn-wa btn-wa-ghost" target="_blank" rel="noopener noreferrer">CHOOSE PLAN</a>
                     </div>
+                </div>
+                <div class="purchase-flow">
+                    <h3>WHAT HAPPENS AFTER PURCHASE</h3>
+                    <ol>
+                        <li>You receive onboarding instructions and confirmation in chat.</li>
+                        <li>You complete your intake details and current check-in photos.</li>
+                        <li>Your customized protocol is built and sent with execution notes.</li>
+                        <li>Check-ins start based on your selected package frequency.</li>
+                    </ol>
                 </div>
             </div>
         </section>
@@ -1666,61 +1875,70 @@
             <div class="container">
                 <h2 class="red-text section-title">FAQ</h2>
                 <div class="faq-container">
-                    <div class="faq-item">
-                        <div class="faq-question" role="button" tabindex="0" aria-expanded="false" aria-controls="faq-answer-1">
-                            How does online coaching work? 
-                            <span class="faq-icon" aria-hidden="true">+</span>
+                    <div class="faq-group">
+                        <div class="faq-group-title">Program</div>
+                        <div class="faq-item">
+                            <div class="faq-question" role="button" tabindex="0" aria-expanded="false" aria-controls="faq-answer-1">
+                                How does online coaching work? 
+                                <span class="faq-icon" aria-hidden="true">+</span>
+                            </div>
+                            <div class="faq-answer" id="faq-answer-1">Initial questionnaire, personalized protocols, and periodic chat check-ins via WhatsApp.</div>
                         </div>
-                        <div class="faq-answer" id="faq-answer-1">Initial questionnaire, personalized protocols, and periodic chat check-ins via WhatsApp.</div>
+                        <div class="faq-item">
+                            <div class="faq-question" role="button" tabindex="0" aria-expanded="false" aria-controls="faq-answer-2">
+                                What do I need to get started? 
+                                <span class="faq-icon" aria-hidden="true">+</span>
+                            </div>
+                            <div class="faq-answer" id="faq-answer-2">Internet access, gym or home equipment, body measurements, and photos.</div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question" role="button" tabindex="0" aria-expanded="false" aria-controls="faq-answer-3">
+                                How personalized is the program? 
+                                <span class="faq-icon" aria-hidden="true">+</span>
+                            </div>
+                            <div class="faq-answer" id="faq-answer-3">Built entirely around your specific goals, level, and training time.</div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question" role="button" tabindex="0" aria-expanded="false" aria-controls="faq-answer-4">
+                                Can beginners do coaching? 
+                                <span class="faq-icon" aria-hidden="true">+</span>
+                            </div>
+                            <div class="faq-answer" id="faq-answer-4">Yes, intensity adjusts for everyone from zero experience to advanced athletes.</div>
+                        </div>
                     </div>
-                    <div class="faq-item">
-                        <div class="faq-question" role="button" tabindex="0" aria-expanded="false" aria-controls="faq-answer-2">
-                            What do I need to get started? 
-                            <span class="faq-icon" aria-hidden="true">+</span>
+                    <div class="faq-group">
+                        <div class="faq-group-title">Payments</div>
+                        <div class="faq-item">
+                            <div class="faq-question" role="button" tabindex="0" aria-expanded="false" aria-controls="faq-answer-7">
+                                How do payments work? 
+                                <span class="faq-icon" aria-hidden="true">+</span>
+                            </div>
+                            <div class="faq-answer" id="faq-answer-7">Upfront via Revolut, Paypal, or Bank Transfer. No auto-renew.</div>
                         </div>
-                        <div class="faq-answer" id="faq-answer-2">Internet access, gym or home equipment, body measurements, and photos.</div>
+                        <div class="faq-item">
+                            <div class="faq-question" role="button" tabindex="0" aria-expanded="false" aria-controls="faq-answer-8">
+                                Can I get a refund? 
+                                <span class="faq-icon" aria-hidden="true">+</span>
+                            </div>
+                            <div class="faq-answer" id="faq-answer-8">As a digital service, refunds are not available once received.</div>
+                        </div>
                     </div>
-                    <div class="faq-item">
-                        <div class="faq-question" role="button" tabindex="0" aria-expanded="false" aria-controls="faq-answer-3">
-                            How personalized is the program? 
-                            <span class="faq-icon" aria-hidden="true">+</span>
+                    <div class="faq-group">
+                        <div class="faq-group-title">Support</div>
+                        <div class="faq-item">
+                            <div class="faq-question" role="button" tabindex="0" aria-expanded="false" aria-controls="faq-answer-5">
+                                What support is provided? 
+                                <span class="faq-icon" aria-hidden="true">+</span>
+                            </div>
+                            <div class="faq-answer" id="faq-answer-5">Chat support for doubts and scheduled check-ins per package.</div>
                         </div>
-                        <div class="faq-answer" id="faq-answer-3">Built entirely around your specific goals, level, and training time.</div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question" role="button" tabindex="0" aria-expanded="false" aria-controls="faq-answer-4">
-                            Can beginners do coaching? 
-                            <span class="faq-icon" aria-hidden="true">+</span>
+                        <div class="faq-item">
+                            <div class="faq-question" role="button" tabindex="0" aria-expanded="false" aria-controls="faq-answer-6">
+                                Does coaching replace a doctor? 
+                                <span class="faq-icon" aria-hidden="true">+</span>
+                            </div>
+                            <div class="faq-answer" id="faq-answer-6">No. Online coaching does not substitute medical visits or therapeutic plans.</div>
                         </div>
-                        <div class="faq-answer" id="faq-answer-4">Yes, intensity adjusts for everyone from zero experience to advanced athletes.</div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question" role="button" tabindex="0" aria-expanded="false" aria-controls="faq-answer-5">
-                            What support is provided? 
-                            <span class="faq-icon" aria-hidden="true">+</span>
-                        </div>
-                        <div class="faq-answer" id="faq-answer-5">Chat support for doubts and scheduled check-ins per package.</div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question" role="button" tabindex="0" aria-expanded="false" aria-controls="faq-answer-6">
-                            Does coaching replace a doctor? 
-                            <span class="faq-icon" aria-hidden="true">+</span>
-                        </div>
-                        <div class="faq-answer" id="faq-answer-6">No. Online coaching does not substitute medical visits or therapeutic plans.</div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question" role="button" tabindex="0" aria-expanded="false" aria-controls="faq-answer-7">
-                            How do payments work? 
-                            <span class="faq-icon" aria-hidden="true">+</span>
-                        </div>
-                        <div class="faq-answer" id="faq-answer-7">Upfront via Revolut, Paypal, or Bank Transfer. No auto-renew.</div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question" role="button" tabindex="0" aria-expanded="false" aria-controls="faq-answer-8">
-                            Can I get a refund? 
-                            <span class="faq-icon" aria-hidden="true">+</span>
-                        </div>
-                        <div class="faq-answer" id="faq-answer-8">As a digital service, refunds are not available once received.</div>
                     </div>
                 </div>
             </div>
@@ -1728,27 +1946,39 @@
 
         <section id="contact" class="contact reveal">
             <div class="container">
-                <div class="form-container">
-                    <h2 class="red-text section-title">CONNECT WITH ANGELO</h2>
-                    <form id="applicationForm" action="https://formspree.io/f/xgovnlpv" method="POST">
-                        <div class="form-group">
-                            <label for="name">Full Name *</label>
-                            <input type="text" id="name" name="name" required placeholder="John Doe" aria-required="true">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email *</label>
-                            <input type="email" id="email" name="email" required placeholder="john.doe@example.com" aria-required="true">
-                        </div>
-                        <div class="form-group">
-                            <label for="whatsapp">WhatsApp Number</label>
-                            <input type="text" id="whatsapp" name="whatsapp" placeholder="+359 889 021 289">
-                        </div>
-                        <div class="form-group">
-                            <label for="stats">Current Stats & Goals *</label>
-                            <textarea id="stats" name="stats" rows="5" required placeholder="Weight, height, training experience, injuries, main goals..." aria-required="true"></textarea>
-                        </div>
-                        <button type="button" onclick="sendToWhatsApp()" class="btn-send">SEND APPLICATION</button>
-                    </form>
+                <div class="apply-layout">
+                    <aside class="apply-info">
+                        <span class="apply-time">~2 minutes</span>
+                        <h3>APPLICATION FLOW</h3>
+                        <p>Share your current condition and goals so your setup starts with the right structure.</p>
+                        <ul class="apply-list">
+                            <li>Fill in your baseline stats and context.</li>
+                            <li>Submit once and continue on WhatsApp.</li>
+                            <li>Receive your onboarding and first steps.</li>
+                        </ul>
+                    </aside>
+                    <div class="form-container">
+                        <h2 class="red-text section-title">CONNECT WITH ANGELO</h2>
+                        <form id="applicationForm" action="https://formspree.io/f/xgovnlpv" method="POST">
+                            <div class="form-group">
+                                <label for="name">Full Name *</label>
+                                <input type="text" id="name" name="name" required placeholder="John Doe" aria-required="true">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" name="email" required placeholder="john.doe@example.com" aria-required="true">
+                            </div>
+                            <div class="form-group">
+                                <label for="whatsapp">WhatsApp Number</label>
+                                <input type="text" id="whatsapp" name="whatsapp" placeholder="+359 889 021 289">
+                            </div>
+                            <div class="form-group">
+                                <label for="stats">Current Stats & Goals *</label>
+                                <textarea id="stats" name="stats" rows="5" required placeholder="Weight, height, training experience, injuries, main goals..." aria-required="true"></textarea>
+                            </div>
+                            <button type="button" onclick="sendToWhatsApp()" class="btn-send cta-primary">SEND APPLICATION</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1769,6 +1999,20 @@
             <a href="https://www.instagram.com/thecoachangelo" class="share-btn" target="_blank" rel="noopener noreferrer" aria-label="Follow on Instagram">
                 <i class="fab fa-instagram" aria-hidden="true"></i>
             </a>
+        </div>
+        <div class="trust-strip">
+            <div class="trust-item">
+                <strong>Response Time</strong>
+                <span>First reply within 24 hours on working days.</span>
+            </div>
+            <div class="trust-item">
+                <strong>Check-in Frequency</strong>
+                <span>Weekly or monthly check-ins based on selected protocol.</span>
+            </div>
+            <div class="trust-item">
+                <strong>Medical Disclaimer</strong>
+                <span>Coaching is educational and does not replace medical diagnosis or treatment.</span>
+            </div>
         </div>
         <div class="copyright">© 2026 THE COACH ANGELO. ALL RIGHTS RESERVED.</div>
     </footer>
@@ -2026,9 +2270,19 @@ document.querySelector(`[data-bf="${percentage}"]`).classList.add('selected');
                 const item = button.parentElement;
                 const isOpen = item.classList.contains('active');
                 const icon = button.querySelector('.faq-icon');
-                
-                item.classList.toggle('active');
-                button.setAttribute('aria-expanded', !isOpen);
+
+                document.querySelectorAll('.faq-item.active').forEach(activeItem => {
+                    if (activeItem !== item) {
+                        activeItem.classList.remove('active');
+                        const activeButton = activeItem.querySelector('.faq-question');
+                        const activeIcon = activeItem.querySelector('.faq-icon');
+                        if (activeButton) activeButton.setAttribute('aria-expanded', 'false');
+                        if (activeIcon) activeIcon.textContent = '+';
+                    }
+                });
+
+                item.classList.toggle('active', !isOpen);
+                button.setAttribute('aria-expanded', (!isOpen).toString());
                 icon.textContent = isOpen ? '+' : '−';
             }
         });
