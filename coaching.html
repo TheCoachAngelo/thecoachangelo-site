@@ -1564,6 +1564,8 @@
     body.page-calculators header:not(.scrolled),
     body.page-apply header:not(.scrolled),
     body.page-home header:not(.scrolled) {
+        display: none !important;
+        visibility: hidden !important;
         opacity: 0 !important;
         pointer-events: none !important;
         transform: translateY(-110%) !important;
@@ -1572,6 +1574,8 @@
     body.page-calculators header.scrolled,
     body.page-apply header.scrolled,
     body.page-home header.scrolled {
+        display: flex !important;
+        visibility: visible !important;
         opacity: 1 !important;
         pointer-events: auto !important;
         transform: translateY(0) !important;
@@ -2252,8 +2256,10 @@
             const header = document.getElementById('mainHeader');
             const stickyCTA = document.getElementById('stickyCTA');
             const mobileNav = document.querySelector('.mobile-nav');
+            const isMobile = window.innerWidth <= 768;
+            const scrolledThreshold = isMobile ? 220 : 150;
 
-            if (window.scrollY > 150) {
+            if (window.scrollY > scrolledThreshold) {
                 header.classList.add('scrolled');
             } else {
                 header.classList.remove('scrolled');
