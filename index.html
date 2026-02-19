@@ -7,8 +7,6 @@
     <meta name="description" content="Elite physique coaching by former IFBB athlete Coach Angelo. Custom diet, training, and contest prep protocols.">
     <title>The Coach Angelo | Elite Physique</title>
     
-    <!-- PWA Manifest -->
-    <link rel="manifest" href="application/json;base64,ewogICJuYW1lIjogIlRoZSBDb2FjaCBBbmdlbG8iLAogICJzaG9ydF9uYW1lIjogIkNvYWNoIEFuZ2VsbyIsCiAgImRlc2NyaXB0aW9uIjogIkVsaXRlIFBoeXNpcXVlIENvYWNoaW5nIiwKICAic3RhcnRfdXJsIjogIi8iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiMwMDAwMDAiLAogICJ0aGVtZV9jb2xvciI6ICIjZTYxZTJhIiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiaHR0cHM6Ly9zdGF0aWMud2l4c3RhdGljLmNvbS9tZWRpYS80MzM4ZDBfMWI1NGVjODA3YjQwNDZkMmI3N2VkOWM1N2E3MTI5NWR+bXYyLnBuZyIsCiAgICAgICJzaXplcyI6ICIxOTJ4MTkyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgfQogIF0KfQ==">
     <link rel="apple-touch-icon" href="https://static.wixstatic.com/media/4338d0_1b54ec807b4046d2b77ed9c57a71295d~mv2.png">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -1569,27 +1567,6 @@
                 document.getElementById('loadingScreen').classList.add('hidden');
             }, 1500);
         });
-
-        // ===== PWA SERVICE WORKER =====
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                const swCode = `
-                    self.addEventListener('install', (e) => {
-                        e.waitUntil(
-                            caches.open('coach-angelo-v1').then((cache) => cache.addAll(['/']))
-                        );
-                    });
-                    self.addEventListener('fetch', (e) => {
-                        e.respondWith(
-                            caches.match(e.request).then((response) => response || fetch(e.request))
-                        );
-                    });
-                `;
-                const blob = new Blob([swCode], { type: 'application/javascript' });
-                const swUrl = URL.createObjectURL(blob);
-                navigator.serviceWorker.register(swUrl);
-            });
-        }
 
         // ===== STICKY CTA BAR =====
         window.addEventListener('scroll', function() {
