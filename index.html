@@ -38,23 +38,6 @@
             overflow-x: hidden; 
             padding-bottom: 70px; 
         }
-        body.page-coaching #main-content > section.hero,
-        body.page-coaching #main-content > section.science-section,
-        body.page-coaching #main-content > section.stats-bar,
-        body.page-coaching #main-content > section#about,
-        body.page-coaching #main-content > section.email-capture,
-        body.page-coaching #main-content > section#contact {
-            display: none;
-        }
-        body.page-apply #stickyCTA {
-            display: none !important;
-        }
-        body.page-apply #main-content > section:not(#contact) {
-            display: none;
-        }
-        body.page-apply #contact {
-            padding-top: 170px;
-        }
         
         h1, h2, h3 { font-family: 'Oswald', sans-serif; text-transform: uppercase; margin: 0; }
         .container { max-width: 1100px; margin: auto; padding: 0 20px; }
@@ -1169,7 +1152,7 @@
 }
     </style>
 </head>
-<body class="page-home">
+<body>
     <!-- LOADING SCREEN -->
     <div id="loadingScreen">
         <div class="loader">
@@ -1196,17 +1179,21 @@
             <img src="https://static.wixstatic.com/media/4338d0_1b54ec807b4046d2b77ed9c57a71295d~mv2.png" alt="Coach Angelo - Elite Physique Training" loading="eager">
         </div>
         <nav class="nav-links" role="navigation" aria-label="Main navigation">
-            <a href="index.html">Home</a>
-            <a href="coaching.html">Coaching</a>
-            <a href="apply.html">Apply</a>
-            <a href="https://wa.me/359889021289" class="book-btn" target="_blank" rel="noopener noreferrer">WHATSAPP</a>
+            <a href="#about">Method</a>
+            <a href="#calculators">Tools</a>
+            <a href="#plans">Protocols</a>
+            <a href="#faq">FAQ</a>
+            <a href="#testimonials">Results</a>
+            <a href="#contact">Contact</a>
+            <a href="https://wa.me/359889021289" class="book-btn" target="_blank" rel="noopener noreferrer">BOOK NOW</a>
         </nav>
     </header>
 
     <nav class="mobile-nav" role="navigation" aria-label="Mobile navigation">
-        <a href="index.html" aria-label="Home"><i class="fas fa-house" aria-hidden="true"></i>Home</a>
-        <a href="coaching.html" aria-label="Coaching"><i class="fas fa-dumbbell" aria-hidden="true"></i>Coaching</a>
-        <a href="apply.html" aria-label="Apply"><i class="fas fa-envelope" aria-hidden="true"></i>Apply</a>
+        <a href="#about" aria-label="About Method"><i class="fas fa-user-tie" aria-hidden="true"></i>Method</a>
+        <a href="#calculators" aria-label="Fitness Calculators"><i class="fas fa-calculator" aria-hidden="true"></i>Tools</a>
+        <a href="#plans" aria-label="Training Protocols"><i class="fas fa-dumbbell" aria-hidden="true"></i>Protocols</a>
+     <a href="#contact" aria-label="Contact Form"><i class="fas fa-envelope" aria-hidden="true"></i>Contact</a>
     </nav>
 
     <a href="https://wa.me/359889021289" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Contact on WhatsApp">
@@ -1217,7 +1204,7 @@
         <section class="hero parallax">
             <div class="hero-content">
                 <h1 class="reveal active">UNLEASH YOUR<br>TRUE <span class="red-text">POTENTIAL</span></h1>
-                <a href="coaching.html" class="btn-main reveal active">VIEW COACHING</a>
+                <a href="#plans" class="btn-main reveal active">START THE CHALLENGE</a>
             </div>
         </section>
 
