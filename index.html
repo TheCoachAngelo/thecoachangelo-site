@@ -936,6 +936,7 @@
     }
     input[type="text"],
     input[type="email"],
+    input[type="tel"],
     textarea {
         font-size: 16px;
         padding: 18px;
@@ -1432,6 +1433,7 @@
         }
         input[type="text"],
         input[type="email"],
+        input[type="tel"],
         textarea { 
             width: 100%; 
             padding: 20px; 
@@ -1446,11 +1448,16 @@
         }
         input[type="text"]:focus,
         input[type="email"]:focus,
+        input[type="tel"]:focus,
         textarea:focus { 
             border-color: var(--red); 
             background: #000;
             transform: translateY(-2px);
             box-shadow: 0 5px 20px rgba(230, 30, 42, 0.2);
+        }
+        .field-error {
+            border-color: #ff6a76 !important;
+            box-shadow: 0 0 0 2px rgba(255,106,118,0.18);
         }
         .btn-send { 
             width: 100%; 
@@ -1554,7 +1561,22 @@
 /* === MOBILE UX FINAL OVERRIDES === */
 @media (max-width: 768px) {
     body {
-        padding-bottom: 28px;
+        padding-bottom: 0;
+    }
+    body.page-home header {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+    body.page-home .nav-links {
+        display: flex;
+        justify-content: flex-end;
+    }
+    body.page-home .nav-links a:not(.book-btn) {
+        display: none;
+    }
+    body.page-home .mobile-tabs {
+        display: flex;
     }
     header,
     body.page-home header.scrolled,
@@ -1574,12 +1596,21 @@
         gap: 10px;
         padding: 8px 0 4px;
         margin-top: 6px;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+    }
+    .mobile-tabs::-webkit-scrollbar {
+        display: none;
     }
     .mobile-tabs a {
         font-size: 0.82rem;
         padding: 10px 12px;
-        min-height: 40px;
+        min-height: 44px;
         border-radius: 10px;
+        scroll-snap-align: start;
+    }
+    #main-content > section {
+        scroll-margin-top: 108px;
     }
     .hero {
         min-height: 80svh;
@@ -1591,7 +1622,7 @@
         margin-bottom: 16px;
     }
     .btn-main {
-        min-height: 50px;
+        min-height: 52px;
         max-width: 320px;
         padding: 14px 20px;
     }
@@ -1630,6 +1661,7 @@
         text-transform: none;
         letter-spacing: 0.2px;
         align-items: flex-start;
+        min-height: 48px;
     }
     .faq-icon {
         margin-left: 10px;
@@ -1638,10 +1670,17 @@
     .form-container {
         padding: 22px 12px;
     }
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea {
+        min-height: 52px;
+        font-size: 16px;
+    }
     body.page-coaching #main-content > section#plans,
     body.page-calculators #main-content > section#calculators,
     body.page-apply #main-content > section#contact {
-        padding-top: 124px;
+        padding-top: 112px;
     }
 }
 
@@ -2097,15 +2136,15 @@
                     <form id="applicationForm" action="https://formspree.io/f/xgovnlpv" method="POST">
                         <div class="form-group">
                             <label for="name">Full Name *</label>
-                            <input type="text" id="name" name="name" required placeholder="John Doe" aria-required="true">
+                            <input type="text" id="name" name="name" required placeholder="John Doe" aria-required="true" autocomplete="name">
                         </div>
                         <div class="form-group">
                             <label for="email">Email *</label>
-                            <input type="email" id="email" name="email" required placeholder="john.doe@example.com" aria-required="true">
+                            <input type="email" id="email" name="email" required placeholder="john.doe@example.com" aria-required="true" autocomplete="email" inputmode="email">
                         </div>
                         <div class="form-group">
                             <label for="whatsapp">WhatsApp Number</label>
-                            <input type="text" id="whatsapp" name="whatsapp" placeholder="+359 889 021 289">
+                            <input type="tel" id="whatsapp" name="whatsapp" placeholder="+359 889 021 289" autocomplete="tel" inputmode="tel">
                         </div>
                         <div class="form-group">
                             <label for="stats">Current Stats & Goals *</label>
@@ -2427,21 +2466,33 @@ document.querySelector(`[data-bf="${percentage}"]`).classList.add('selected');
             const nameField = form.querySelector('#name');
             const emailField = form.querySelector('#email');
             const statsField = form.querySelector('#stats');
+            const requiredFields = [nameField, emailField, statsField];
+
+            requiredFields.forEach(field => field.classList.remove('field-error'));
             
             if (!nameField.value.trim()) {
                 alert("Please enter your name.");
+                nameField.classList.add('field-error');
                 nameField.focus();
                 return;
             }
             
             if (!emailField.value.trim()) {
                 alert("Please enter your email.");
+                emailField.classList.add('field-error');
+                emailField.focus();
+                return;
+            }
+            if (!emailField.checkValidity()) {
+                alert("Please enter a valid email.");
+                emailField.classList.add('field-error');
                 emailField.focus();
                 return;
             }
             
             if (!statsField.value.trim()) {
                 alert("Please enter your current stats and goals.");
+                statsField.classList.add('field-error');
                 statsField.focus();
                 return;
             }
@@ -2467,6 +2518,15 @@ document.querySelector(`[data-bf="${percentage}"]`).classList.add('selected');
                 alert("There was an error sending your application. Please try again.");
             });
         }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.getElementById('applicationForm');
+            if (form) {
+                form.querySelectorAll('input, textarea').forEach(field => {
+                    field.addEventListener('input', () => field.classList.remove('field-error'));
+                });
+            }
+        });
 
         // ===== REVEAL ANIMATIONS =====
         function reveal() {
