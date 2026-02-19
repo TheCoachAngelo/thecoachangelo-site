@@ -627,17 +627,17 @@
         border-bottom: 1px solid rgba(230, 30, 42, 0.65);
         transition: transform 0.28s ease, opacity 0.28s ease;
     }
-    header.scrolled { 
+    body.page-home header.scrolled {
         opacity: 1;
         pointer-events: auto;
         transform: translateY(0);
-        padding: 10px 12px; 
+        padding: 10px 12px;
     }
-    header .logo img {
+    body.page-home header .logo img {
         height: 34px;
     }
-    .nav-links { display: none; }
-    header.scrolled .nav-links {
+    body.page-home .nav-links { display: none; }
+    body.page-home header.scrolled .nav-links {
         display: flex;
         gap: 8px;
         flex-wrap: nowrap;
@@ -645,16 +645,57 @@
         max-width: 68vw;
         padding-bottom: 2px;
     }
-    header.scrolled .nav-links a {
+    body.page-home header.scrolled .nav-links a {
         font-size: 0.72rem;
         padding: 6px 8px;
         white-space: nowrap;
     }
-    header.scrolled .book-btn {
+    body.page-home header.scrolled .book-btn {
         padding: 8px 10px;
         font-size: 0.72rem;
     }
-    .mobile-nav { display: none !important; } 
+    body.page-coaching header,
+    body.page-calculators header,
+    body.page-apply header {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+        padding: 10px 12px;
+    }
+    body.page-coaching header .logo img,
+    body.page-calculators header .logo img,
+    body.page-apply header .logo img {
+        height: 34px;
+    }
+    body.page-coaching .nav-links,
+    body.page-calculators .nav-links,
+    body.page-apply .nav-links {
+        display: flex;
+        gap: 8px;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        max-width: 68vw;
+        padding-bottom: 2px;
+    }
+    body.page-coaching .nav-links a,
+    body.page-calculators .nav-links a,
+    body.page-apply .nav-links a {
+        font-size: 0.72rem;
+        padding: 6px 8px;
+        white-space: nowrap;
+    }
+    body.page-coaching .book-btn,
+    body.page-calculators .book-btn,
+    body.page-apply .book-btn {
+        padding: 8px 10px;
+        font-size: 0.72rem;
+    }
+    .mobile-nav { display: none !important; }
+    body.page-coaching .mobile-nav,
+    body.page-calculators .mobile-nav,
+    body.page-apply .mobile-nav {
+        display: none !important;
+    } 
     
     /* Hero Section - Better text scaling */
     .hero { 
