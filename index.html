@@ -1551,6 +1551,132 @@
             border-top: 1px solid #222;
             margin-top: 40px;
         }
+/* === MOBILE UX FINAL OVERRIDES === */
+@media (max-width: 768px) {
+    body {
+        padding-bottom: 28px;
+    }
+    header,
+    body.page-home header.scrolled,
+    body.page-coaching header,
+    body.page-calculators header,
+    body.page-apply header {
+        padding: 9px 12px;
+    }
+    header .logo img,
+    body.page-home header .logo img,
+    body.page-coaching header .logo img,
+    body.page-calculators header .logo img,
+    body.page-apply header .logo img {
+        height: 36px;
+    }
+    .mobile-tabs {
+        gap: 10px;
+        padding: 8px 0 4px;
+        margin-top: 6px;
+    }
+    .mobile-tabs a {
+        font-size: 0.82rem;
+        padding: 10px 12px;
+        min-height: 40px;
+        border-radius: 10px;
+    }
+    .hero {
+        min-height: 80svh;
+        padding-top: 72px;
+        padding-bottom: 30px;
+    }
+    .hero h1 {
+        font-size: clamp(2.05rem, 9vw, 3rem);
+        margin-bottom: 16px;
+    }
+    .btn-main {
+        min-height: 50px;
+        max-width: 320px;
+        padding: 14px 20px;
+    }
+    .whatsapp-float {
+        bottom: 18px;
+        right: 14px;
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+        z-index: 1800;
+    }
+    .science-content {
+        border-left: 2px solid rgba(239, 64, 80, 0.72);
+        padding-left: 14px;
+    }
+    .about-list li {
+        margin: 14px 0;
+        font-size: 1rem;
+    }
+    .calc-card,
+    .price-card,
+    .quote-block,
+    .faq-group,
+    .form-container {
+        border-radius: 16px;
+    }
+    .price-card {
+        padding: 22px 14px;
+    }
+    .purchase-flow {
+        padding: 18px 14px;
+    }
+    .faq-question {
+        font-size: 0.95rem;
+        line-height: 1.35;
+        text-transform: none;
+        letter-spacing: 0.2px;
+        align-items: flex-start;
+    }
+    .faq-icon {
+        margin-left: 10px;
+        flex-shrink: 0;
+    }
+    .form-container {
+        padding: 22px 12px;
+    }
+    body.page-coaching #main-content > section#plans,
+    body.page-calculators #main-content > section#calculators,
+    body.page-apply #main-content > section#contact {
+        padding-top: 124px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding-bottom: 20px;
+    }
+    .mobile-tabs a {
+        font-size: 0.78rem;
+        padding: 9px 10px;
+    }
+    .hero {
+        min-height: 76svh;
+        padding-top: 68px;
+    }
+    .hero h1 {
+        font-size: clamp(1.95rem, 10.5vw, 2.55rem);
+    }
+    .stats-bar {
+        padding: 34px 14px;
+    }
+    .stat-item h2 {
+        font-size: 2.6rem;
+    }
+    .whatsapp-float {
+        bottom: 14px;
+        width: 46px;
+        height: 46px;
+        font-size: 22px;
+    }
+    .faq-question {
+        padding: 10px 8px;
+    }
+}
+
 /* === MOBILE LANDSCAPE OPTIMIZATION === */
 @media (max-width: 768px) and (orientation: landscape) {
     .hero {
@@ -1566,13 +1692,13 @@
 /* === SMALL PHONES (iPhone SE, etc) === */
 @media (max-width: 375px) {
     .hero h1 {
-        font-size: 2rem;
+        font-size: 1.88rem;
     }
     .calc-card {
-        padding: 25px 15px;
+        padding: 20px 12px;
     }
     .price-val {
-        font-size: 3.5rem;
+        font-size: 3rem;
     }
 }
     </style>
