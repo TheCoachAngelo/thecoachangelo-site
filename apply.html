@@ -922,13 +922,6 @@
     }
     
     /* Contact Form */
-    .apply-layout {
-        grid-template-columns: 1fr;
-    }
-    .apply-info {
-        position: static;
-        padding: 22px 16px;
-    }
     .form-container {
         padding: 26px 14px;
     }
@@ -1350,57 +1343,9 @@
             padding: 120px 0; 
             background: linear-gradient(180deg, #050506, #020202); 
         }
-        .apply-layout {
-            display: grid;
-            grid-template-columns: minmax(250px, 0.9fr) minmax(320px, 1.3fr);
-            gap: 26px;
-            align-items: start;
-        }
-        .apply-info {
-            background: var(--panel-bg);
-            border: 1px solid var(--border-soft);
-            border-radius: var(--radius-lg);
-            padding: 28px 24px;
-            box-shadow: var(--shadow-soft);
-            position: sticky;
-            top: 110px;
-        }
-        .apply-time {
-            display: inline-block;
-            background: rgba(230, 30, 42, 0.14);
-            color: var(--red);
-            border: 1px solid rgba(230, 30, 42, 0.4);
-            border-radius: 999px;
-            padding: 6px 12px;
-            font-size: 0.82rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 14px;
-        }
-        .apply-info h3 {
-            font-size: 1.4rem;
-            margin-bottom: 12px;
-        }
-        .apply-info p {
-            margin: 0 0 14px;
-            color: var(--text-med);
-        }
-        .apply-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .apply-list li {
-            margin-bottom: 10px;
-            color: var(--text-med);
-            font-size: 0.95rem;
-        }
-        .apply-list li::before {
-            content: "•";
-            color: var(--red);
-            margin-right: 10px;
-        }
         .form-container { 
+            max-width: 800px;
+            margin: auto;
             background: #050505; 
             padding: 60px; 
             border: 1px solid var(--border-soft); 
@@ -1983,39 +1928,27 @@
 
         <section id="contact" class="contact reveal">
             <div class="container">
-                <div class="apply-layout">
-                    <aside class="apply-info">
-                        <span class="apply-time">~2 minutes</span>
-                        <h3>APPLICATION FLOW</h3>
-                        <p>Share your current condition and goals so your setup starts with the right structure.</p>
-                        <ul class="apply-list">
-                            <li>Fill in your baseline stats and context.</li>
-                            <li>Submit once and continue on WhatsApp.</li>
-                            <li>Receive your onboarding and first steps.</li>
-                        </ul>
-                    </aside>
-                    <div class="form-container">
-                        <h2 class="red-text section-title">CONNECT WITH ANGELO</h2>
-                        <form id="applicationForm" action="https://formspree.io/f/xgovnlpv" method="POST">
-                            <div class="form-group">
-                                <label for="name">Full Name *</label>
-                                <input type="text" id="name" name="name" required placeholder="John Doe" aria-required="true">
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email *</label>
-                                <input type="email" id="email" name="email" required placeholder="john.doe@example.com" aria-required="true">
-                            </div>
-                            <div class="form-group">
-                                <label for="whatsapp">WhatsApp Number</label>
-                                <input type="text" id="whatsapp" name="whatsapp" placeholder="+359 889 021 289">
-                            </div>
-                            <div class="form-group">
-                                <label for="stats">Current Stats & Goals *</label>
-                                <textarea id="stats" name="stats" rows="5" required placeholder="Weight, height, training experience, injuries, main goals..." aria-required="true"></textarea>
-                            </div>
-                            <button type="button" onclick="sendToWhatsApp()" class="btn-send cta-primary">SEND APPLICATION</button>
-                        </form>
-                    </div>
+                <div class="form-container">
+                    <h2 class="red-text section-title">CONNECT WITH ANGELO</h2>
+                    <form id="applicationForm" action="https://formspree.io/f/xgovnlpv" method="POST">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" required placeholder="John Doe" aria-required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required placeholder="john.doe@example.com" aria-required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="whatsapp">WhatsApp Number</label>
+                            <input type="text" id="whatsapp" name="whatsapp" placeholder="+359 889 021 289">
+                        </div>
+                        <div class="form-group">
+                            <label for="stats">Current Stats & Goals *</label>
+                            <textarea id="stats" name="stats" rows="5" required placeholder="Weight, height, training experience, injuries, main goals..." aria-required="true"></textarea>
+                        </div>
+                        <button type="button" onclick="sendToWhatsApp()" class="btn-send cta-primary">SEND APPLICATION</button>
+                    </form>
                 </div>
             </div>
         </section>
