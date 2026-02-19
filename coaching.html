@@ -55,6 +55,15 @@
         body.page-coaching #main-content > section#calculators {
             padding-top: 170px;
         }
+        body.page-apply #main-content > section:not(#contact) {
+            display: none;
+        }
+        body.page-apply #main-content > section#contact {
+            padding-top: 170px;
+        }
+        body.page-apply #stickyCTA {
+            display: none !important;
+        }
         
         h1, h2, h3 { font-family: 'Oswald', sans-serif; text-transform: uppercase; margin: 0; }
         .container { max-width: 1100px; margin: auto; padding: 0 20px; }
@@ -1253,19 +1262,16 @@
         </div>
         <nav class="nav-links" role="navigation" aria-label="Main navigation">
             <a href="index.html">Home</a>
-            <a href="coaching.html#calculators">Calculators</a>
-            <a href="coaching.html#plans">Coaching</a>
-            <a href="coaching.html#faq">FAQ</a>
-            <a href="coaching.html#contact">Contact</a>
+            <a href="coaching.html">Coaching</a>
+            <a href="apply.html">Apply</a>
             <a href="https://wa.me/359889021289" class="book-btn" target="_blank" rel="noopener noreferrer">BOOK NOW</a>
         </nav>
     </header>
 
     <nav class="mobile-nav" role="navigation" aria-label="Mobile navigation">
         <a href="index.html" aria-label="Home"><i class="fas fa-house" aria-hidden="true"></i>Home</a>
-        <a href="coaching.html#calculators" aria-label="Fitness Calculators"><i class="fas fa-calculator" aria-hidden="true"></i>Tools</a>
-        <a href="coaching.html#plans" aria-label="Training Protocols"><i class="fas fa-dumbbell" aria-hidden="true"></i>Coaching</a>
-     <a href="coaching.html#contact" aria-label="Contact Form"><i class="fas fa-envelope" aria-hidden="true"></i>Contact</a>
+        <a href="coaching.html" aria-label="Coaching"><i class="fas fa-dumbbell" aria-hidden="true"></i>Coaching</a>
+     <a href="apply.html" aria-label="Apply"><i class="fas fa-envelope" aria-hidden="true"></i>Apply</a>
     </nav>
 
     <a href="https://wa.me/359889021289" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Contact on WhatsApp">
@@ -1276,7 +1282,7 @@
         <section class="hero parallax">
             <div class="hero-content">
                 <h1 class="reveal active">UNLEASH YOUR<br>TRUE <span class="red-text">POTENTIAL</span></h1>
-                <a href="coaching.html#plans" class="btn-main reveal active">START THE CHALLENGE</a>
+                <a href="apply.html" class="btn-main reveal active">START THE CHALLENGE</a>
             </div>
         </section>
 
