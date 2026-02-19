@@ -98,20 +98,20 @@
         .red-text { color: var(--red); }
         .mobile-tabs { display: none; }
         .section-title {
-            font-size: clamp(2.4rem, 6.7vw, 4.2rem);
-            letter-spacing: 0.2px;
-            line-height: 1.05;
+            font-size: clamp(2.55rem, 7.2vw, 4.8rem);
+            letter-spacing: -0.2px;
+            line-height: 1.02;
             text-align: center;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
             text-wrap: balance;
         }
         .section-subtitle {
             text-align: center;
-            font-size: 0.96rem;
+            font-size: 1rem;
             color: var(--text-med);
-            margin: 0 auto 54px;
-            max-width: 560px;
-            line-height: 1.6;
+            margin: 0 auto 68px;
+            max-width: 600px;
+            line-height: 1.72;
             text-wrap: pretty;
         }
 
@@ -1013,12 +1013,21 @@
         font-size: 1.25rem;
     }
     .quote-block {
-        padding: 18px 12px;
+        padding: 24px 16px 18px;
         margin-bottom: 22px;
     }
+    .quote-block::before {
+        top: 2px;
+        left: 10px;
+        font-size: 2.7rem;
+    }
     .quote-text {
-        font-size: 1rem;
-        line-height: 1.65;
+        font-size: 0.98rem;
+        line-height: 1.7;
+    }
+    .quote-author {
+        font-size: 0.8rem;
+        letter-spacing: 1px;
     }
 }
 
@@ -1176,8 +1185,8 @@
         }
         .price-card { 
             background: var(--panel-bg-alt); 
-            padding: 60px 40px; 
-            border: 1px solid var(--border-soft); 
+            padding: 62px 42px; 
+            border: 1px solid rgba(255,255,255,0.06); 
             position: relative; 
             display: flex; 
             flex-direction: column; 
@@ -1187,9 +1196,9 @@
             box-shadow: var(--shadow-card);
         }
         .price-card:hover { 
-            transform: translateY(-12px) scale(1.02); 
-            border-color: rgba(255,255,255,0.22);
-            box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5);
+            transform: translateY(-8px);
+            border-color: rgba(255,255,255,0.14);
+            box-shadow: 0 18px 42px rgba(0, 0, 0, 0.48);
         }
         .price-val { 
             font-size: 5rem; 
@@ -1278,33 +1287,45 @@
         }
 
         .testimonials { 
-            padding: var(--space-section) 0; 
+            padding: calc(var(--space-section) + 6px) 0; 
             background: #060607; 
         }
         .testimonials .section-title {
-            margin-bottom: 80px;
+            margin-bottom: 66px;
         }
         .quote-block { 
-            max-width: 950px; 
-            margin: 0 auto 70px; 
-            padding: 50px; 
-            border-left: 2px solid var(--red); 
-            background: linear-gradient(145deg, #131317, #0a0a0c);
-            border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
-            box-shadow: var(--shadow-card);
+            max-width: 900px; 
+            margin: 0 auto 34px; 
+            padding: 40px 38px 34px; 
+            border: 1px solid rgba(255,255,255,0.08);
+            background: linear-gradient(145deg, #17181d, #0d0e12);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 14px 34px rgba(0,0,0,0.35);
+            position: relative;
+        }
+        .quote-block::before {
+            content: "“";
+            position: absolute;
+            top: 8px;
+            left: 16px;
+            color: rgba(255,255,255,0.16);
+            font-size: 3.5rem;
+            font-family: Georgia, serif;
+            line-height: 1;
         }
         .quote-text { 
             font-style: italic; 
             color: var(--text-med); 
-            font-size: 1.25rem; 
-            line-height: 1.8; 
-            margin-bottom: 25px; 
+            font-size: 1.12rem; 
+            line-height: 1.86; 
+            margin-bottom: 18px; 
         }
         .quote-author {
-            font-weight: bold;
-            color: var(--red);
-            font-size: 1rem;
-            letter-spacing: 1px;
+            font-weight: 700;
+            color: #f0f2f6;
+            font-size: 0.88rem;
+            letter-spacing: 1.25px;
+            text-transform: uppercase;
         }
 
         .faq-section { 
@@ -1317,7 +1338,7 @@
         }
         .faq-group {
             margin-bottom: 26px;
-            border: 1px solid var(--border-soft);
+            border: 1px solid rgba(255,255,255,0.07);
             border-radius: var(--radius-lg);
             background: linear-gradient(145deg, #111114, #09090b);
             box-shadow: var(--shadow-card);
@@ -1391,8 +1412,8 @@
             max-width: 800px;
             margin: auto;
             background: linear-gradient(145deg, #0f0f11, #070709); 
-            padding: 60px; 
-            border: 1px solid var(--border-soft); 
+            padding: 64px 58px; 
+            border: 1px solid rgba(255,255,255,0.08); 
             border-radius: var(--radius-lg);
             box-shadow: var(--shadow-card);
         }
