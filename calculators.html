@@ -20,11 +20,16 @@
             --border: #2a2a2e;
             --border-soft: rgba(255,255,255,0.08);
             --panel-bg: linear-gradient(145deg, #111113, #0a0a0b);
+            --panel-bg-alt: linear-gradient(145deg, #141417, #0b0b0d);
             --text-high: #eee;
-            --text-med: #aeb0b8;
+            --text-med: #a8abb4;
             --radius-lg: 18px;
+            --radius-md: 14px;
             --shadow-soft: 0 12px 40px rgba(0,0,0,0.45);
+            --shadow-card: 0 10px 28px rgba(0,0,0,0.34);
             --shadow-red: 0 20px 50px rgba(230,30,42,0.22);
+            --space-section: 112px;
+            --space-section-mobile: 78px;
         }
         
         * { box-sizing: border-box; }
@@ -33,7 +38,7 @@
         
         body { 
             margin: 0; 
-            background: radial-gradient(circle at 20% -10%, rgba(230,30,42,0.18), transparent 45%), var(--black); 
+            background: radial-gradient(circle at 20% -10%, rgba(230,30,42,0.18), transparent 45%), radial-gradient(circle at 85% 20%, rgba(255,255,255,0.03), transparent 35%), var(--black); 
             color: var(--text-high); 
             font-family: 'Montserrat', sans-serif; 
             line-height: 1.7; 
@@ -92,16 +97,20 @@
         .mobile-tabs { display: none; }
         .section-title {
             font-size: clamp(2.4rem, 6.7vw, 4.2rem);
-            letter-spacing: 0.4px;
+            letter-spacing: 0.2px;
+            line-height: 1.05;
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 14px;
+            text-wrap: balance;
         }
         .section-subtitle {
             text-align: center;
-            font-size: 1rem;
+            font-size: 0.96rem;
             color: var(--text-med);
-            margin: 0 auto 60px;
-            max-width: 650px;
+            margin: 0 auto 54px;
+            max-width: 560px;
+            line-height: 1.6;
+            text-wrap: pretty;
         }
 
         /* ===== LOADING SCREEN ===== */
@@ -427,9 +436,9 @@
 
         .reveal { 
             opacity: 0; 
-            transform: translateY(50px) scale(0.98); 
-            filter: blur(2px); 
-            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+            transform: translateY(34px) scale(0.99); 
+            filter: blur(1.4px); 
+            transition: opacity 0.7s ease, transform 0.7s ease, filter 0.7s ease; 
         }
         .reveal.active { 
             opacity: 1; 
@@ -454,10 +463,11 @@
             box-shadow: 0 2px 20px rgba(0,0,0,0.12);
         }
         header.scrolled {
-            background: rgba(8, 8, 10, 0.95); 
+            background: rgba(8, 8, 10, 0.88); 
             padding: 15px 40px; 
-            border-bottom: 1px solid rgba(230,30,42,0.7); 
+            border-bottom: 1px solid rgba(255,255,255,0.12); 
             backdrop-filter: blur(20px);
+            box-shadow: 0 14px 35px rgba(0,0,0,0.38);
         }
         .logo img { height: 65px; transition: 0.5s; }
         header.scrolled .logo img { height: 50px; }
@@ -805,11 +815,17 @@
     .about-content h2,
     .science-content h2,
     .section-title {
-        font-size: clamp(2rem, 8.5vw, 2.7rem);
+        font-size: clamp(1.9rem, 8.1vw, 2.55rem);
+        line-height: 1.06;
+    }
+    .section-subtitle {
+        font-size: 0.9rem;
+        max-width: 94%;
+        margin-bottom: 34px;
     }
     .science-content {
         margin-left: 0;
-        padding-left: 24px;
+        padding-left: 18px;
     }
     .science-content p {
         font-size: 1rem;
@@ -819,7 +835,7 @@
     /* Calculators - Better touch targets */
     .calc-grid { grid-template-columns: 1fr; }
     .calc-card {
-        padding: 24px 16px;
+        padding: 22px 14px;
     }
     .input-group input,
     .input-group select {
@@ -866,7 +882,7 @@
         gap: 22px;
     }
     .price-card {
-        padding: 30px 18px;
+        padding: 26px 16px;
         max-width: 100%;
     }
     .timeline-grid {
@@ -877,9 +893,9 @@
     }
     .timeline-step {
         position: relative;
-        padding: 16px 12px;
+        padding: 14px 11px;
         border-radius: 14px;
-        min-height: 175px;
+        min-height: 165px;
     }
     .step-index {
         position: static;
@@ -897,7 +913,7 @@
         line-height: 1.5;
     }
     .timeline-section {
-        padding: 80px 0;
+        padding: var(--space-section-mobile) 0;
     }
     .price-val {
         font-size: 3.3rem;
@@ -914,7 +930,7 @@
     
     /* Contact Form */
     .form-container {
-        padding: 26px 14px;
+        padding: 24px 13px;
     }
     input[type="text"],
     input[type="email"],
@@ -985,14 +1001,27 @@
     .calc-grid {
         gap: 18px;
     }
+    .timeline-grid {
+        gap: 10px;
+    }
+    .timeline-step {
+        min-height: 154px;
+    }
+    .price-card h3 {
+        font-size: 1.25rem;
+    }
     .quote-block {
-        padding: 24px 16px;
+        padding: 18px 12px;
         margin-bottom: 22px;
+    }
+    .quote-text {
+        font-size: 1rem;
+        line-height: 1.65;
     }
 }
 
         .science-section { 
-            padding: 120px 0; 
+            padding: var(--space-section) 0; 
             background: linear-gradient(180deg, #070707, #050506); 
         }
         .science-content { 
@@ -1038,7 +1067,7 @@
         }
 
         .about { 
-            padding: 120px 0; 
+            padding: var(--space-section) 0; 
             background: linear-gradient(180deg, #09090a, #030304); 
         }
         .about-flex { 
@@ -1052,7 +1081,14 @@
             height: 100%; 
             object-fit: cover; 
             border: 1px solid #222;
-            border-radius: 4px;
+            border-radius: var(--radius-md);
+            filter: saturate(1.03) contrast(1.02) brightness(0.94);
+            box-shadow: var(--shadow-card);
+            transition: transform 0.45s ease, filter 0.45s ease;
+        }
+        .about-img img:hover {
+            transform: scale(1.015);
+            filter: saturate(1.08) contrast(1.04) brightness(0.98);
         }
         .about-content { flex: 1; }
         .about-content h2 {
@@ -1080,7 +1116,7 @@
             flex-shrink: 0; 
         }
         .timeline-section {
-            padding: 110px 0;
+            padding: var(--space-section) 0;
             background: linear-gradient(180deg, #080809, #050506);
         }
         .timeline-grid {
@@ -1090,11 +1126,16 @@
             gap: 18px;
         }
         .timeline-step {
-            background: var(--panel-bg);
+            background: var(--panel-bg-alt);
             border: 1px solid var(--border-soft);
             border-radius: var(--radius-lg);
             padding: 26px 22px;
-            box-shadow: var(--shadow-soft);
+            box-shadow: var(--shadow-card);
+            transition: transform 0.26s ease, border-color 0.26s ease;
+        }
+        .timeline-step:hover {
+            transform: translateY(-3px);
+            border-color: rgba(230,30,42,0.38);
         }
         .step-index {
             display: inline-flex;
@@ -1121,7 +1162,7 @@
         }
 
         .pricing { 
-            padding: 120px 0; 
+            padding: var(--space-section) 0; 
             text-align: center;
             background: linear-gradient(180deg, #070708, #050505);
         }
@@ -1132,7 +1173,7 @@
             margin-top: 60px; 
         }
         .price-card { 
-            background: var(--panel-bg); 
+            background: var(--panel-bg-alt); 
             padding: 60px 40px; 
             border: 1px solid var(--border-soft); 
             position: relative; 
@@ -1141,7 +1182,7 @@
             text-align: left; 
             transition: all 0.4s ease; 
             border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-soft);
+            box-shadow: var(--shadow-card);
         }
         .price-card:hover { 
             transform: translateY(-12px) scale(1.02); 
@@ -1235,7 +1276,7 @@
         }
 
         .testimonials { 
-            padding: 120px 0; 
+            padding: var(--space-section) 0; 
             background: #060607; 
         }
         .testimonials .section-title {
@@ -1246,9 +1287,9 @@
             margin: 0 auto 70px; 
             padding: 50px; 
             border-left: 2px solid var(--red); 
-            background: linear-gradient(145deg, #101013, #080809);
+            background: linear-gradient(145deg, #131317, #0a0a0c);
             border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
-            box-shadow: var(--shadow-soft);
+            box-shadow: var(--shadow-card);
         }
         .quote-text { 
             font-style: italic; 
@@ -1265,7 +1306,7 @@
         }
 
         .faq-section { 
-            padding: 120px 0; 
+            padding: var(--space-section) 0; 
             background: linear-gradient(180deg, #060607, #040404); 
         }
         .faq-container { 
@@ -1276,8 +1317,8 @@
             margin-bottom: 26px;
             border: 1px solid var(--border-soft);
             border-radius: var(--radius-lg);
-            background: linear-gradient(145deg, #0e0e10, #09090b);
-            box-shadow: var(--shadow-soft);
+            background: linear-gradient(145deg, #111114, #09090b);
+            box-shadow: var(--shadow-card);
             padding: 6px 18px 12px;
         }
         .faq-group-title {
@@ -1331,17 +1372,17 @@
         .faq-item.active .faq-icon { transform: none; }
 
         .contact { 
-            padding: 120px 0; 
+            padding: var(--space-section) 0; 
             background: linear-gradient(180deg, #050506, #020202); 
         }
         .form-container { 
             max-width: 800px;
             margin: auto;
-            background: #050505; 
+            background: linear-gradient(145deg, #0f0f11, #070709); 
             padding: 60px; 
             border: 1px solid var(--border-soft); 
             border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-soft);
+            box-shadow: var(--shadow-card);
         }
         .form-group {
             margin-bottom: 25px;
@@ -1454,7 +1495,8 @@
             border: 1px solid var(--border-soft);
             border-radius: 12px;
             padding: 14px 12px;
-            background: linear-gradient(145deg, #0c0c0e, #070708);
+            background: linear-gradient(145deg, #131316, #09090b);
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
         }
         .trust-item strong {
             color: var(--text-high);
@@ -1606,6 +1648,8 @@
                 </div>
             </div>
         </section>
+
+
         <!-- CALCULATORS SECTION -->
         <section id="calculators" class="calculators-section reveal">
             <div class="container">
