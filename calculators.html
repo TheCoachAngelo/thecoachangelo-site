@@ -2248,11 +2248,11 @@
         });
 
         // ===== STICKY CTA BAR =====
-        window.addEventListener('scroll', function() {
+        function updateHeaderAndStickyState() {
             const header = document.getElementById('mainHeader');
             const stickyCTA = document.getElementById('stickyCTA');
             const mobileNav = document.querySelector('.mobile-nav');
-            
+
             if (window.scrollY > 150) {
                 header.classList.add('scrolled');
             } else {
@@ -2274,7 +2274,11 @@
 
             reveal();
             animateCounters();
-        });
+        }
+
+        window.addEventListener('scroll', updateHeaderAndStickyState);
+        window.addEventListener('DOMContentLoaded', updateHeaderAndStickyState);
+        window.addEventListener('pageshow', updateHeaderAndStickyState);
 
         // ===== ANIMATED COUNTER =====
         let countersAnimated = false;
