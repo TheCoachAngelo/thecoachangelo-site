@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#e61e2a">
-    <meta name="description" content="Coaching page: calculators, pricing protocols, FAQ and contact with Coach Angelo.">
+    <meta name="description" content="Coaching page: plans, pricing, FAQ and details with Coach Angelo.">
     <title>The Coach Angelo | Coaching</title>
     
     <link rel="apple-touch-icon" href="https://static.wixstatic.com/media/4338d0_1b54ec807b4046d2b77ed9c57a71295d~mv2.png">
@@ -19,7 +19,7 @@
             --gray: #0a0a0a; 
             --border: #2a2a2e;
             --text-high: #eee;
-            --text-med: #ccc;
+            --text-med: #aeb0b8;
             --radius-lg: 18px;
             --shadow-soft: 0 12px 40px rgba(0,0,0,0.45);
             --shadow-red: 0 20px 50px rgba(230,30,42,0.22);
@@ -85,6 +85,15 @@
         h1, h2, h3 { font-family: 'Oswald', sans-serif; text-transform: uppercase; margin: 0; }
         .container { max-width: 1100px; margin: auto; padding: 0 20px; }
         .red-text { color: var(--red); }
+        .hero-secondary {
+            display: inline-block;
+            margin-top: 14px;
+            color: var(--text-med);
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+        .hero-secondary:hover { color: #fff; }
+        .mobile-tabs { display: none; }
         .section-title {
             font-size: clamp(2.3rem, 7vw, 4.5rem);
             text-align: center;
@@ -349,9 +358,9 @@
             margin: 0 auto;
             padding: 50px;
             background: rgba(10,10,12,0.8);
-            border: 1px solid rgba(230,30,42,0.55);
+            border: 1px solid var(--border);
             border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-red);
+            box-shadow: var(--shadow-soft);
         }
         .email-box h2 {
             font-size: 3rem;
@@ -623,6 +632,9 @@
         pointer-events: none;
         transform: translateY(-110%);
         padding: 10px 12px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
         background: rgba(8, 8, 10, 0.94);
         border-bottom: 1px solid rgba(230, 30, 42, 0.65);
         transition: transform 0.28s ease, opacity 0.28s ease;
@@ -639,20 +651,19 @@
     body.page-home .nav-links { display: none; }
     body.page-home header.scrolled .nav-links {
         display: flex;
-        gap: 8px;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        max-width: 68vw;
-        padding-bottom: 2px;
+        justify-content: flex-end;
     }
-    body.page-home header.scrolled .nav-links a {
-        font-size: 0.72rem;
-        padding: 6px 8px;
-        white-space: nowrap;
+    body.page-home header.scrolled .nav-links a:not(.book-btn) {
+        display: none;
     }
     body.page-home header.scrolled .book-btn {
-        padding: 8px 10px;
+        display: inline-flex;
+        padding: 8px 12px;
         font-size: 0.72rem;
+        white-space: nowrap;
+    }
+    body.page-home header.scrolled .mobile-tabs {
+        display: flex;
     }
     body.page-coaching header,
     body.page-calculators header,
@@ -671,27 +682,54 @@
     body.page-calculators .nav-links,
     body.page-apply .nav-links {
         display: flex;
-        gap: 6px;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        max-width: 74vw;
-        padding-bottom: 2px;
+        justify-content: flex-end;
     }
-    body.page-coaching .nav-links a,
-    body.page-calculators .nav-links a,
-    body.page-apply .nav-links a {
-        font-size: 0.66rem;
-        padding: 5px 6px;
-        white-space: nowrap;
+    body.page-coaching .nav-links a:not(.book-btn),
+    body.page-calculators .nav-links a:not(.book-btn),
+    body.page-apply .nav-links a:not(.book-btn) {
+        display: none;
     }
     body.page-coaching .book-btn,
     body.page-calculators .book-btn,
     body.page-apply .book-btn {
-        padding: 7px 8px;
-        font-size: 0.66rem;
+        display: inline-flex;
+        padding: 8px 12px;
+        font-size: 0.72rem;
         white-space: nowrap;
         flex-shrink: 0;
-        margin-left: 2px;
+    }
+    body.page-coaching .mobile-tabs,
+    body.page-calculators .mobile-tabs,
+    body.page-apply .mobile-tabs {
+        display: flex;
+    }
+    .mobile-tabs {
+        display: none;
+        width: 100%;
+        gap: 8px;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding: 6px 0 2px;
+        border-top: 1px solid rgba(255,255,255,0.08);
+        margin-top: 4px;
+        -webkit-overflow-scrolling: touch;
+    }
+    .mobile-tabs a {
+        color: var(--text-med);
+        text-decoration: none;
+        font-family: 'Oswald', sans-serif;
+        font-size: 0.76rem;
+        text-transform: uppercase;
+        padding: 6px 8px;
+        border-radius: 8px;
+        background: rgba(255,255,255,0.02);
+        border: 1px solid rgba(255,255,255,0.08);
+    }
+    .mobile-tabs a:hover,
+    .mobile-tabs a:focus-visible {
+        color: #fff;
+        background: rgba(230, 30, 42, 0.2);
+        border-color: rgba(230, 30, 42, 0.4);
     }
     .mobile-nav { display: none !important; }
     body.page-coaching .mobile-nav,
@@ -1353,13 +1391,19 @@
             <a href="apply.html">Apply</a>
             <a href="https://wa.me/359889021289" class="book-btn" target="_blank" rel="noopener noreferrer">BOOK NOW</a>
         </nav>
+        <nav class="mobile-tabs" aria-label="Mobile top navigation">
+            <a href="index.html">Home</a>
+            <a href="coaching.html">Coaching</a>
+            <a href="calculators.html">Calculators</a>
+            <a href="apply.html">Apply</a>
+        </nav>
     </header>
 
     <nav class="mobile-nav" role="navigation" aria-label="Mobile navigation">
         <a href="index.html" aria-label="Home"><i class="fas fa-house" aria-hidden="true"></i>Home</a>
         <a href="coaching.html" aria-label="Coaching"><i class="fas fa-dumbbell" aria-hidden="true"></i>Coaching</a>
-     <a href="calculators.html" aria-label="Calculators"><i class="fas fa-calculator" aria-hidden="true"></i>Calcs</a>
-     <a href="apply.html" aria-label="Apply"><i class="fas fa-envelope" aria-hidden="true"></i>Apply</a>
+        <a href="calculators.html" aria-label="Calculators"><i class="fas fa-calculator" aria-hidden="true"></i>Calcs</a>
+        <a href="apply.html" aria-label="Apply"><i class="fas fa-envelope" aria-hidden="true"></i>Apply</a>
     </nav>
 
     <a href="https://wa.me/359889021289" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Contact on WhatsApp">
@@ -1371,6 +1415,7 @@
             <div class="hero-content">
                 <h1 class="reveal active">UNLEASH YOUR<br>TRUE <span class="red-text">POTENTIAL</span></h1>
                 <a href="apply.html" class="btn-main reveal active">START THE CHALLENGE</a>
+                <a href="coaching.html" class="hero-secondary reveal active">See coaching details</a>
             </div>
         </section>
 
