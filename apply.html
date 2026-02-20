@@ -2031,6 +2031,95 @@ header.scrolled {
         font-weight: 700;
     }
 }
+
+/* === OBVIOUS VISUAL SHIFT (NO WORDING CHANGES) === */
+:root {
+    --red: #ff3b30 !important;
+    --red-deep: #c61f17 !important;
+}
+
+body {
+    background:
+        radial-gradient(circle at 10% -10%, rgba(255,59,48,0.24), transparent 38%),
+        radial-gradient(circle at 85% 5%, rgba(59,130,246,0.18), transparent 35%),
+        linear-gradient(180deg, #070b12 0%, #05070c 100%) !important;
+}
+
+header.scrolled {
+    background: linear-gradient(145deg, rgba(14,20,31,0.95), rgba(10,14,22,0.95)) !important;
+    border-bottom: 1px solid rgba(255,255,255,0.28) !important;
+}
+
+.hero {
+    background:
+        linear-gradient(to bottom, rgba(8,12,20,0.24) 0%, rgba(8,12,20,0.68) 48%, rgba(6,8,13,0.98) 88%, #05070c 100%),
+        url('https://static.wixstatic.com/media/4338d0_9c6fc5304e2144cea2a932ddb0adc172~mv2.jpg') !important;
+}
+
+.hero h1 {
+    font-size: clamp(2.9rem, 8.5vw, 6rem) !important;
+    letter-spacing: -1px !important;
+    text-shadow: 0 12px 36px rgba(0,0,0,0.7), 0 0 30px rgba(255,59,48,0.25) !important;
+}
+
+.section-title {
+    font-size: clamp(2.9rem, 7.4vw, 5.2rem) !important;
+}
+
+.section-title::after {
+    width: 150px !important;
+    height: 3px !important;
+    background: linear-gradient(90deg, rgba(255,59,48,0.1), rgba(255,59,48,1), rgba(59,130,246,0.3)) !important;
+}
+
+.calc-card,
+.price-card,
+.quote-block,
+.faq-group,
+.form-container,
+.purchase-flow,
+.email-box,
+.trust-item {
+    background: linear-gradient(145deg, #1a2130, #111722) !important;
+    border: 1px solid rgba(255,255,255,0.2) !important;
+    border-radius: 24px !important;
+    box-shadow: 0 20px 44px rgba(0,0,0,0.42) !important;
+}
+
+.price-card.featured {
+    outline: 2px solid rgba(255,59,48,0.7) !important;
+    box-shadow: 0 26px 56px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,59,48,0.3) inset !important;
+}
+
+.btn-main,
+.sticky-btn,
+.btn-send,
+.price-card.featured .btn-wa,
+.book-btn {
+    border-radius: 14px !important;
+    box-shadow: 0 14px 30px rgba(255,59,48,0.35) !important;
+}
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: clamp(2.2rem, 10.5vw, 3.6rem) !important;
+    }
+    .section-title {
+        font-size: clamp(2.2rem, 9vw, 3.4rem) !important;
+    }
+    .mobile-tabs a {
+        border-radius: 999px !important;
+        background: rgba(255,255,255,0.12) !important;
+        border: 2px solid rgba(255,255,255,0.24) !important;
+    }
+    .calc-card,
+    .price-card,
+    .quote-block,
+    .faq-group,
+    .form-container {
+        border-radius: 18px !important;
+    }
+}
     </style>
 </head>
 <body class="page-apply">
