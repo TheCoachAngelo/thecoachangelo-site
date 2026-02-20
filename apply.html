@@ -89,6 +89,7 @@
         body.page-calculators #main-content > section#how-it-works,
         body.page-calculators #main-content > section.email-capture,
         body.page-calculators #main-content > section#plans,
+        body.page-calculators #main-content > section#transformations,
         body.page-calculators #main-content > section#testimonials,
         body.page-calculators #main-content > section#faq,
         body.page-calculators #main-content > section#contact {
@@ -2169,6 +2170,28 @@ body {
     z-index: 2;
 }
 
+.hero-proof {
+    margin-top: 18px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.hero-proof span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(10, 12, 18, 0.66);
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.45px;
+    text-transform: uppercase;
+}
+
 #main-content > section {
     padding-top: clamp(88px, 10vw, 130px) !important;
     padding-bottom: clamp(88px, 10vw, 130px) !important;
@@ -2220,6 +2243,105 @@ body {
     border: 1px solid rgba(255,255,255,0.22);
 }
 
+.transformations {
+    position: relative;
+}
+
+.transformation-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.transformation-card {
+    border: 1px solid var(--raw-edge);
+    border-radius: 18px;
+    overflow: hidden;
+    background: var(--raw-surface);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.44), inset 0 0 0 1px rgba(255,255,255,0.02);
+}
+
+.ba-photos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+}
+
+.ba-slot {
+    position: relative;
+    min-height: 230px;
+    border-right: 1px solid rgba(255,255,255,0.14);
+    background: linear-gradient(160deg, #141922, #0f131a);
+}
+
+.ba-slot:last-child {
+    border-right: 0;
+}
+
+.ba-slot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.ba-slot.missing::after {
+    content: "ADD PHOTO";
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    color: rgba(255,255,255,0.54);
+}
+
+.ba-tag {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 4px 8px;
+    border-radius: 999px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    background: rgba(0,0,0,0.7);
+    border: 1px solid rgba(255,255,255,0.25);
+}
+
+.ba-meta {
+    padding: 14px 14px 16px;
+    display: grid;
+    gap: 7px;
+}
+
+.ba-meta h3 {
+    font-size: 1rem;
+    letter-spacing: 0.7px;
+}
+
+.ba-meta p {
+    margin: 0;
+    color: var(--text-med);
+    font-size: 0.88rem;
+}
+
+.results-cta {
+    margin-top: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.results-cta p {
+    margin: 0;
+    font-size: 0.92rem;
+    color: var(--text-med);
+}
+
 /* Cinematic motion */
 .reveal {
     opacity: 0;
@@ -2265,6 +2387,20 @@ body {
     }
     .hero h1 {
         font-size: clamp(2.35rem, 11.2vw, 3.7rem) !important;
+    }
+    .hero-proof span {
+        font-size: 0.67rem;
+        padding: 7px 11px;
+    }
+    .transformation-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    .ba-slot {
+        min-height: 190px;
+    }
+    .ba-meta h3 {
+        font-size: 0.9rem;
     }
     .mobile-tabs a {
         font-size: 0.82rem !important;
@@ -2329,6 +2465,11 @@ body {
             <div class="hero-content">
                 <h1 class="reveal active">UNLEASH YOUR<br>TRUE <span class="red-text">POTENTIAL</span></h1>
                 <a href="apply.html" class="btn-main cta-primary reveal active">START THE CHALLENGE</a>
+                <div class="hero-proof reveal active">
+                    <span><i class="fas fa-shield-halved" aria-hidden="true"></i>IFBB METHOD</span>
+                    <span><i class="fas fa-dumbbell" aria-hidden="true"></i>10+ YEARS</span>
+                    <span><i class="fas fa-comments" aria-hidden="true"></i>WEEKLY CHECK-INS</span>
+                </div>
             </div>
         </section>
 
@@ -2560,6 +2701,115 @@ body {
                         <li>Your customized protocol is built and sent with execution notes.</li>
                         <li>Check-ins start based on your selected package frequency.</li>
                     </ol>
+                </div>
+            </div>
+        </section>
+
+        <section id="transformations" class="transformations reveal">
+            <div class="container">
+                <h2 class="red-text section-title">CLIENT TRANSFORMATIONS</h2>
+                <p class="section-subtitle">Before and after results from real clients following the protocol.</p>
+                <div class="transformation-grid">
+                    <article class="transformation-card">
+                        <div class="ba-photos">
+                            <div class="ba-slot">
+                                <span class="ba-tag">BEFORE</span>
+                                <img src="assets/transformations/client-01-before.jpg" alt="Client 1 before transformation" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('missing');">
+                            </div>
+                            <div class="ba-slot">
+                                <span class="ba-tag">AFTER</span>
+                                <img src="assets/transformations/client-01-after.jpg" alt="Client 1 after transformation" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('missing');">
+                            </div>
+                        </div>
+                        <div class="ba-meta">
+                            <h3>CLIENT 01 • 12 WEEKS</h3>
+                            <p>Goal achieved: fat loss + muscle definition.</p>
+                        </div>
+                    </article>
+                    <article class="transformation-card">
+                        <div class="ba-photos">
+                            <div class="ba-slot">
+                                <span class="ba-tag">BEFORE</span>
+                                <img src="assets/transformations/client-02-before.jpg" alt="Client 2 before transformation" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('missing');">
+                            </div>
+                            <div class="ba-slot">
+                                <span class="ba-tag">AFTER</span>
+                                <img src="assets/transformations/client-02-after.jpg" alt="Client 2 after transformation" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('missing');">
+                            </div>
+                        </div>
+                        <div class="ba-meta">
+                            <h3>CLIENT 02 • 16 WEEKS</h3>
+                            <p>Goal achieved: body recomposition.</p>
+                        </div>
+                    </article>
+                    <article class="transformation-card">
+                        <div class="ba-photos">
+                            <div class="ba-slot">
+                                <span class="ba-tag">BEFORE</span>
+                                <img src="assets/transformations/client-03-before.jpg" alt="Client 3 before transformation" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('missing');">
+                            </div>
+                            <div class="ba-slot">
+                                <span class="ba-tag">AFTER</span>
+                                <img src="assets/transformations/client-03-after.jpg" alt="Client 3 after transformation" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('missing');">
+                            </div>
+                        </div>
+                        <div class="ba-meta">
+                            <h3>CLIENT 03 • 10 WEEKS</h3>
+                            <p>Goal achieved: conditioning and stage readiness.</p>
+                        </div>
+                    </article>
+                    <article class="transformation-card">
+                        <div class="ba-photos">
+                            <div class="ba-slot">
+                                <span class="ba-tag">BEFORE</span>
+                                <img src="assets/transformations/client-04-before.jpg" alt="Client 4 before transformation" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('missing');">
+                            </div>
+                            <div class="ba-slot">
+                                <span class="ba-tag">AFTER</span>
+                                <img src="assets/transformations/client-04-after.jpg" alt="Client 4 after transformation" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('missing');">
+                            </div>
+                        </div>
+                        <div class="ba-meta">
+                            <h3>CLIENT 04 • 8 WEEKS</h3>
+                            <p>Goal achieved: strength + lean mass.</p>
+                        </div>
+                    </article>
+                    <article class="transformation-card">
+                        <div class="ba-photos">
+                            <div class="ba-slot">
+                                <span class="ba-tag">BEFORE</span>
+                                <img src="assets/transformations/client-05-before.jpg" alt="Client 5 before transformation" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('missing');">
+                            </div>
+                            <div class="ba-slot">
+                                <span class="ba-tag">AFTER</span>
+                                <img src="assets/transformations/client-05-after.jpg" alt="Client 5 after transformation" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('missing');">
+                            </div>
+                        </div>
+                        <div class="ba-meta">
+                            <h3>CLIENT 05 • 14 WEEKS</h3>
+                            <p>Goal achieved: sustainable fat reduction.</p>
+                        </div>
+                    </article>
+                    <article class="transformation-card">
+                        <div class="ba-photos">
+                            <div class="ba-slot">
+                                <span class="ba-tag">BEFORE</span>
+                                <img src="assets/transformations/client-06-before.jpg" alt="Client 6 before transformation" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('missing');">
+                            </div>
+                            <div class="ba-slot">
+                                <span class="ba-tag">AFTER</span>
+                                <img src="assets/transformations/client-06-after.jpg" alt="Client 6 after transformation" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('missing');">
+                            </div>
+                        </div>
+                        <div class="ba-meta">
+                            <h3>CLIENT 06 • 20 WEEKS</h3>
+                            <p>Goal achieved: complete lifestyle transformation.</p>
+                        </div>
+                    </article>
+                </div>
+                <div class="results-cta">
+                    <p>Want to be the next before/after story?</p>
+                    <a href="https://wa.me/359889021289" class="btn-wa cta-primary" target="_blank" rel="noopener noreferrer">BOOK NOW</a>
                 </div>
             </div>
         </section>
