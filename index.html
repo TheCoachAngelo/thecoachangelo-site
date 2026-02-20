@@ -2279,6 +2279,12 @@ body {
     display: block;
 }
 
+.ba-compare.client-01-compare .ba-image,
+.ba-compare.client-01-compare .ba-after-image {
+    object-fit: contain;
+    object-position: center top;
+}
+
 .ba-after-layer {
     position: absolute;
     inset: 0 auto 0 0;
@@ -2814,10 +2820,10 @@ body {
                 <p class="section-subtitle">Before and after results from real clients following the protocol.</p>
                 <div class="transformation-grid">
                     <article class="transformation-card">
-                        <div class="ba-compare" data-default="50">
-                            <img class="ba-image" src="assets/transformations/client-01-before.jpg" alt="Client 1 before transformation" loading="lazy" onerror="this.style.display='none';this.closest('.ba-compare').classList.add('missing-before');">
+                        <div class="ba-compare client-01-compare" data-default="50">
+                            <img class="ba-image" src="assets/transformations/client-01-after.jpg" alt="Client 1 before transformation" loading="lazy" onerror="this.style.display='none';this.closest('.ba-compare').classList.add('missing-before');">
                             <div class="ba-after-layer">
-                                <img class="ba-after-image" src="assets/transformations/client-01-after.jpg" alt="Client 1 after transformation" loading="lazy" onerror="this.style.display='none';this.closest('.ba-compare').classList.add('missing-after');">
+                                <img class="ba-after-image" src="assets/transformations/client-01-before.jpg" alt="Client 1 after transformation" loading="lazy" onerror="this.style.display='none';this.closest('.ba-compare').classList.add('missing-after');">
                             </div>
                             <span class="ba-tag ba-tag-before">BEFORE</span>
                             <span class="ba-tag ba-tag-after">AFTER</span>
