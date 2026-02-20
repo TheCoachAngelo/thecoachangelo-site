@@ -66,7 +66,6 @@
         body.page-coaching #main-content > section#how-it-works,
         body.page-coaching #main-content > section#calculators,
         body.page-coaching #main-content > section.email-capture,
-        body.page-coaching #main-content > section#transformations,
         body.page-coaching #main-content > section#testimonials,
         body.page-coaching #main-content > section#contact {
             display: none;
@@ -90,7 +89,6 @@
         body.page-calculators #main-content > section#how-it-works,
         body.page-calculators #main-content > section.email-capture,
         body.page-calculators #main-content > section#plans,
-        body.page-calculators #main-content > section#transformations,
         body.page-calculators #main-content > section#testimonials,
         body.page-calculators #main-content > section#faq,
         body.page-calculators #main-content > section#contact {
@@ -2132,390 +2130,6 @@ header.scrolled {
         border-radius: 18px !important;
     }
 }
-
-/* === ATHLETE RAW + CINEMATIC PACING (NO WORDING CHANGES) === */
-:root {
-    --raw-bg-1: #07080b;
-    --raw-bg-2: #0a0c11;
-    --raw-bg-3: #0c1017;
-    --raw-surface: linear-gradient(160deg, #171c26, #0f131b);
-    --raw-edge: rgba(255,255,255,0.18);
-    --raw-red-glow: rgba(255,59,48,0.28);
-}
-
-body {
-    background:
-        radial-gradient(circle at 14% -12%, var(--raw-red-glow), transparent 38%),
-        radial-gradient(circle at 84% 10%, rgba(124,92,255,0.14), transparent 34%),
-        linear-gradient(180deg, var(--raw-bg-1) 0%, #05060a 100%) !important;
-}
-
-.hero {
-    position: relative;
-    isolation: isolate;
-}
-
-.hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    background:
-        radial-gradient(1200px 420px at 72% 8%, rgba(255,59,48,0.18), transparent 62%),
-        linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.54));
-    pointer-events: none;
-}
-
-.hero-content {
-    position: relative;
-    z-index: 2;
-}
-
-.hero-proof {
-    margin-top: 18px;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.hero-proof span {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 14px;
-    border-radius: 999px;
-    border: 1px solid rgba(255,255,255,0.2);
-    background: rgba(10, 12, 18, 0.66);
-    font-size: 0.76rem;
-    font-weight: 700;
-    letter-spacing: 0.45px;
-    text-transform: uppercase;
-}
-
-#main-content > section {
-    padding-top: clamp(88px, 10vw, 130px) !important;
-    padding-bottom: clamp(88px, 10vw, 130px) !important;
-}
-
-#main-content > section:nth-of-type(odd):not(.hero) {
-    background: linear-gradient(180deg, var(--raw-bg-2), #090b10) !important;
-}
-
-#main-content > section:nth-of-type(even):not(.hero) {
-    background: linear-gradient(180deg, var(--raw-bg-3), #0a0c12) !important;
-}
-
-.calc-card,
-.price-card,
-.quote-block,
-.faq-group,
-.form-container,
-.purchase-flow,
-.email-box,
-.trust-item {
-    background: var(--raw-surface) !important;
-    border: 1px solid var(--raw-edge) !important;
-    box-shadow: 0 18px 40px rgba(0,0,0,0.44), inset 0 0 0 1px rgba(255,255,255,0.02) !important;
-}
-
-.price-card.featured {
-    outline: 2px solid rgba(255,59,48,0.78) !important;
-    box-shadow: 0 28px 58px rgba(0,0,0,0.56), 0 0 0 1px rgba(255,59,48,0.34) inset !important;
-}
-
-.section-title {
-    font-size: clamp(3rem, 7.8vw, 5.6rem) !important;
-    letter-spacing: -1.1px !important;
-}
-
-.section-title::after {
-    width: 164px !important;
-    height: 3px !important;
-}
-
-.quote-text {
-    font-size: 1.08rem !important;
-    line-height: 1.84 !important;
-}
-
-.best-value {
-    letter-spacing: 1.4px;
-    border: 1px solid rgba(255,255,255,0.22);
-}
-
-.transformations {
-    position: relative;
-}
-
-.transformation-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 24px;
-}
-
-.transformation-card {
-    border: 1px solid var(--raw-edge);
-    border-radius: 18px;
-    overflow: hidden;
-    background: var(--raw-surface);
-    box-shadow: 0 18px 40px rgba(0,0,0,0.44), inset 0 0 0 1px rgba(255,255,255,0.02);
-}
-
-.ba-compare {
-    position: relative;
-    min-height: 320px;
-    overflow: hidden;
-    background: linear-gradient(160deg, #141922, #0f131a);
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-
-.ba-image,
-.ba-after-image {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.ba-compare.client-01-compare .ba-image,
-.ba-compare.client-01-compare .ba-after-image {
-    object-fit: contain;
-    object-position: center top;
-}
-
-.ba-after-layer {
-    position: absolute;
-    inset: 0 auto 0 0;
-    width: 50%;
-    overflow: hidden;
-    border-right: 2px solid rgba(255,255,255,0.65);
-}
-
-.ba-divider {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    width: 2px;
-    background: rgba(255,255,255,0.72);
-    transform: translateX(-1px);
-    pointer-events: none;
-}
-
-.ba-handle {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(9,10,14,0.84);
-    border: 1px solid rgba(255,255,255,0.74);
-    display: grid;
-    place-items: center;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    pointer-events: none;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-}
-
-.ba-range {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    appearance: none;
-    background: transparent;
-    cursor: ew-resize;
-    z-index: 5;
-}
-
-.ba-range::-webkit-slider-thumb {
-    appearance: none;
-    width: 46px;
-    height: 46px;
-    opacity: 0;
-}
-
-.ba-range::-moz-range-thumb {
-    width: 46px;
-    height: 46px;
-    border: 0;
-    opacity: 0;
-}
-
-.ba-missing {
-    position: absolute;
-    left: 8px;
-    right: 8px;
-    bottom: 8px;
-    padding: 7px 9px;
-    text-align: center;
-    border-radius: 8px;
-    background: rgba(0,0,0,0.62);
-    border: 1px solid rgba(255,255,255,0.18);
-    font-size: 0.66rem;
-    letter-spacing: 1px;
-    color: rgba(255,255,255,0.74);
-    font-weight: 700;
-    display: none;
-    text-transform: uppercase;
-}
-
-.ba-compare.missing-before .ba-missing-before,
-.ba-compare.missing-after .ba-missing-after {
-    display: block;
-}
-
-.ba-tag {
-    position: absolute;
-    top: 10px;
-    z-index: 6;
-    padding: 4px 8px;
-    border-radius: 999px;
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.8px;
-    background: rgba(0,0,0,0.7);
-    border: 1px solid rgba(255,255,255,0.25);
-}
-
-.ba-tag-before {
-    left: 10px;
-}
-
-.ba-tag-after {
-    right: 10px;
-}
-
-.ba-meta {
-    padding: 14px 14px 16px;
-    display: grid;
-    gap: 7px;
-}
-
-.ba-meta h3 {
-    font-size: 1rem;
-    letter-spacing: 0.7px;
-}
-
-.ba-meta p {
-    margin: 0;
-    color: var(--text-med);
-    font-size: 0.88rem;
-}
-
-.results-cta {
-    margin-top: 38px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
-    flex-wrap: wrap;
-}
-
-.results-cta p {
-    margin: 0;
-    font-size: 0.92rem;
-    color: var(--text-med);
-}
-
-.testimonial-pages {
-    display: grid;
-    gap: clamp(42px, 6vw, 80px);
-}
-
-.testimonial-page {
-    display: grid;
-    gap: 20px;
-    align-content: start;
-    min-height: min(72vh, 760px);
-}
-
-.testimonial-page .quote-block {
-    margin: 0 !important;
-}
-
-@media (min-width: 980px) {
-    .testimonial-page {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        min-height: min(70vh, 520px);
-    }
-}
-
-/* Cinematic motion */
-.reveal {
-    opacity: 0;
-    transform: translateY(48px) scale(0.985);
-    filter: blur(2px);
-    transition:
-        opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-        filter 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0);
-}
-
-#main-content > section.reveal:nth-of-type(2) { transition-delay: 0.05s; }
-#main-content > section.reveal:nth-of-type(3) { transition-delay: 0.1s; }
-#main-content > section.reveal:nth-of-type(4) { transition-delay: 0.15s; }
-#main-content > section.reveal:nth-of-type(5) { transition-delay: 0.2s; }
-#main-content > section.reveal:nth-of-type(6) { transition-delay: 0.25s; }
-
-.calc-card:hover,
-.price-card:hover,
-.quote-block:hover,
-.faq-group:hover,
-.trust-item:hover {
-    transform: translateY(-6px) !important;
-    box-shadow: 0 24px 52px rgba(0,0,0,0.52) !important;
-}
-
-@media (max-width: 768px) {
-    #main-content > section {
-        padding-top: clamp(72px, 9vw, 98px) !important;
-        padding-bottom: clamp(72px, 9vw, 98px) !important;
-    }
-    .section-title {
-        font-size: clamp(2.35rem, 10.2vw, 3.9rem) !important;
-    }
-    .section-title::after {
-        width: 110px !important;
-    }
-    .hero h1 {
-        font-size: clamp(2.35rem, 11.2vw, 3.7rem) !important;
-    }
-    .hero-proof span {
-        font-size: 0.67rem;
-        padding: 7px 11px;
-    }
-    .transformation-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-    }
-    .ba-compare {
-        min-height: 250px;
-    }
-    .ba-meta h3 {
-        font-size: 0.9rem;
-    }
-    .testimonial-page {
-        min-height: auto;
-    }
-    .mobile-tabs a {
-        font-size: 0.82rem !important;
-    }
-}
     </style>
 </head>
 <body class="page-apply">
@@ -2575,11 +2189,6 @@ body {
             <div class="hero-content">
                 <h1 class="reveal active">UNLEASH YOUR<br>TRUE <span class="red-text">POTENTIAL</span></h1>
                 <a href="apply.html" class="btn-main cta-primary reveal active">START THE CHALLENGE</a>
-                <div class="hero-proof reveal active">
-                    <span><i class="fas fa-shield-halved" aria-hidden="true"></i>IFBB METHOD</span>
-                    <span><i class="fas fa-dumbbell" aria-hidden="true"></i>10+ YEARS</span>
-                    <span><i class="fas fa-comments" aria-hidden="true"></i>WEEKLY CHECK-INS</span>
-                </div>
             </div>
         </section>
 
@@ -2815,62 +2424,24 @@ body {
             </div>
         </section>
 
-        <section id="transformations" class="transformations reveal">
-            <div class="container">
-                <h2 class="red-text section-title">CLIENT TRANSFORMATIONS</h2>
-                <p class="section-subtitle">Before and after results from real clients following the protocol.</p>
-                <div class="transformation-grid">
-                    <article class="transformation-card">
-                        <div class="ba-compare client-01-compare" data-default="50">
-                            <img class="ba-image" src="assets/transformations/client-01-after.jpg" alt="Gigio before transformation" loading="lazy" onerror="this.style.display='none';this.closest('.ba-compare').classList.add('missing-before');">
-                            <div class="ba-after-layer">
-                                <img class="ba-after-image" src="assets/transformations/client-01-before.jpg" alt="Gigio after transformation" loading="lazy" onerror="this.style.display='none';this.closest('.ba-compare').classList.add('missing-after');">
-                            </div>
-                            <span class="ba-tag ba-tag-before">BEFORE</span>
-                            <span class="ba-tag ba-tag-after">AFTER</span>
-                            <span class="ba-divider" aria-hidden="true"></span>
-                            <span class="ba-handle" aria-hidden="true">DRAG</span>
-                            <input class="ba-range" type="range" min="0" max="100" value="50" aria-label="Compare before and after for client 1">
-                            <span class="ba-missing ba-missing-before">ADD BEFORE PHOTO</span>
-                            <span class="ba-missing ba-missing-after">ADD AFTER PHOTO</span>
-                        </div>
-                        <div class="ba-meta">
-                            <h3>GIGIO • 12 WEEKS</h3>
-                            <p>Goal achieved: fat loss + muscle definition.</p>
-                        </div>
-                    </article>
-                </div>
-                <div class="results-cta">
-                    <p>Want to be the next before/after story?</p>
-                    <a href="https://wa.me/359889021289" class="btn-wa cta-primary" target="_blank" rel="noopener noreferrer">BOOK NOW</a>
-                </div>
-            </div>
-        </section>
-
         <section id="testimonials" class="testimonials reveal parallax" style="background-image: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), url('https://static.wixstatic.com/media/4338d0_9c6fc5304e2144cea2a932ddb0adc172~mv2.jpg');">
             <div class="container">
                 <h2 class="section-title">REAL RESULTS</h2>
-                <div class="testimonial-pages">
-                    <div class="testimonial-page">
-                        <div class="quote-block">
-                            <p class="quote-text">"I'm so grateful to have Angelo as my coach. Not only has he helped me improve my physique, but he's also taught me life lessons that go far beyond the gym. His approach is all about discipline, consistency, and becoming the best version of yourself."</p>
-                            <div class="quote-author">✱ ANTONIS KATSIAMIS - CYPRUS</div>
-                        </div>
-                        <div class="quote-block">
-                            <p class="quote-text">"Angelo changed my mindset... nutrition and life... I've known him for many years and he's been following me for a short time but my changes have been beyond expectations... thank you Coach"</p>
-                            <div class="quote-author">✱ GIGIO MOSCA - ITALY</div>
-                        </div>
-                    </div>
-                    <div class="testimonial-page">
-                        <div class="quote-block">
-                            <p class="quote-text">"Working with Angelo has changed my life. He gave me hope and completely transformed my fitness journey. With him, I've found not only an amazing coach and role model, but also a lifelong friend."</p>
-                            <div class="quote-author">✱ ANDREAS MATHEOU - CYPRUS</div>
-                        </div>
-                        <div class="quote-block">
-                            <p class="quote-text">"I have been training with Angelo for two years. His knowledge changed my life and I became completely unrecognizable. I highly recommend him — a true professional."</p>
-                            <div class="quote-author">✱ VILIAN GORANOV - BULGARIA</div>
-                        </div>
-                    </div>
+                <div class="quote-block">
+                    <p class="quote-text">"I'm so grateful to have Angelo as my coach. Not only has he helped me improve my physique, but he's also taught me life lessons that go far beyond the gym. His approach is all about discipline, consistency, and becoming the best version of yourself."</p>
+                    <div class="quote-author">✱ ANTONIS KATSIAMIS - CYPRUS</div>
+                </div>
+                <div class="quote-block">
+                    <p class="quote-text">"Angelo changed my mindset... nutrition and life... I've known him for many years and he's been following me for a short time but my changes have been beyond expectations... thank you Coach"</p>
+                    <div class="quote-author">✱ GIGIO MOSCA - ITALY</div>
+                </div>
+                <div class="quote-block">
+                    <p class="quote-text">"Working with Angelo has changed my life. He gave me hope and completely transformed my fitness journey. With him, I've found not only an amazing coach and role model, but also a lifelong friend."</p>
+                    <div class="quote-author">✱ ANDREAS MATHEOU - CYPRUS</div>
+                </div>
+                <div class="quote-block">
+                    <p class="quote-text">"I have been training with Angelo for two years. His knowledge changed my life and I became completely unrecognizable. I highly recommend him — a true professional."</p>
+                    <div class="quote-author">✱ VILIAN GORANOV - BULGARIA</div>
                 </div>
             </div>
         </section>
@@ -3464,29 +3035,6 @@ document.querySelector(`[data-bf="${percentage}"]`).classList.add('selected');
 
                 lazyImages.forEach(img => imageObserver.observe(img));
             }
-        });
-
-        document.addEventListener("DOMContentLoaded", function() {
-            const sliders = document.querySelectorAll('.ba-compare');
-
-            sliders.forEach(slider => {
-                const range = slider.querySelector('.ba-range');
-                const afterLayer = slider.querySelector('.ba-after-layer');
-                const divider = slider.querySelector('.ba-divider');
-                const handle = slider.querySelector('.ba-handle');
-                const startValue = slider.dataset.default || "50";
-                range.value = startValue;
-
-                const updateCompare = () => {
-                    const value = Math.max(0, Math.min(100, Number(range.value)));
-                    afterLayer.style.width = value + '%';
-                    divider.style.left = value + '%';
-                    handle.style.left = value + '%';
-                };
-
-                range.addEventListener('input', updateCompare);
-                updateCompare();
-            });
         });
     </script>
 </body>
