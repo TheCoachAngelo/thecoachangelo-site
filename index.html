@@ -2302,51 +2302,6 @@ body {
     pointer-events: none;
 }
 
-.ba-handle {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(9,10,14,0.84);
-    border: 1px solid rgba(255,255,255,0.74);
-    display: grid;
-    place-items: center;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    pointer-events: none;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-}
-
-.ba-range {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    appearance: none;
-    background: transparent;
-    cursor: ew-resize;
-    z-index: 5;
-}
-
-.ba-range::-webkit-slider-thumb {
-    appearance: none;
-    width: 46px;
-    height: 46px;
-    opacity: 0;
-}
-
-.ba-range::-moz-range-thumb {
-    width: 46px;
-    height: 46px;
-    border: 0;
-    opacity: 0;
-}
-
 .ba-missing {
     position: absolute;
     left: 8px;
@@ -2818,7 +2773,7 @@ body {
                 <p class="section-subtitle">Before and after results from real clients following the protocol.</p>
                 <div class="transformation-grid">
                     <article class="transformation-card">
-                        <div class="ba-compare client-01-compare" data-default="50">
+                        <div class="ba-compare client-01-compare">
                             <img class="ba-image" src="assets/transformations/client-01-before.jpg" alt="Gigio before transformation" loading="lazy" onerror="this.style.display='none';this.closest('.ba-compare').classList.add('missing-before');">
                             <div class="ba-after-layer">
                                 <img class="ba-after-image" src="assets/transformations/client-01-after.jpg" alt="Gigio after transformation" loading="lazy" onerror="this.style.display='none';this.closest('.ba-compare').classList.add('missing-after');">
@@ -2826,8 +2781,6 @@ body {
                             <span class="ba-tag ba-tag-before">BEFORE</span>
                             <span class="ba-tag ba-tag-after">AFTER</span>
                             <span class="ba-divider" aria-hidden="true"></span>
-                            <span class="ba-handle" aria-hidden="true">DRAG</span>
-                            <input class="ba-range" type="range" min="0" max="100" value="50" aria-label="Compare before and after for client 1">
                             <span class="ba-missing ba-missing-before">ADD BEFORE PHOTO</span>
                             <span class="ba-missing ba-missing-after">ADD AFTER PHOTO</span>
                         </div>
@@ -3463,28 +3416,6 @@ document.querySelector(`[data-bf="${percentage}"]`).classList.add('selected');
             }
         });
 
-        document.addEventListener("DOMContentLoaded", function() {
-            const sliders = document.querySelectorAll('.ba-compare');
-
-            sliders.forEach(slider => {
-                const range = slider.querySelector('.ba-range');
-                const afterLayer = slider.querySelector('.ba-after-layer');
-                const divider = slider.querySelector('.ba-divider');
-                const handle = slider.querySelector('.ba-handle');
-                const startValue = slider.dataset.default || "50";
-                range.value = startValue;
-
-                const updateCompare = () => {
-                    const value = Math.max(0, Math.min(100, Number(range.value)));
-                    afterLayer.style.width = value + '%';
-                    divider.style.left = value + '%';
-                    handle.style.left = value + '%';
-                };
-
-                range.addEventListener('input', updateCompare);
-                updateCompare();
-            });
-        });
     </script>
 </body>
 </html>
