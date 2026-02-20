@@ -8,6 +8,11 @@
     <title>The Coach Angelo | Apply</title>
     
     <link rel="apple-touch-icon" href="https://static.wixstatic.com/media/4338d0_1b54ec807b4046d2b77ed9c57a71295d~mv2.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://static.wixstatic.com" crossorigin>
+    <link rel="preload" as="image" fetchpriority="high" href="https://static.wixstatic.com/media/4338d0_9c6fc5304e2144cea2a932ddb0adc172~mv2.jpg">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,400&family=Oswald:wght@700&display=swap" rel="stylesheet">
@@ -1808,6 +1813,11 @@
     position: relative;
 }
 
+#main-content > section:not(.hero) {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 900px;
+}
+
 #main-content > section:not(.hero)::before {
     content: "";
     position: absolute;
@@ -2472,6 +2482,26 @@ header.scrolled {
     </footer>
 
     <script>
+        // ===== LIGHT ANALYTICS =====
+        const analyticsState = { scrollMilestones: new Set() };
+        function trackEvent(name, params = {}) {
+            const payload = { event: name, page: location.pathname, ts: Date.now(), ...params };
+            if (window.gtag) {
+                window.gtag('event', name, params);
+            } else if (Array.isArray(window.dataLayer)) {
+                window.dataLayer.push(payload);
+            } else {
+                try {
+                    const key = 'coach_analytics_queue';
+                    const queue = JSON.parse(localStorage.getItem(key) || '[]');
+                    queue.push(payload);
+                    localStorage.setItem(key, JSON.stringify(queue.slice(-300)));
+                } catch (e) {
+                    // no-op
+                }
+            }
+        }
+
         // ===== LOADING SCREEN =====
         window.addEventListener('load', function() {
             setTimeout(() => {
@@ -2505,6 +2535,14 @@ header.scrolled {
                     mobileNav.classList.remove('show');
                 }
             }
+
+            const scrollPercent = Math.round((window.scrollY / Math.max(1, document.documentElement.scrollHeight - window.innerHeight)) * 100);
+            [25, 50, 75, 100].forEach(mark => {
+                if (scrollPercent >= mark && !analyticsState.scrollMilestones.has(mark)) {
+                    analyticsState.scrollMilestones.add(mark);
+                    trackEvent('scroll_depth', { depth: mark });
+                }
+            });
 
             reveal();
             animateCounters();
@@ -2576,6 +2614,7 @@ header.scrolled {
                 <p style="margin-top: 15px; color: var(--text-med);">These are starting points. Angelo will fine-tune your calories based on weekly progress.</p>
             `;
             document.getElementById('tdee-result').classList.add('show');
+            trackEvent('calculator_tdee', { gender, activity, tdee });
         }
 
         let selectedBF = null;
@@ -2583,6 +2622,7 @@ header.scrolled {
             selectedBF = percentage;
             document.querySelectorAll('.bf-option').forEach(el => el.classList.remove('selected'));
 document.querySelector(`[data-bf="${percentage}"]`).classList.add('selected');
+            trackEvent('calculator_bodyfat_select', { percentage });
             
             const weight = parseFloat(document.getElementById('bf-weight').value);
             if (weight) {
@@ -2645,6 +2685,7 @@ document.querySelector(`[data-bf="${percentage}"]`).classList.add('selected');
             document.getElementById('macro-carbs').textContent = carbs + 'g';
             document.getElementById('macro-fats').textContent = fats + 'g';
             document.getElementById('macro-result').classList.add('show');
+            trackEvent('calculator_macros', { goal, calories, weight });
         }
 
        // ===== EMAIL CAPTURE WITH 3-DAY SPLIT DELIVERY =====
@@ -2657,6 +2698,7 @@ document.querySelector(`[data-bf="${percentage}"]`).classList.add('selected');
                 alert('Please enter your email');
                 return;
             }
+            trackEvent('lead_submit_attempt', { source: 'free_split' });
 
             const btn = e.target.querySelector('button');
             const originalText = btn.textContent;
@@ -2690,6 +2732,7 @@ document.querySelector(`[data-bf="${percentage}"]`).classList.add('selected');
             .then(response => {
                 emailInput.value = '';
                 btn.textContent = '✅ DOWNLOADED!';
+                trackEvent('lead_submit_success', { source: 'free_split' });
                 alert('✅ SUCCESS! Your FREE 3-Day Split is downloading now.\n\nGet ready to transform your physique!');
                 
                 setTimeout(() => {
@@ -2701,6 +2744,7 @@ document.querySelector(`[data-bf="${percentage}"]`).classList.add('selected');
                 console.error('Error:', error);
                 emailInput.value = '';
                 btn.textContent = '✅ DOWNLOADED!';
+                trackEvent('lead_submit_fallback', { source: 'free_split' });
                 
                 setTimeout(() => {
                     btn.textContent = originalText;
@@ -2744,6 +2788,9 @@ document.querySelector(`[data-bf="${percentage}"]`).classList.add('selected');
                 item.classList.toggle('active', !isOpen);
                 button.setAttribute('aria-expanded', (!isOpen).toString());
                 icon.textContent = isOpen ? '+' : '−';
+                if (!isOpen) {
+                    trackEvent('faq_open', { question: button.textContent.trim().replace(/\s+/g, ' ').slice(0, 90) });
+                }
             }
         });
 
@@ -2754,6 +2801,7 @@ document.querySelector(`[data-bf="${percentage}"]`).classList.add('selected');
             const emailField = form.querySelector('#email');
             const statsField = form.querySelector('#stats');
             const requiredFields = [nameField, emailField, statsField];
+            trackEvent('application_submit_attempt');
 
             requiredFields.forEach(field => field.classList.remove('field-error'));
             
@@ -2795,6 +2843,7 @@ document.querySelector(`[data-bf="${percentage}"]`).classList.add('selected');
                     const message = `Ciao Angelo! Sono ${nameField.value}. Ho inviato la candidatura via form. Email: ${emailField.value}. Obiettivi: ${statsField.value}`;
                     window.open(`https://wa.me/359889021289?text=${encodeURIComponent(message)}`, '_blank');
                     form.reset();
+                    trackEvent('application_submit_success');
                     alert("Application sent successfully! Opening WhatsApp...");
                 } else {
                     throw new Error('Form submission failed');
@@ -2802,6 +2851,7 @@ document.querySelector(`[data-bf="${percentage}"]`).classList.add('selected');
             })
             .catch(error => {
                 console.error('Error:', error);
+                trackEvent('application_submit_error');
                 alert("There was an error sending your application. Please try again.");
             });
         }
@@ -2831,15 +2881,17 @@ document.querySelector(`[data-bf="${percentage}"]`).classList.add('selected');
         }
 
         window.addEventListener("load", reveal);
-        window.addEventListener("load", function() {
-            const mobileNav = document.querySelector('.mobile-nav');
-            if (mobileNav && window.innerWidth <= 768) {
-                if (window.scrollY > window.innerHeight * 0.65) {
-                    mobileNav.classList.add('show');
-                } else {
-                    mobileNav.classList.remove('show');
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.addEventListener('click', function(e) {
+                const target = e.target.closest('a, button');
+                if (!target) return;
+                const text = (target.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 70);
+                if (target.matches('.book-btn, .sticky-btn, .btn-main, .btn-wa, .btn-send')) {
+                    trackEvent('cta_click', { label: text, href: target.getAttribute('href') || '' });
+                } else if (target.matches('.mobile-tabs a, .nav-links a')) {
+                    trackEvent('nav_click', { label: text, href: target.getAttribute('href') || '' });
                 }
-            }
+            });
         });
 
         // ===== COPY LINK =====
@@ -2847,6 +2899,7 @@ document.querySelector(`[data-bf="${percentage}"]`).classList.add('selected');
             const url = "https://thecoachangelo.com";
             
             navigator.clipboard.writeText(url).then(function() {
+                trackEvent('copy_link');
                 const btn = event.target.closest('.copy-link-btn');
                 const originalHTML = btn.innerHTML;
                 
@@ -2861,6 +2914,7 @@ document.querySelector(`[data-bf="${percentage}"]`).classList.add('selected');
                 }, 2000);
             }).catch(function(err) {
                 console.error('Failed to copy:', err);
+                trackEvent('copy_link_error');
                 alert("Failed to copy link. Please copy manually: " + url);
             });
         }
