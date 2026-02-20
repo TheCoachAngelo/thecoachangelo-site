@@ -2419,6 +2419,29 @@ body {
     color: var(--text-med);
 }
 
+.testimonial-pages {
+    display: grid;
+    gap: clamp(42px, 6vw, 80px);
+}
+
+.testimonial-page {
+    display: grid;
+    gap: 20px;
+    align-content: start;
+    min-height: min(72vh, 760px);
+}
+
+.testimonial-page .quote-block {
+    margin: 0 !important;
+}
+
+@media (min-width: 980px) {
+    .testimonial-page {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        min-height: min(70vh, 520px);
+    }
+}
+
 /* Cinematic motion */
 .reveal {
     opacity: 0;
@@ -2478,6 +2501,9 @@ body {
     }
     .ba-meta h3 {
         font-size: 0.9rem;
+    }
+    .testimonial-page {
+        min-height: auto;
     }
     .mobile-tabs a {
         font-size: 0.82rem !important;
@@ -2912,21 +2938,27 @@ body {
         <section id="testimonials" class="testimonials reveal parallax" style="background-image: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), url('https://static.wixstatic.com/media/4338d0_9c6fc5304e2144cea2a932ddb0adc172~mv2.jpg');">
             <div class="container">
                 <h2 class="section-title">REAL RESULTS</h2>
-                <div class="quote-block">
-                    <p class="quote-text">"I'm so grateful to have Angelo as my coach. Not only has he helped me improve my physique, but he's also taught me life lessons that go far beyond the gym. His approach is all about discipline, consistency, and becoming the best version of yourself."</p>
-                    <div class="quote-author">✱ ANTONIS KATSIAMIS - CYPRUS</div>
-                </div>
-                <div class="quote-block">
-                    <p class="quote-text">"Angelo changed my mindset... nutrition and life... I've known him for many years and he's been following me for a short time but my changes have been beyond expectations... thank you Coach"</p>
-                    <div class="quote-author">✱ GIGIO MOSCA - ITALY</div>
-                </div>
-                <div class="quote-block">
-                    <p class="quote-text">"Working with Angelo has changed my life. He gave me hope and completely transformed my fitness journey. With him, I've found not only an amazing coach and role model, but also a lifelong friend."</p>
-                    <div class="quote-author">✱ ANDREAS MATHEOU - CYPRUS</div>
-                </div>
-                <div class="quote-block">
-                    <p class="quote-text">"I have been training with Angelo for two years. His knowledge changed my life and I became completely unrecognizable. I highly recommend him — a true professional."</p>
-                    <div class="quote-author">✱ VILIAN GORANOV - BULGARIA</div>
+                <div class="testimonial-pages">
+                    <div class="testimonial-page">
+                        <div class="quote-block">
+                            <p class="quote-text">"I'm so grateful to have Angelo as my coach. Not only has he helped me improve my physique, but he's also taught me life lessons that go far beyond the gym. His approach is all about discipline, consistency, and becoming the best version of yourself."</p>
+                            <div class="quote-author">✱ ANTONIS KATSIAMIS - CYPRUS</div>
+                        </div>
+                        <div class="quote-block">
+                            <p class="quote-text">"Angelo changed my mindset... nutrition and life... I've known him for many years and he's been following me for a short time but my changes have been beyond expectations... thank you Coach"</p>
+                            <div class="quote-author">✱ GIGIO MOSCA - ITALY</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-page">
+                        <div class="quote-block">
+                            <p class="quote-text">"Working with Angelo has changed my life. He gave me hope and completely transformed my fitness journey. With him, I've found not only an amazing coach and role model, but also a lifelong friend."</p>
+                            <div class="quote-author">✱ ANDREAS MATHEOU - CYPRUS</div>
+                        </div>
+                        <div class="quote-block">
+                            <p class="quote-text">"I have been training with Angelo for two years. His knowledge changed my life and I became completely unrecognizable. I highly recommend him — a true professional."</p>
+                            <div class="quote-author">✱ VILIAN GORANOV - BULGARIA</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
