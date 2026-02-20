@@ -2130,6 +2130,146 @@ header.scrolled {
         border-radius: 18px !important;
     }
 }
+
+/* === ATHLETE RAW + CINEMATIC PACING (NO WORDING CHANGES) === */
+:root {
+    --raw-bg-1: #07080b;
+    --raw-bg-2: #0a0c11;
+    --raw-bg-3: #0c1017;
+    --raw-surface: linear-gradient(160deg, #171c26, #0f131b);
+    --raw-edge: rgba(255,255,255,0.18);
+    --raw-red-glow: rgba(255,59,48,0.28);
+}
+
+body {
+    background:
+        radial-gradient(circle at 14% -12%, var(--raw-red-glow), transparent 38%),
+        radial-gradient(circle at 84% 10%, rgba(124,92,255,0.14), transparent 34%),
+        linear-gradient(180deg, var(--raw-bg-1) 0%, #05060a 100%) !important;
+}
+
+.hero {
+    position: relative;
+    isolation: isolate;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background:
+        radial-gradient(1200px 420px at 72% 8%, rgba(255,59,48,0.18), transparent 62%),
+        linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.54));
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+#main-content > section {
+    padding-top: clamp(88px, 10vw, 130px) !important;
+    padding-bottom: clamp(88px, 10vw, 130px) !important;
+}
+
+#main-content > section:nth-of-type(odd):not(.hero) {
+    background: linear-gradient(180deg, var(--raw-bg-2), #090b10) !important;
+}
+
+#main-content > section:nth-of-type(even):not(.hero) {
+    background: linear-gradient(180deg, var(--raw-bg-3), #0a0c12) !important;
+}
+
+.calc-card,
+.price-card,
+.quote-block,
+.faq-group,
+.form-container,
+.purchase-flow,
+.email-box,
+.trust-item {
+    background: var(--raw-surface) !important;
+    border: 1px solid var(--raw-edge) !important;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.44), inset 0 0 0 1px rgba(255,255,255,0.02) !important;
+}
+
+.price-card.featured {
+    outline: 2px solid rgba(255,59,48,0.78) !important;
+    box-shadow: 0 28px 58px rgba(0,0,0,0.56), 0 0 0 1px rgba(255,59,48,0.34) inset !important;
+}
+
+.section-title {
+    font-size: clamp(3rem, 7.8vw, 5.6rem) !important;
+    letter-spacing: -1.1px !important;
+}
+
+.section-title::after {
+    width: 164px !important;
+    height: 3px !important;
+}
+
+.quote-text {
+    font-size: 1.08rem !important;
+    line-height: 1.84 !important;
+}
+
+.best-value {
+    letter-spacing: 1.4px;
+    border: 1px solid rgba(255,255,255,0.22);
+}
+
+/* Cinematic motion */
+.reveal {
+    opacity: 0;
+    transform: translateY(48px) scale(0.985);
+    filter: blur(2px);
+    transition:
+        opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+        filter 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+}
+
+#main-content > section.reveal:nth-of-type(2) { transition-delay: 0.05s; }
+#main-content > section.reveal:nth-of-type(3) { transition-delay: 0.1s; }
+#main-content > section.reveal:nth-of-type(4) { transition-delay: 0.15s; }
+#main-content > section.reveal:nth-of-type(5) { transition-delay: 0.2s; }
+#main-content > section.reveal:nth-of-type(6) { transition-delay: 0.25s; }
+
+.calc-card:hover,
+.price-card:hover,
+.quote-block:hover,
+.faq-group:hover,
+.trust-item:hover {
+    transform: translateY(-6px) !important;
+    box-shadow: 0 24px 52px rgba(0,0,0,0.52) !important;
+}
+
+@media (max-width: 768px) {
+    #main-content > section {
+        padding-top: clamp(72px, 9vw, 98px) !important;
+        padding-bottom: clamp(72px, 9vw, 98px) !important;
+    }
+    .section-title {
+        font-size: clamp(2.35rem, 10.2vw, 3.9rem) !important;
+    }
+    .section-title::after {
+        width: 110px !important;
+    }
+    .hero h1 {
+        font-size: clamp(2.35rem, 11.2vw, 3.7rem) !important;
+    }
+    .mobile-tabs a {
+        font-size: 0.82rem !important;
+    }
+}
     </style>
 </head>
 <body class="page-calculators">
