@@ -1982,6 +1982,110 @@ header.scrolled {
     border-bottom: 1px solid rgba(255,255,255,0.15);
 }
 
+.transformations {
+    padding: var(--space-section) 0;
+    background: linear-gradient(180deg, #0b0c10, #06070b);
+}
+
+.ba-card {
+    max-width: 860px;
+    margin: 0 auto;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.16);
+    background: linear-gradient(145deg, #111624, #090d16);
+    box-shadow: 0 16px 44px rgba(0,0,0,0.45);
+}
+
+.ba-images {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 460px;
+}
+
+.ba-images::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    transform: translateX(-1px);
+    background: rgba(255,255,255,0.7);
+}
+
+.ba-side {
+    position: relative;
+    overflow: hidden;
+    background: #0b0f17;
+}
+
+.ba-side img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.ba-side.before img {
+    object-fit: cover;
+    object-position: center top;
+}
+
+.ba-side.after img {
+    object-fit: contain;
+    object-position: center bottom;
+}
+
+.ba-label {
+    position: absolute;
+    top: 14px;
+    z-index: 2;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(15,18,27,0.82);
+    border: 1px solid rgba(255,255,255,0.32);
+    color: #fff;
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 1px;
+    font-size: 1rem;
+}
+
+.ba-label.before {
+    left: 14px;
+}
+
+.ba-label.after {
+    right: 14px;
+}
+
+.ba-meta {
+    padding: 28px 28px 30px;
+}
+
+.ba-meta h3 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 8px;
+}
+
+.ba-meta p {
+    margin: 0;
+    font-size: 1.75rem;
+    color: var(--text-med);
+}
+
+@media (max-width: 768px) {
+    .ba-images {
+        min-height: 360px;
+    }
+    .ba-meta {
+        padding: 20px 18px 22px;
+    }
+    .ba-meta p {
+        font-size: 1.15rem;
+    }
+}
+
 .testimonials .container {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2420,6 +2524,28 @@ header.scrolled {
                         <li>Your customized protocol is built and sent with execution notes.</li>
                         <li>Check-ins start based on your selected package frequency.</li>
                     </ol>
+                </div>
+            </div>
+        </section>
+
+        <section id="transformations" class="transformations reveal">
+            <div class="container">
+                <h2 class="red-text section-title">CLIENT TRANSFORMATIONS</h2>
+                <div class="ba-card">
+                    <div class="ba-images">
+                        <div class="ba-side before">
+                            <span class="ba-label before">BEFORE</span>
+                            <img src="assets/transformations/client-01-before.jpg" alt="Gigio before transformation" loading="lazy">
+                        </div>
+                        <div class="ba-side after">
+                            <span class="ba-label after">AFTER</span>
+                            <img src="assets/transformations/client-01-after.jpg" alt="Gigio after transformation" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="ba-meta">
+                        <h3>GIGIO • 12 WEEKS</h3>
+                        <p>Goal achieved: fat loss.</p>
+                    </div>
                 </div>
             </div>
         </section>
