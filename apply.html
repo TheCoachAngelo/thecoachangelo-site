@@ -1793,6 +1793,128 @@
         font-size: 3rem;
     }
 }
+
+/* === FINAL UI POLISH (NO WORDING CHANGES) === */
+:root {
+    --ui-surface: linear-gradient(145deg, #151922, #0d1017);
+    --ui-surface-soft: linear-gradient(145deg, #191d28, #10141d);
+    --ui-border: rgba(255,255,255,0.12);
+    --ui-border-soft: rgba(255,255,255,0.08);
+    --ui-shadow: 0 16px 36px rgba(0,0,0,0.34);
+    --ui-shadow-hover: 0 22px 46px rgba(0,0,0,0.42);
+}
+
+#main-content > section {
+    position: relative;
+}
+
+#main-content > section:not(.hero)::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    pointer-events: none;
+}
+
+.section-title {
+    font-size: clamp(2.6rem, 7vw, 4.6rem);
+    margin-bottom: 14px;
+    text-wrap: balance;
+}
+
+.section-subtitle {
+    max-width: 620px;
+    margin-bottom: 56px;
+    color: #c1c6d0;
+}
+
+.calc-card,
+.price-card,
+.quote-block,
+.faq-group,
+.form-container,
+.purchase-flow,
+.email-box,
+.trust-item {
+    background: var(--ui-surface) !important;
+    border: 1px solid var(--ui-border) !important;
+    border-radius: 20px !important;
+    box-shadow: var(--ui-shadow) !important;
+}
+
+.calc-card:hover,
+.price-card:hover,
+.quote-block:hover,
+.faq-group:hover,
+.trust-item:hover {
+    box-shadow: var(--ui-shadow-hover);
+    border-color: rgba(255,255,255,0.2) !important;
+}
+
+.price-card ul li,
+.faq-item {
+    border-color: var(--ui-border-soft) !important;
+}
+
+.faq-question {
+    border-radius: 12px;
+}
+
+.faq-question:hover {
+    background: rgba(255,255,255,0.06) !important;
+}
+
+.quote-block {
+    padding: 38px 34px 30px;
+}
+
+.quote-author {
+    color: #fff;
+    opacity: 0.9;
+}
+
+.btn-main,
+.sticky-btn,
+.btn-send,
+.price-card.featured .btn-wa,
+.book-btn {
+    border-radius: 12px !important;
+}
+
+.btn-wa-ghost {
+    background: #eceff4 !important;
+    border-color: #eceff4 !important;
+    color: #0f1115 !important;
+}
+
+@media (max-width: 768px) {
+    .section-title {
+        font-size: clamp(2.05rem, 8.5vw, 3rem);
+    }
+    .section-subtitle {
+        font-size: 0.94rem;
+        margin-bottom: 36px;
+    }
+    .calc-card,
+    .price-card,
+    .quote-block,
+    .faq-group,
+    .form-container,
+    .purchase-flow,
+    .email-box,
+    .trust-item {
+        border-radius: 16px !important;
+    }
+    .price-card {
+        padding: 20px 14px !important;
+    }
+    .quote-block {
+        padding: 24px 16px 18px !important;
+    }
+}
     </style>
 </head>
 <body class="page-apply">
