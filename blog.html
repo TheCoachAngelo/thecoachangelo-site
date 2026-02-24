@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#e61e2a">
-    <meta name="description" content="Elite physique coaching by former IFBB athlete Coach Angelo. Custom diet, training, and contest prep protocols.">
-    <title>The Coach Angelo | Elite Physique</title>
+    <meta name="description" content="Coach Angelo blog: fat loss, body recomposition, training, nutrition and mindset articles.">
+    <title>The Coach Angelo | Blog</title>
     
     <link rel="apple-touch-icon" href="https://static.wixstatic.com/media/4338d0_1b54ec807b4046d2b77ed9c57a71295d~mv2.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1982,110 +1982,6 @@ header.scrolled {
     border-bottom: 1px solid rgba(255,255,255,0.15);
 }
 
-.transformations {
-    padding: var(--space-section) 0;
-    background: linear-gradient(180deg, #0b0c10, #06070b);
-}
-
-.ba-card {
-    max-width: 860px;
-    margin: 0 auto;
-    border-radius: 20px;
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.16);
-    background: linear-gradient(145deg, #111624, #090d16);
-    box-shadow: 0 16px 44px rgba(0,0,0,0.45);
-}
-
-.ba-images {
-    position: relative;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    min-height: 460px;
-}
-
-.ba-images::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    width: 2px;
-    transform: translateX(-1px);
-    background: rgba(255,255,255,0.7);
-}
-
-.ba-side {
-    position: relative;
-    overflow: hidden;
-    background: #0b0f17;
-}
-
-.ba-side img {
-    width: 100%;
-    height: 100%;
-    display: block;
-}
-
-.ba-side.before img {
-    object-fit: cover;
-    object-position: center top;
-}
-
-.ba-side.after img {
-    object-fit: contain;
-    object-position: center bottom;
-}
-
-.ba-label {
-    position: absolute;
-    top: 14px;
-    z-index: 2;
-    padding: 8px 14px;
-    border-radius: 999px;
-    background: rgba(15,18,27,0.82);
-    border: 1px solid rgba(255,255,255,0.32);
-    color: #fff;
-    font-family: 'Oswald', sans-serif;
-    letter-spacing: 1px;
-    font-size: 1rem;
-}
-
-.ba-label.before {
-    left: 14px;
-}
-
-.ba-label.after {
-    right: 14px;
-}
-
-.ba-meta {
-    padding: 28px 28px 30px;
-}
-
-.ba-meta h3 {
-    font-size: clamp(2rem, 4vw, 3rem);
-    margin-bottom: 8px;
-}
-
-.ba-meta p {
-    margin: 0;
-    font-size: 1.75rem;
-    color: var(--text-med);
-}
-
-@media (max-width: 768px) {
-    .ba-images {
-        min-height: 360px;
-    }
-    .ba-meta {
-        padding: 20px 18px 22px;
-    }
-    .ba-meta p {
-        font-size: 1.15rem;
-    }
-}
-
 .testimonials .container {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2240,7 +2136,7 @@ header.scrolled {
 }
     </style>
 </head>
-<body class="page-home">
+<body class="page-calculators">
     <!-- LOADING SCREEN -->
     <div id="loadingScreen">
         <div class="loader">
@@ -2326,28 +2222,6 @@ header.scrolled {
             </div>
         </section>
 
-        <section id="transformations" class="transformations">
-            <div class="container">
-                <h2 class="red-text section-title">CLIENT TRANSFORMATIONS</h2>
-                <div class="ba-card">
-                    <div class="ba-images">
-                        <div class="ba-side before">
-                            <span class="ba-label before">BEFORE</span>
-                            <img src="assets/transformations/client-01-before.jpg" alt="Gigio before transformation" loading="lazy">
-                        </div>
-                        <div class="ba-side after">
-                            <span class="ba-label after">AFTER</span>
-                            <img src="assets/transformations/client-01-after.jpg" alt="Gigio after transformation" loading="lazy">
-                        </div>
-                    </div>
-                    <div class="ba-meta">
-                        <h3>GIGIO • 12 WEEKS</h3>
-                        <p>Goal achieved: fat loss.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <section id="about" class="about reveal">
             <div class="container">
                 <div class="about-flex">
@@ -2371,117 +2245,26 @@ header.scrolled {
         <!-- CALCULATORS SECTION -->
         <section id="calculators" class="calculators-section reveal">
             <div class="container">
-                <h2 class="red-text section-title">FREE FITNESS CALCULATORS</h2>
-                <p class="section-subtitle">Science-based tools to optimize your transformation</p>
-                
+                <h2 class="red-text section-title">COACH ANGELO BLOG</h2>
+                <p class="section-subtitle">Articles on fat loss, coaching strategy, nutrition, training structure and mindset.</p>
                 <div class="calc-grid">
-                    <!-- TDEE CALCULATOR -->
                     <div class="calc-card">
-                        <h3><i class="fas fa-fire" aria-hidden="true"></i> TDEE CALCULATOR</h3>
-                        <div class="input-group">
-                            <label for="tdee-weight">Weight (kg)</label>
-                            <input type="number" id="tdee-weight" placeholder="80">
-                        </div>
-                        <div class="input-group">
-                            <label for="tdee-height">Height (cm)</label>
-                            <input type="number" id="tdee-height" placeholder="180">
-                        </div>
-                        <div class="input-group">
-                            <label for="tdee-age">Age</label>
-                            <input type="number" id="tdee-age" placeholder="30">
-                        </div>
-                        <div class="input-group">
-                            <label for="tdee-gender">Gender</label>
-                            <select id="tdee-gender">
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                            </select>
-                        </div>
-                        <div class="input-group">
-                            <label for="tdee-activity">Activity Level</label>
-                            <select id="tdee-activity">
-                                <option value="1.2">Sedentary (little/no exercise)</option>
-                                <option value="1.375">Light (1-3 days/week)</option>
-                                <option value="1.55" selected>Moderate (3-5 days/week)</option>
-                                <option value="1.725">Very Active (6-7 days/week)</option>
-                                <option value="1.9">Extremely Active (athlete)</option>
-                            </select>
-                        </div>
-                        <button class="calc-btn" onclick="calculateTDEE()">CALCULATE</button>
-                        <div class="calc-result" id="tdee-result">
-                            <div class="result-value" id="tdee-value">0</div>
-                            <div class="result-label">Calories/Day</div>
-                            <div class="result-details" id="tdee-details"></div>
-                        </div>
+                        <h3><i class="fas fa-fire" aria-hidden="true"></i> FAT LOSS MISTAKES THAT KEEP YOU STUCK</h3>
+                        <p style="margin: 16px 0; color: var(--text-med);">The biggest fat-loss errors I see in real clients: under-eating, overestimating output, no structure, and inconsistency hidden behind “motivation.”</p>
+                        <p style="margin: 0 0 18px; color: var(--text-med); font-size: 0.92rem;">Category: Fat Loss • 6 min read</p>
+                        <a href="blog-post-fat-loss.html" class="calc-btn" style="display:inline-block; text-decoration:none; text-align:center;">READ ARTICLE</a>
                     </div>
-
-                    <!-- BODY FAT ESTIMATOR -->
                     <div class="calc-card">
-                        <h3><i class="fas fa-percent" aria-hidden="true"></i> BODY FAT ESTIMATOR</h3>
-                        <p style="margin-bottom: 20px; color: var(--text-med); font-size: 0.95rem;">Select your approximate body fat percentage:</p>
-                        <div class="bodyfat-visual">
-                            <div class="bf-option" data-bf="8" onclick="selectBodyFat(8)">
-                                <div class="bf-percentage">8%</div>
-                                <div class="bf-label">Shredded</div>
-                            </div>
-                            <div class="bf-option" data-bf="12" onclick="selectBodyFat(12)">
-                                <div class="bf-percentage">12%</div>
-                                <div class="bf-label">Lean</div>
-                            </div>
-                            <div class="bf-option" data-bf="15" onclick="selectBodyFat(15)">
-                                <div class="bf-percentage">15%</div>
-                                <div class="bf-label">Fit</div>
-                            </div>
-                            <div class="bf-option" data-bf="20" onclick="selectBodyFat(20)">
-                                <div class="bf-percentage">20%</div>
-                                <div class="bf-label">Average</div>
-                            </div>
-                            <div class="bf-option" data-bf="25" onclick="selectBodyFat(25)">
-                                <div class="bf-percentage">25%</div>
-                                <div class="bf-label">Above Avg</div>
-                            </div>
-                        </div>
-                        <div class="input-group">
-                            <label for="bf-weight">Your Weight (kg)</label>
-                            <input type="number" id="bf-weight" placeholder="80">
-                        </div>
-                        <div class="calc-result show" id="bf-result" style="display: none;">
-                            <div class="result-label">Fat Mass:</div>
-                            <div class="result-value" id="bf-fat" style="font-size: 2rem;">0 kg</div>
-                            <div class="result-label" style="margin-top: 15px;">Lean Mass:</div>
-                            <div class="result-value" id="bf-lean" style="font-size: 2rem;">0 kg</div>
-                            <div class="result-details" id="bf-recommendation"></div>
-                        </div>
+                        <h3><i class="fas fa-utensils" aria-hidden="true"></i> HOW TO STRUCTURE A CUT WITHOUT LOSING MUSCLE</h3>
+                        <p style="margin: 16px 0; color: var(--text-med);">My practical framework for calories, protein, training performance and check-ins when the goal is fat loss with muscle retention.</p>
+                        <p style="margin: 0 0 18px; color: var(--text-med); font-size: 0.92rem;">Category: Nutrition • Coming next</p>
+                        <a href="apply.html" class="calc-btn" style="display:inline-block; text-decoration:none; text-align:center;">GET COACHING</a>
                     </div>
-
-                    <!-- MACRO CALCULATOR -->
                     <div class="calc-card">
-                        <h3><i class="fas fa-drumstick-bite" aria-hidden="true"></i> MACRO CALCULATOR</h3>
-                        <div class="input-group">
-                            <label for="macro-calories">Daily Calories</label>
-                            <input type="number" id="macro-calories" placeholder="2500">
-                        </div>
-                        <div class="input-group">
-                            <label for="macro-goal">Goal</label>
-                            <select id="macro-goal">
-                                <option value="cut">Cut (Fat Loss)</option>
-                                <option value="maintain">Maintain</option>
-                                <option value="bulk">Bulk (Muscle Gain)</option>
-                            </select>
-                        </div>
-                        <div class="input-group">
-                            <label for="macro-weight-kg">Weight (kg)</label>
-                            <input type="number" id="macro-weight-kg" placeholder="80">
-                        </div>
-                        <button class="calc-btn" onclick="calculateMacros()">CALCULATE MACROS</button>
-                        <div class="calc-result" id="macro-result">
-                            <div class="result-details">
-                                <p style="font-size: 1.2rem; margin-bottom: 15px;"><strong>Daily Targets:</strong></p>
-                                <p><i class="fas fa-drumstick-bite" style="color: var(--red);"></i> <strong>Protein:</strong> <span id="macro-protein">0g</span></p>
-                                <p><i class="fas fa-bread-slice" style="color: var(--red);"></i> <strong>Carbs:</strong> <span id="macro-carbs">0g</span></p>
-                                <p><i class="fas fa-bacon" style="color: var(--red);"></i> <strong>Fats:</strong> <span id="macro-fats">0g</span></p>
-                            </div>
-                        </div>
+                        <h3><i class="fas fa-dumbbell" aria-hidden="true"></i> WHY MOST PROGRAMS FAIL AFTER 2 WEEKS</h3>
+                        <p style="margin: 16px 0; color: var(--text-med);">The real issue is not the plan, but execution design: recovery, complexity, progression and accountability.</p>
+                        <p style="margin: 0 0 18px; color: var(--text-med); font-size: 0.92rem;">Category: Training • Coming next</p>
+                        <a href="apply.html" class="calc-btn" style="display:inline-block; text-decoration:none; text-align:center;">APPLY NOW</a>
                     </div>
                 </div>
             </div>
