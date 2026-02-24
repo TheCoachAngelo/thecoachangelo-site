@@ -24,7 +24,22 @@ const allowedOrigins = [
   'http://127.0.0.1:5500'
 ].filter(Boolean);
 
-app.use(helmet({ crossOriginResourcePolicy: false }));
+app.use(helmet({
+  crossOriginResourcePolicy: false,
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      baseUri: ["'self'"],
+      fontSrc: ["'self'", 'https:', 'data:'],
+      imgSrc: ["'self'", 'https:', 'data:', 'blob:'],
+      objectSrc: ["'none'"],
+      scriptSrc: ["'self'", "'unsafe-inline'"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      connectSrc: ["'self'", ...allowedOrigins],
+      frameAncestors: ["'none'"]
+    }
+  }
+}));
 app.use(cors({
   origin(origin, cb) {
     if (!origin) return cb(null, true);
