@@ -51,3 +51,8 @@ Backend runs on `http://localhost:4000` by default.
 - For production, move from SQLite to Postgres later if needed.
 - Deploy backend separately (VPS / Railway / Render).
 - Keep your current frontend on `thecoachangelo.com` and call this API.
+
+## Admin UI
+- Open `http://localhost:4000/admin`
+- Login with the account created using `npm run create-admin`
+- Create/edit/publish posts in the browser

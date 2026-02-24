@@ -3,12 +3,17 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import publicRoutes from './routes/public.js';
 import adminRoutes from './routes/admin.js';
 import './db.js';
 
 const app = express();
 const port = Number(process.env.PORT || 4000);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const publicDir = path.resolve(__dirname, '../public');
 
 const allowedOrigins = [
   process.env.ADMIN_ORIGIN,
@@ -32,6 +37,11 @@ app.use(morgan('dev'));
 
 app.get('/', (_req, res) => {
   res.json({ ok: true, message: 'The Coach Angelo backend is running' });
+});
+
+app.use('/admin', express.static(path.join(publicDir, 'admin')));
+app.get('/admin', (_req, res) => {
+  res.sendFile(path.join(publicDir, 'admin', 'index.html'));
 });
 
 app.use('/api', publicRoutes);

@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coach Angelo Admin</title>
+  <style>
+    :root {
+      --bg: #07090d;
+      --panel: #111620;
+      --panel2: #171d2a;
+      --line: rgba(255,255,255,.12);
+      --text: #edf0f6;
+      --muted: #aeb6c5;
+      --red: #e61e2a;
+      --red2: #ba1a24;
+      --green: #1db954;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      background: radial-gradient(circle at 10% -10%, rgba(230,30,42,.15), transparent 40%), var(--bg);
+      color: var(--text);
+    }
+    .wrap { max-width: 1240px; margin: 0 auto; padding: 20px; }
+    .topbar {
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+      background: linear-gradient(145deg, #141a26, #0d121a);
+      border: 1px solid var(--line); border-radius: 16px; padding: 14px 16px; margin-bottom: 16px;
+      position: sticky; top: 12px; z-index: 20;
+      backdrop-filter: blur(12px);
+    }
+    .brand { font-weight: 800; letter-spacing: .4px; }
+    .brand span { color: var(--red); }
+    .row { display: grid; grid-template-columns: 360px 1fr; gap: 16px; }
+    .panel {
+      background: linear-gradient(145deg, var(--panel2), var(--panel));
+      border: 1px solid var(--line); border-radius: 16px; padding: 14px;
+      box-shadow: 0 18px 40px rgba(0,0,0,.35);
+    }
+    h1,h2,h3 { margin: 0 0 12px; font-family: Inter, system-ui, sans-serif; }
+    h1 { font-size: 1.1rem; }
+    h2 { font-size: 1rem; }
+    label { display: block; margin: 10px 0 6px; color: var(--muted); font-size: .85rem; }
+    input, textarea, select {
+      width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.03); color: var(--text); outline: none;
+    }
+    textarea { min-height: 140px; resize: vertical; font-family: ui-monospace, SFMono-Regular, monospace; }
+    .btns { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+    button {
+      border: 0; border-radius: 10px; padding: 10px 12px; color: white; cursor: pointer;
+      font-weight: 700; letter-spacing: .2px;
+      background: linear-gradient(135deg, var(--red), var(--red2));
+    }
+    button.secondary { background: #253044; }
+    button.ghost { background: transparent; border: 1px solid rgba(255,255,255,.16); }
+    button.green { background: linear-gradient(135deg, #17a34a, #0f7d37); }
+    button:disabled { opacity: .55; cursor: not-allowed; }
+    .hidden { display: none !important; }
+    .muted { color: var(--muted); font-size: .9rem; }
+    .status {
+      margin-top: 10px; padding: 10px 12px; border-radius: 10px; font-size: .9rem; display: none;
+      border: 1px solid rgba(255,255,255,.1);
+    }
+    .status.show { display: block; }
+    .status.ok { background: rgba(29,185,84,.12); border-color: rgba(29,185,84,.35); }
+    .status.err { background: rgba(230,30,42,.12); border-color: rgba(230,30,42,.35); }
+    .post-list { display: grid; gap: 10px; max-height: calc(100vh - 220px); overflow: auto; }
+    .post-item {
+      padding: 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,.1);
+      background: rgba(255,255,255,.02); cursor: pointer;
+    }
+    .post-item.active { border-color: rgba(230,30,42,.65); box-shadow: inset 0 0 0 1px rgba(230,30,42,.35); }
+    .post-item h3 { margin: 0 0 6px; font-size: .95rem; }
+    .post-item p { margin: 0; color: var(--muted); font-size: .82rem; line-height: 1.35; }
+    .badge { display: inline-block; font-size: .72rem; font-weight: 700; padding: 3px 8px; border-radius: 999px; margin-right: 6px; }
+    .badge.pub { background: rgba(29,185,84,.14); color: #6ff5a4; border: 1px solid rgba(29,185,84,.35); }
+    .badge.draft { background: rgba(255,255,255,.08); color: #d6dbe5; border: 1px solid rgba(255,255,255,.16); }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .form-grid .full { grid-column: 1 / -1; }
+    .inline { display: flex; align-items: center; gap: 8px; }
+    .inline input[type="checkbox"] { width: auto; }
+    .toolbar { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 10px; }
+    .mono { font-family: ui-monospace, SFMono-Regular, monospace; font-size: .8rem; }
+    @media (max-width: 980px) { .row { grid-template-columns: 1fr; } .post-list { max-height: 300px; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">The Coach Angelo <span>Admin</span></div>
+      <div id="userBox" class="muted">Not logged in</div>
+    </div>
+
+    <div id="loginPanel" class="panel" style="max-width:460px; margin: 24px auto;">
+      <h1>Admin Login</h1>
+      <p class="muted">Use the admin account created with <span class="mono">npm run create-admin</span>.</p>
+      <label>Email</label>
+      <input id="loginEmail" type="email" placeholder="you@example.com" />
+      <label>Password</label>
+      <input id="loginPassword" type="password" placeholder="Password" />
+      <div class="btns">
+        <button id="loginBtn">Login</button>
+      </div>
+      <div id="loginStatus" class="status"></div>
+    </div>
+
+    <div id="app" class="hidden">
+      <div class="row">
+        <aside class="panel">
+          <div class="toolbar">
+            <h2 style="margin:0;">Posts</h2>
+            <div class="btns" style="margin:0;">
+              <button id="newPostBtn" class="secondary" type="button">New</button>
+              <button id="logoutBtn" class="ghost" type="button">Logout</button>
+            </div>
+          </div>
+          <div class="post-list" id="postList"></div>
+        </aside>
+
+        <section class="panel">
+          <div class="toolbar">
+            <h2 style="margin:0;">Editor</h2>
+            <div class="muted mono" id="editorMeta">No post selected</div>
+          </div>
+
+          <form id="postForm">
+            <div class="form-grid">
+              <div class="full">
+                <label>Title</label>
+                <input id="title" required />
+              </div>
+              <div>
+                <label>Slug</label>
+                <input id="slug" placeholder="auto-generated-from-title" />
+              </div>
+              <div>
+                <label>Category</label>
+                <input id="category" placeholder="Fat Loss" />
+              </div>
+              <div>
+                <label>Author Name</label>
+                <input id="author_name" value="Coach Angelo" />
+              </div>
+              <div>
+                <label>Tags (comma separated)</label>
+                <input id="tags" placeholder="fat loss, nutrition" />
+              </div>
+              <div class="full">
+                <label>Excerpt</label>
+                <textarea id="excerpt" style="min-height:90px;"></textarea>
+              </div>
+              <div class="full">
+                <label>Featured Image URL</label>
+                <input id="featured_image_url" placeholder="https://..." />
+              </div>
+              <div class="full">
+                <label>Content HTML</label>
+                <textarea id="content_html" required placeholder="<p>Your article HTML...</p>"></textarea>
+              </div>
+              <div class="full inline">
+                <input id="is_published" type="checkbox" />
+                <label for="is_published" style="margin:0;">Published</label>
+              </div>
+            </div>
+            <div class="btns">
+              <button id="saveBtn" type="submit">Save Post</button>
+              <button id="deleteBtn" type="button" class="secondary" disabled>Delete</button>
+              <button id="clearBtn" type="button" class="ghost">Clear</button>
+              <button id="previewBtn" type="button" class="green">Open Public API</button>
+            </div>
+            <div id="formStatus" class="status"></div>
+          </form>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API_BASE = `${location.origin}/api`;
+    const TOKEN_KEY = 'coach_admin_token';
+    const USER_KEY = 'coach_admin_user';
+
+    const state = {
+      token: localStorage.getItem(TOKEN_KEY) || '',
+      user: JSON.parse(localStorage.getItem(USER_KEY) || 'null'),
+      posts: [],
+      selectedId: null
+    };
+
+    const els = {
+      loginPanel: document.getElementById('loginPanel'),
+      app: document.getElementById('app'),
+      userBox: document.getElementById('userBox'),
+      loginEmail: document.getElementById('loginEmail'),
+      loginPassword: document.getElementById('loginPassword'),
+      loginBtn: document.getElementById('loginBtn'),
+      loginStatus: document.getElementById('loginStatus'),
+      postList: document.getElementById('postList'),
+      postForm: document.getElementById('postForm'),
+      editorMeta: document.getElementById('editorMeta'),
+      formStatus: document.getElementById('formStatus'),
+      newPostBtn: document.getElementById('newPostBtn'),
+      logoutBtn: document.getElementById('logoutBtn'),
+      deleteBtn: document.getElementById('deleteBtn'),
+      clearBtn: document.getElementById('clearBtn'),
+      previewBtn: document.getElementById('previewBtn'),
+      saveBtn: document.getElementById('saveBtn'),
+      title: document.getElementById('title'),
+      slug: document.getElementById('slug'),
+      category: document.getElementById('category'),
+      author_name: document.getElementById('author_name'),
+      tags: document.getElementById('tags'),
+      excerpt: document.getElementById('excerpt'),
+      featured_image_url: document.getElementById('featured_image_url'),
+      content_html: document.getElementById('content_html'),
+      is_published: document.getElementById('is_published')
+    };
+
+    function setStatus(el, msg, type = 'ok') {
+      el.className = `status show ${type}`;
+      el.textContent = msg;
+    }
+
+    function clearStatus(el) {
+      el.className = 'status';
+      el.textContent = '';
+    }
+
+    function slugifyText(text) {
+      return String(text || '')
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-');
+    }
+
+    async function api(path, options = {}) {
+      const headers = { 'Content-Type': 'application/json', ...(options.headers || {}) };
+      if (state.token) headers.Authorization = `Bearer ${state.token}`;
+      const res = await fetch(`${API_BASE}${path}`, { ...options, headers });
+      if (res.status === 204) return null;
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || `Request failed (${res.status})`);
+      return data;
+    }
+
+    function renderShell() {
+      const loggedIn = !!state.token;
+      els.loginPanel.classList.toggle('hidden', loggedIn);
+      els.app.classList.toggle('hidden', !loggedIn);
+      els.userBox.textContent = loggedIn && state.user ? `${state.user.email} (${state.user.role})` : 'Not logged in';
+    }
+
+    function renderPosts() {
+      els.postList.innerHTML = '';
+      if (!state.posts.length) {
+        const div = document.createElement('div');
+        div.className = 'muted';
+        div.textContent = 'No posts yet. Create your first post.';
+        els.postList.appendChild(div);
+        return;
+      }
+      state.posts.forEach((post) => {
+        const item = document.createElement('button');
+        item.type = 'button';
+        item.className = `post-item${state.selectedId === post.id ? ' active' : ''}`;
+        item.innerHTML = `
+          <div style="margin-bottom:6px;">
+            <span class="badge ${post.is_published ? 'pub' : 'draft'}">${post.is_published ? 'Published' : 'Draft'}</span>
+            <span class="mono">/${post.slug}</span>
+          </div>
+          <h3>${escapeHtml(post.title)}</h3>
+          <p>${escapeHtml(post.excerpt || 'No excerpt')}</p>
+        `;
+        item.addEventListener('click', () => selectPost(post.id));
+        els.postList.appendChild(item);
+      });
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function getSelectedPost() {
+      return state.posts.find((p) => p.id === state.selectedId) || null;
+    }
+
+    function fillForm(post = null) {
+      if (!post) {
+        state.selectedId = null;
+        els.postForm.reset();
+        els.author_name.value = 'Coach Angelo';
+        els.editorMeta.textContent = 'New draft';
+        els.deleteBtn.disabled = true;
+        return;
+      }
+      state.selectedId = post.id;
+      els.title.value = post.title || '';
+      els.slug.value = post.slug || '';
+      els.category.value = post.category || '';
+      els.author_name.value = post.author_name || 'Coach Angelo';
+      els.tags.value = Array.isArray(post.tags) ? post.tags.join(', ') : '';
+      els.excerpt.value = post.excerpt || '';
+      els.featured_image_url.value = post.featured_image_url || '';
+      els.content_html.value = post.content_html || '';
+      els.is_published.checked = !!post.is_published;
+      els.editorMeta.textContent = `Editing #${post.id} • ${post.updated_at || post.created_at || ''}`;
+      els.deleteBtn.disabled = false;
+      renderPosts();
+    }
+
+    function selectPost(id) {
+      const post = state.posts.find((p) => p.id === id);
+      if (!post) return;
+      fillForm(post);
+    }
+
+    async function loadPosts() {
+      const data = await api('/admin/posts');
+      state.posts = data.posts || [];
+      renderPosts();
+      if (state.selectedId) {
+        const current = getSelectedPost();
+        fillForm(current);
+      }
+    }
+
+    async function login() {
+      clearStatus(els.loginStatus);
+      try {
+        const email = els.loginEmail.value.trim();
+        const password = els.loginPassword.value;
+        const data = await api('/admin/login', {
+          method: 'POST',
+          body: JSON.stringify({ email, password })
+        });
+        state.token = data.token;
+        state.user = data.admin;
+        localStorage.setItem(TOKEN_KEY, state.token);
+        localStorage.setItem(USER_KEY, JSON.stringify(state.user));
+        renderShell();
+        await loadPosts();
+      } catch (err) {
+        setStatus(els.loginStatus, err.message, 'err');
+      }
+    }
+
+    function logout() {
+      state.token = '';
+      state.user = null;
+      state.posts = [];
+      state.selectedId = null;
+      localStorage.removeItem(TOKEN_KEY);
+      localStorage.removeItem(USER_KEY);
+      renderShell();
+      renderPosts();
+      fillForm(null);
+    }
+
+    function collectPayload() {
+      const title = els.title.value.trim();
+      const slug = els.slug.value.trim() || slugifyText(title);
+      return {
+        title,
+        slug,
+        category: els.category.value.trim(),
+        author_name: els.author_name.value.trim() || 'Coach Angelo',
+        tags: els.tags.value.split(',').map(s => s.trim()).filter(Boolean),
+        excerpt: els.excerpt.value.trim(),
+        featured_image_url: els.featured_image_url.value.trim(),
+        content_html: els.content_html.value.trim(),
+        is_published: els.is_published.checked
+      };
+    }
+
+    async function savePost(e) {
+      e.preventDefault();
+      clearStatus(els.formStatus);
+      els.saveBtn.disabled = true;
+      try {
+        const payload = collectPayload();
+        if (!payload.title || !payload.content_html) throw new Error('Title and Content HTML are required');
+
+        let data;
+        if (state.selectedId) {
+          data = await api(`/admin/posts/${state.selectedId}`, {
+            method: 'PUT',
+            body: JSON.stringify(payload)
+          });
+          setStatus(els.formStatus, 'Post updated');
+        } else {
+          data = await api('/admin/posts', {
+            method: 'POST',
+            body: JSON.stringify(payload)
+          });
+          state.selectedId = data.post.id;
+          setStatus(els.formStatus, 'Post created');
+        }
+        await loadPosts();
+        fillForm(state.posts.find(p => p.id === state.selectedId) || data.post);
+      } catch (err) {
+        setStatus(els.formStatus, err.message, 'err');
+      } finally {
+        els.saveBtn.disabled = false;
+      }
+    }
+
+    async function deletePost() {
+      const post = getSelectedPost();
+      if (!post) return;
+      if (!confirm(`Delete post: ${post.title}?`)) return;
+      clearStatus(els.formStatus);
+      try {
+        await api(`/admin/posts/${post.id}`, { method: 'DELETE' });
+        setStatus(els.formStatus, 'Post deleted');
+        fillForm(null);
+        await loadPosts();
+      } catch (err) {
+        setStatus(els.formStatus, err.message, 'err');
+      }
+    }
+
+    function openPreviewApi() {
+      const post = getSelectedPost();
+      if (!post) return alert('Save a post first');
+      window.open(`${API_BASE}/posts/${encodeURIComponent(post.slug)}`, '_blank');
+    }
+
+    async function bootstrap() {
+      renderShell();
+      fillForm(null);
+      if (!state.token) return;
+      try {
+        const me = await api('/admin/me');
+        state.user = me.user;
+        localStorage.setItem(USER_KEY, JSON.stringify(state.user));
+        renderShell();
+        await loadPosts();
+      } catch {
+        logout();
+      }
+    }
+
+    els.loginBtn.addEventListener('click', login);
+    els.loginPassword.addEventListener('keydown', (e) => { if (e.key === 'Enter') login(); });
+    els.newPostBtn.addEventListener('click', () => { clearStatus(els.formStatus); fillForm(null); renderPosts(); });
+    els.logoutBtn.addEventListener('click', logout);
+    els.postForm.addEventListener('submit', savePost);
+    els.deleteBtn.addEventListener('click', deletePost);
+    els.clearBtn.addEventListener('click', () => { clearStatus(els.formStatus); fillForm(null); renderPosts(); });
+    els.previewBtn.addEventListener('click', openPreviewApi);
+    els.title.addEventListener('input', () => {
+      if (!els.slug.value.trim()) {
+        els.slug.placeholder = slugifyText(els.title.value.trim());
+      }
+    });
+
+    bootstrap();
+  </script>
+</body>
+</html>
