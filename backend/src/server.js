@@ -20,6 +20,8 @@ const allowedOrigins = [
   process.env.PUBLIC_SITE_ORIGIN,
   'http://localhost:3000',
   'http://127.0.0.1:3000',
+  'http://localhost:4000',
+  'http://127.0.0.1:4000',
   'http://localhost:5500',
   'http://127.0.0.1:5500'
 ].filter(Boolean);
@@ -44,7 +46,9 @@ app.use(cors({
   origin(origin, cb) {
     if (!origin) return cb(null, true);
     if (allowedOrigins.includes(origin)) return cb(null, true);
-    return cb(new Error(`Origin not allowed: ${origin}`));
+    const err = new Error(`Origin not allowed: ${origin}`);
+    err.status = 403;
+    return cb(err);
   }
 }));
 app.use(express.json({ limit: '2mb' }));
