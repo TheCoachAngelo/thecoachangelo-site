@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <rect width="1200" height="675" fill="#050505"/>
+  <rect x="40" y="40" width="1120" height="595" rx="24" fill="#0c0c0e" stroke="#2a2a2e"/>
+  <text x="70" y="95" fill="#ffffff" font-family="Arial" font-size="36" font-weight="700">TRT FIRST 90 DAYS</text>
+  <text x="70" y="130" fill="#9da3af" font-family="Arial" font-size="18">Baseline first. Then labs. Then small changes.</text>
+  <line x1="120" y1="360" x2="1080" y2="360" stroke="#666" stroke-width="4"/>
+  <circle cx="160" cy="360" r="16" fill="#ffffff"/>
+  <circle cx="430" cy="360" r="16" fill="#9ef54d"/>
+  <circle cx="700" cy="360" r="16" fill="#e61e2a"/>
+  <circle cx="980" cy="360" r="16" fill="#ffffff"/>
+  <text x="120" y="430" fill="#ffffff" font-family="Arial" font-size="22">Day 0</text>
+  <text x="355" y="430" fill="#ffffff" font-family="Arial" font-size="22">Week 6</text>
+  <text x="635" y="430" fill="#ffffff" font-family="Arial" font-size="22">Week 12</text>
+  <text x="905" y="430" fill="#ffffff" font-family="Arial" font-size="22">Week 24</text>
+  <text x="92" y="300" fill="#9da3af" font-family="Arial" font-size="18">Baseline labs</text>
+  <text x="350" y="300" fill="#9ef54d" font-family="Arial" font-size="18">Adjust once</text>
+  <text x="610" y="300" fill="#e61e2a" font-family="Arial" font-size="18">Safety check</text>
+  <text x="900" y="300" fill="#ffffff" font-family="Arial" font-size="18">Hold or refine</text>
+  <text x="70" y="540" fill="#ffffff" font-family="Arial" font-size="20">Do not chase symptoms before the bloodwork tells you what changed.</text>
+</svg>

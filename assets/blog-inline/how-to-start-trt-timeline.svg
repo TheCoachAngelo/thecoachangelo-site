@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <rect width="1200" height="675" fill="#050505"/>
+  <rect x="40" y="40" width="1120" height="595" rx="24" fill="#0c0c0e" stroke="#2a2a2e"/>
+  <text x="70" y="95" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="36" font-weight="700">FIRST 90 DAYS ON TRT</text>
+  <text x="70" y="130" fill="#9da3af" font-family="Arial, Helvetica, sans-serif" font-size="18">Start. Check. Adjust. Repeat. That is the whole system.</text>
+  <line x1="110" y1="350" x2="1090" y2="350" stroke="#ffffff" stroke-width="5"/>
+  <circle cx="170" cy="350" r="18" fill="#9ef54d"/>
+  <circle cx="430" cy="350" r="18" fill="#ffffff"/>
+  <circle cx="690" cy="350" r="18" fill="#9ef54d"/>
+  <circle cx="950" cy="350" r="18" fill="#e61e2a"/>
+  <text x="135" y="420" fill="#ffffff" font-family="Arial" font-size="22">Week 0</text>
+  <text x="388" y="420" fill="#ffffff" font-family="Arial" font-size="22">Week 6</text>
+  <text x="646" y="420" fill="#ffffff" font-family="Arial" font-size="22">Week 12</text>
+  <text x="896" y="420" fill="#ffffff" font-family="Arial" font-size="22">Adjust</text>
+  <text x="120" y="255" fill="#9ef54d" font-family="Arial" font-size="24">Baseline labs</text>
+  <text x="370" y="255" fill="#ffffff" font-family="Arial" font-size="24">Mid-cycle labs</text>
+  <text x="640" y="255" fill="#9ef54d" font-family="Arial" font-size="24">Full panel</text>
+  <text x="890" y="255" fill="#e61e2a" font-family="Arial" font-size="24">Change only if data says so</text>
+</svg>

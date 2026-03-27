@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <rect width="1200" height="675" fill="#050505"/>
+  <rect x="40" y="40" width="1120" height="595" rx="24" fill="#0c0c0e" stroke="#2a2a2e"/>
+  <text x="70" y="95" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="36" font-weight="700">LAGGING MUSCLE BLOCK</text>
+  <text x="70" y="130" fill="#9da3af" font-family="Arial, Helvetica, sans-serif" font-size="18">More weekly sets. Better placement. Smarter frequency.</text>
+  <line x1="110" y1="560" x2="1110" y2="560" stroke="#666" stroke-width="2"/>
+  <rect x="160" y="430" width="150" height="130" fill="#ffffff"/>
+  <rect x="360" y="360" width="150" height="200" fill="#9ef54d"/>
+  <rect x="560" y="290" width="150" height="270" fill="#e61e2a"/>
+  <text x="180" y="585" fill="#ffffff" font-family="Arial" font-size="22">10 sets</text>
+  <text x="380" y="585" fill="#ffffff" font-family="Arial" font-size="22">16 sets</text>
+  <text x="580" y="585" fill="#ffffff" font-family="Arial" font-size="22">22 sets</text>
+  <text x="845" y="310" fill="#ffffff" font-family="Arial" font-size="24">Start low.</text>
+  <text x="845" y="346" fill="#9ef54d" font-family="Arial" font-size="24">Add clean sets.</text>
+  <text x="845" y="382" fill="#e61e2a" font-family="Arial" font-size="24">Stop before quality dies.</text>
+</svg>
