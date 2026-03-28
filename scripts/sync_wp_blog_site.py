@@ -32,7 +32,7 @@ from bs4 import BeautifulSoup
 
 SITE_ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_BLOG_DIR = SITE_ROOT / "blog"
-DEFAULT_TEMPLATE = SITE_ROOT / "blog-how-to-start-trt.html"
+DEFAULT_TEMPLATE = SITE_ROOT / "blog" / "how-to-start-trt" / "index.html"
 BLOG_INDEX_TEMPLATE = SITE_ROOT / "blog.html"
 CANONICAL_SITE = "https://thecoachangelo.com"
 
@@ -279,6 +279,22 @@ def update_blog_index(template_html: str, posts: list[dict[str, Any]], category_
     return str(soup)
 
 
+def prune_stale_blog_outputs(posts: list[dict[str, Any]]) -> None:
+    live_slugs = {post["slug"] for post in posts}
+
+    for flat_file in SITE_ROOT.glob("blog-*.html"):
+        slug = flat_file.name[len("blog-") : -len(".html")]
+        if slug not in live_slugs:
+            flat_file.unlink(missing_ok=True)
+
+    if OUTPUT_BLOG_DIR.exists():
+        for child in OUTPUT_BLOG_DIR.iterdir():
+            if child.name == "index.html":
+                continue
+            if child.is_dir() and child.name not in live_slugs:
+                shutil.rmtree(child, ignore_errors=True)
+
+
 def choose_template() -> str:
     if DEFAULT_TEMPLATE.exists():
         return DEFAULT_TEMPLATE.read_text(encoding="utf-8")
@@ -301,6 +317,8 @@ def main() -> None:
 
     if not posts:
         fail("No published WordPress posts found.")
+
+    prune_stale_blog_outputs(posts)
 
     template_html = choose_template()
     index_template_html = BLOG_INDEX_TEMPLATE.read_text(encoding="utf-8")
